@@ -1,0 +1,22 @@
+{
+  "name": "zero-waste-wsg2024",
+  "version": "1.0.0",
+  "description": "An application to improve production for the zero-waste challenge @ Junction 2024",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wsg2024-junction/zero-waste-wsg2024.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wsg2024-junction/zero-waste-wsg2024/issues"
+  },
+  "homepage": "https://github.com/wsg2024-junction/zero-waste-wsg2024#readme",
+  "dependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
