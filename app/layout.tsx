@@ -81,6 +81,10 @@ const links = [
         name: 'Home',
         url: '/',
     },
+    {
+        name: 'Chat',
+        url: '/chat',
+    },
 ];
 
 export default function RootLayout({
