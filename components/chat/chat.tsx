@@ -1,7 +1,6 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import ChatMessage, {ChatMessageProperties} from "@/components/chat/chat-message";
-import {Label} from "@/components/ui/label";
-import {H2, H3} from "@/components/ui/typography";
+import {H3} from "@/components/ui/typography";
 
 interface ChatProperties {
 
@@ -42,14 +41,14 @@ export default async function Chat() {
 
 
     return (
-        <>
-            <H3>Hello</H3>
+        <div className={"m-2"}>
+            <H3>Chat</H3>
             <div className={"space-y-2"}>
                 {chatMessages.map((chatMessage, index) => (
-                    <ChatMessage key={index} chatMessage={chatMessage}/>
+                    <ChatMessage currentUser={currentUser} key={index} chatMessage={chatMessage}/>
                 ))}
             </div>
-        </>
+        </div>
     );
     
 }

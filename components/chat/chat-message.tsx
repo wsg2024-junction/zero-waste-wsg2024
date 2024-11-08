@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import { Card } from '@/components/ui/card';
 
 export interface ChatMessageProperties {
     sender: User;
@@ -8,13 +8,20 @@ export interface ChatMessageProperties {
     timestamp: Date;
 }
 
-export default async function ChatMessage({chatMessage}: {chatMessage: ChatMessageProperties}) {
+export default async function ChatMessage({
+    currentUser,
+    chatMessage,
+}: {
+    currentUser: User;
+    chatMessage: ChatMessageProperties;
+}) {
     return (
-        <div className="">
+        <Card
+            className={`p-3 max-w-[75%] ${currentUser.userId === chatMessage.sender.userId ? 'ml-auto bg-pink-200 ' : ''}`}>
             {chatMessage.sender.username}
             {chatMessage.receiver.username}
             {chatMessage.message}
             {chatMessage.timestamp.toISOString()}
-        </div>
+        </Card>
     );
 }
