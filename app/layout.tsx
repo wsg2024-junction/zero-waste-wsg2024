@@ -1,3 +1,4 @@
+import { AppShell } from "@/components/app-shell";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -75,14 +76,28 @@ export const metadata: Metadata = {
   description: "Sustainable Management for HK Foods",
 };
 
+const links = [
+  {
+    name: "Home",
+    url: "/",
+  },
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn(avenir.className, "antialiased")}>{children}</body>
+    <html lang="en" className="h-full">
+      <body
+        className={cn(
+          avenir.className,
+          "antialiased flex flex-col h-full overflow-hidden"
+        )}
+      >
+        <AppShell links={links}>{children}</AppShell>
+      </body>
     </html>
   );
 }
