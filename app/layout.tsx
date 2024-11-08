@@ -82,7 +82,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(avenir.className, "antialiased")}>{children}</body>
+        <body className={cn(avenir.className, "antialiased")}>{children}</body>
     </html>
   );
 }
