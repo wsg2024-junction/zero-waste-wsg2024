@@ -23,8 +23,8 @@ export default function ManagerApp() {
     const locale = useLocale();
     const t = useTranslations();
     const globalMOTDs = useGlobalState();
-    const areas = Object.keys(AreaEnum).map((key) => AreaEnum[key] as string);
-    const [currentArea, setCurrentArea] = useState(areas[0]);
+    const areas = Object.keys(AreaEnum).map((key) => AreaEnum[key as keyof typeof AreaEnum] as Area);
+    const [currentArea, setCurrentArea] = useState<Area>(areas[0]);
     const [currentMOTD, setCurrentMOTD] = useState<string>(globalMOTDs.dashboardMessages[currentArea]);
     const [translation, setText] = useDeepLTranslate(locale as TargetLanguageCode);
 
