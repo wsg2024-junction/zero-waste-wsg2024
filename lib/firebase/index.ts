@@ -4,16 +4,14 @@ import {
     addDoc,
     collection,
     doc,
-    DocumentData,
     getFirestore,
     onSnapshot,
     orderBy,
     query,
-    setDoc,
     Unsubscribe,
     updateDoc,
 } from 'firebase/firestore';
-import {Area, Batch, BatchPlan, ChatMessageModel, GlobalState, Product, User} from '../models';
+import { Area, Batch, ChatMessageModel, GlobalState, User } from '../models';
 
 const app = initializeApp(firebaseConfig);
 
@@ -40,20 +38,8 @@ export function streamUsers(onNext: (users: Record<string, User>) => void): Unsu
 }
 
 // Batches
-
-export async function createBatch(number: number, product: Product, planned: BatchPlan) {
-    await setDoc(doc(firestore, 'batches', number.toString()), {
-        product,
-        status: { stage: 'planned', planned },
-    } satisfies Omit<Batch, 'number'>);
-}
-export async function updateBatch(batch: Batch) {
-    const data = { ...batch } as DocumentData;
-    delete data.number;
-    await setDoc(doc(firestore, 'batches', batch.number.toString()), data);
-}
 export function streamBatches(onNext: (batches: Batch[]) => void): Unsubscribe {
-    return onSnapshot(query(collection(firestore, 'batches'), orderBy('number')), (snapshot) => {
+    return onSnapshot(collection(firestore, 'batches'), (snapshot) => {
         onNext(snapshot.docs.map((doc) => ({ number: parseInt(doc.id), ...doc.data() }) as Batch));
     });
 }
