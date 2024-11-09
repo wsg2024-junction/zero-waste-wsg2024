@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import { LanguageProvider } from '@/app/_utils/useLanguage';
 
 const avenir = localFont({
     adjustFontFallback: 'Arial',
@@ -97,7 +98,9 @@ export default function RootLayout({
             lang="en"
             className="h-full">
             <body className={cn(avenir.className, 'antialiased flex flex-col h-full overflow-hidden')}>
-                <AppShell links={links}>{children}</AppShell>
+                <LanguageProvider>
+                    <AppShell links={links}>{children}</AppShell>
+                </LanguageProvider>
             </body>
         </html>
     );

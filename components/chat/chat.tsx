@@ -4,6 +4,8 @@ import ChatMessage, { ChatMessageProperties } from '@/components/chat/chat-messa
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SendIcon } from 'lucide-react';
+import { useLocale } from '@/app/_utils/loadLocale';
+import { useLanguage } from '@/app/_utils/useLanguage';
 
 interface ChatProperties {}
 
@@ -63,6 +65,9 @@ export default function Chat() {
         });
     };
 
+    const [lang] = useLanguage();
+    const locale = useLocale(lang);
+
     return (
         <div className={'relative h-[100%] pb-[4rem]'}>
             <div className={'flex flex-row-reverse'}>
@@ -70,7 +75,9 @@ export default function Chat() {
                     className={'ml-auto'}
                     variant="link"
                     onClick={() => setShowOriginal(!showOriginal)}>
-                    {showOriginal ? 'Show Translation' : 'Show Original'}
+                    {showOriginal
+                        ? locale.messages.CHAT_SHOW_TRANSLATION
+                        : locale.messages.CHAT_SHOW_ORIGINAL}
                 </Button>
             </div>
             <div className={'space-y-2'}>
@@ -85,6 +92,9 @@ export default function Chat() {
             </div>
             <div className={'absolute bottom-1 left-1 right-1 flex flex-row gap-2'}>
                 <Input
+                    onKeyPress={(event) => {
+                        if (event.key === 'Enter') onAddMessage();
+                    }}
                     inputMode="text"
                     value={message}
                     onInput={onUpdateMessage}

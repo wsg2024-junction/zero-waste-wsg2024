@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
 import moment from 'moment';
 import * as deepl from 'deepl-node';
 import { translate } from '@/lib/deepl';
+import { LanguageContext, useLanguage } from '@/app/_utils/useLanguage';
 
 export interface ChatMessageProperties {
     sender: User;
@@ -22,33 +23,17 @@ export default function ChatMessage({
     currentUser: User;
     chatMessage: ChatMessageProperties;
 }) {
+    const [lang] = useLanguage();
     const isCurrentUser = chatMessage.sender.userId === currentUser.userId;
 
     const [translation, setTranslation] = useState<string>(chatMessage.message);
 
     useEffect(() => {
-        function translateMessage() {
-            const localStorageLanguage = localStorage.getItem('language');
+        translate(chatMessage.message, lang).then((translation) => {
+            setTranslation(translation.text);
+        });
+    }, [lang]);
 
-            let lang = {
-                code: 'en-US',
-                name: 'English',
-                flagIcon: '🇺🇸',
-            };
-            if (localStorageLanguage) {
-                lang = JSON.parse(localStorageLanguage);
-            }
-
-            translate(chatMessage.message, lang.code).then((t) => {
-                setTranslation(t.text);
-            });
-        }
-        window.addEventListener('languagechange', translateMessage);
-        translateMessage();
-        return () => {
-            window.removeEventListener('languagechange', translateMessage);
-        };
-    }, []);
     return (
         <div>
             <div className={`w-fit opacity-40 text-[0.825rem] ${isCurrentUser ? 'ml-auto' : ''}`}>

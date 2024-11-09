@@ -8,10 +8,12 @@ import {
     SelectItem,
     SelectLabel,
     SelectTrigger,
-    SelectValue,
 } from '@/components/ui/select';
 import { useState } from 'react';
 import { LanguagesIcon } from 'lucide-react';
+import { loadLocale } from '@/app/_utils/loadLocale';
+import { useLanguage } from '@/app/_utils/useLanguage';
+import { TargetLanguageCode } from 'deepl-node';
 
 export type AppShellProps = {
     links: {
@@ -52,24 +54,15 @@ const languages: Language[] = [
         name: 'Finnish',
         flagIcon: '🇫🇮',
     },
+    {
+        code: 'tr',
+        name: 'Turkish',
+        flagIcon: '🇹🇷',
+    },
 ];
 
 export function AppShell(props: React.PropsWithChildren<AppShellProps>) {
-    const localStorageLanguage = localStorage.getItem('language');
-    let languageStore = languages[0];
-    if (localStorageLanguage) {
-        console.log(localStorageLanguage);
-        languageStore = JSON.parse(localStorageLanguage) as Language;
-    }
-
-    const [selectedLanguage, setSelectedLanguage] = useState<string>(languageStore.code);
-
-    const onChangeLanguage = (language: string) => {
-        setSelectedLanguage(language);
-        const selectedLanguage = languages.find((lang) => lang.code === language);
-        localStorage.setItem('language', JSON.stringify(selectedLanguage));
-        window.dispatchEvent(new Event('languagechange'));
-    };
+    const [lang, setLang] = useLanguage();
 
     return (
         <div className="h-full flex flex-col">
@@ -97,8 +90,8 @@ export function AppShell(props: React.PropsWithChildren<AppShellProps>) {
                     </ul>
                 </nav>
                 <Select
-                    value={selectedLanguage}
-                    onValueChange={onChangeLanguage}>
+                    value={lang}
+                    onValueChange={setLang}>
                     <SelectTrigger className={'w-[65px]'}>
                         <LanguagesIcon size={20} />
                     </SelectTrigger>
