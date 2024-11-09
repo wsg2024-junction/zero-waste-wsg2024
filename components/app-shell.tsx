@@ -9,11 +9,9 @@ import {
     SelectLabel,
     SelectTrigger,
 } from '@/components/ui/select';
-import { useState } from 'react';
 import { LanguagesIcon } from 'lucide-react';
-import { loadLocale } from '@/app/_utils/loadLocale';
 import { useLanguage } from '@/app/_utils/useLanguage';
-import { TargetLanguageCode } from 'deepl-node';
+import { useLocale } from '@/app/_utils/loadLocale';
 
 export type AppShellProps = {
     links: {
@@ -35,34 +33,66 @@ const languages: Language[] = [
         flagIcon: '🇺🇸',
     },
     {
-        code: 'de',
-        name: 'German',
-        flagIcon: '🇩🇪',
-    },
-    {
-        code: 'es',
-        name: 'Spanish',
-        flagIcon: '🇪🇸',
-    },
-    {
-        code: 'fr',
-        name: 'French',
-        flagIcon: '🇫🇷',
-    },
-    {
         code: 'fi',
         name: 'Finnish',
         flagIcon: '🇫🇮',
     },
     {
-        code: 'tr',
-        name: 'Turkish',
-        flagIcon: '🇹🇷',
+        code: 'de',
+        name: 'German',
+        flagIcon: '🇩🇪',
+    },
+    {
+        code: 'pl',
+        name: 'Polish',
+        flagIcon: '🇵🇱',
+    },
+    {
+        code: 'ru',
+        name: 'Russian',
+        flagIcon: '🇷🇺',
+    },
+    {
+        code: 'uk',
+        name: 'Ukrainian',
+        flagIcon: '🇺🇦',
+    },
+    {
+        code: 'es',
+        name: 'Estonian',
+        flagIcon: '🇪🇪',
+    },
+    {
+        code: 'ro',
+        name: 'Romanian',
+        flagIcon: '🇷🇴',
+    },
+    {
+        code: 'cs',
+        name: 'Czech',
+        flagIcon: '🇨🇿',
+    },
+    {
+        code: 'id',
+        name: 'Indonesian',
+        flagIcon: '🇮🇩',
+    },
+    {
+        code: 'zh-hans',
+        name: 'Chinese',
+        flagIcon: '🇨🇳',
+    },
+
+    {
+        code: 'ko',
+        name: 'Korean',
+        flagIcon: 'ko',
     },
 ];
 
 export function AppShell(props: React.PropsWithChildren<AppShellProps>) {
     const [lang, setLang] = useLanguage();
+    const locale = useLocale(lang);
 
     return (
         <div className="h-full flex flex-col">
@@ -83,7 +113,7 @@ export function AppShell(props: React.PropsWithChildren<AppShellProps>) {
                                 <Link
                                     href={link.url}
                                     className="hover:text-primary font-semibold leading-[4rem]">
-                                    {link.name}
+                                    {locale.messages['NAV_' + link.name.toUpperCase()]}
                                 </Link>
                             </li>
                         ))}

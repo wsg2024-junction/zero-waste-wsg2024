@@ -14,7 +14,7 @@ const mockUser: User = {
     username: 'manager_cooking',
     firstname: 'Max',
     lastname: 'Mustermann',
-    production_step: 'Cooking',
+    production_step: 'COOKING',
 };
 
 const mockUser2: User = {
@@ -22,7 +22,7 @@ const mockUser2: User = {
     username: 'manager_preproduction',
     firstname: 'Joe',
     lastname: 'Doe',
-    production_step: 'Pre-Production',
+    production_step: 'PREPRODUCTION',
 };
 
 export default function Chat() {
@@ -99,11 +99,12 @@ export default function Chat() {
                     value={message}
                     onInput={onUpdateMessage}
                     className={'w-full'}
-                    placeholder={'Type your message here...'}
+                    placeholder={locale.messages.CHAT_HINT_ENTER_TEXT}
                 />
                 <Button
                     disabled={message.length === 0}
                     variant="secondary"
+                    title={locale.messages.CHAT_SEND}
                     onClick={onAddMessage}
                     size="icon">
                     <SendIcon />

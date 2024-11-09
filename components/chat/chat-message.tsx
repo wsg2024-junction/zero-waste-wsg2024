@@ -6,6 +6,7 @@ import moment from 'moment';
 import * as deepl from 'deepl-node';
 import { translate } from '@/lib/deepl';
 import { LanguageContext, useLanguage } from '@/app/_utils/useLanguage';
+import { useLocale } from '@/app/_utils/loadLocale';
 
 export interface ChatMessageProperties {
     sender: User;
@@ -24,6 +25,7 @@ export default function ChatMessage({
     chatMessage: ChatMessageProperties;
 }) {
     const [lang] = useLanguage();
+    const locale = useLocale(lang);
     const isCurrentUser = chatMessage.sender.userId === currentUser.userId;
 
     const [translation, setTranslation] = useState<string>(chatMessage.message);
@@ -37,7 +39,7 @@ export default function ChatMessage({
     return (
         <div>
             <div className={`w-fit opacity-40 text-[0.825rem] ${isCurrentUser ? 'ml-auto' : ''}`}>
-                {chatMessage.sender.production_step}
+                {locale.messages['GENERAL_' + chatMessage.sender.production_step]}
             </div>
             <div className={`flex gap-2 ${isCurrentUser ? 'flex-row-reverse' : ''}`}>
                 <div>
