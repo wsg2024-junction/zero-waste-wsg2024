@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
-import moment from 'moment';
-import { translate } from '@/lib/deepl';
-import { useLanguage } from '@/app/_utils/useLanguage';
-import { useLocale } from '@/app/_utils/loadLocale';
 import { ChatMessageModel, User } from '@/lib/models';
+import { translate } from '@/lib/deepl';
+import { TargetLanguageCode } from 'deepl-node';
+import moment from 'moment';
+import { useLocale, useTranslations } from 'next-intl';
 
 export interface ChatMessageProperties {
     sender: User;
@@ -24,22 +24,22 @@ export default function ChatMessage({
     currentUser: User;
     chatMessage: ChatMessageModel;
 }) {
-    const [lang] = useLanguage();
-    const locale = useLocale(lang);
-    const isCurrentUser = chatMessage.sender.userId === currentUser.userId;
+    const locale = useLocale();
+    const t = useTranslations();
+    const isCurrentUser = chatMessage.sender.name === currentUser.name;
 
     const [translation, setTranslation] = useState<string>(chatMessage.message);
 
     useEffect(() => {
-        translate(chatMessage.message, lang).then((translation) => {
+        translate(chatMessage.message, locale as TargetLanguageCode).then((translation) => {
             setTranslation(translation.text);
         });
-    }, [lang]);
+    }, [locale]);
 
     return (
         <div>
             <div className={`w-fit opacity-40 text-[0.825rem] ${isCurrentUser ? 'ml-auto' : ''}`}>
-                {locale.messages['GENERAL_' + chatMessage.area]}
+                {t('GENERAL_' + chatMessage.area?.toUpperCase())}
             </div>
             <div className={`flex gap-2 ${isCurrentUser ? 'flex-row-reverse' : ''}`}>
                 <div>
@@ -51,7 +51,9 @@ export default function ChatMessage({
                         alt="HK Foods"></Image>
                 </div>
                 <Card
-                    className={`relative min-w-[5rem] p-2 pb-6 text-wrap break-words overflow-hidden  max-w-[75%] ${isCurrentUser ? 'ml-auto bg-primary-200 ' : ''}`}>
+                    className={`relative min-w-[5rem] p-2 pb-6 text-wrap break-words overflow-hidden  max-w-[75%] ${
+                        isCurrentUser ? 'ml-auto bg-primary-200 ' : ''
+                    }`}>
                     <span>{showOriginal ? chatMessage.message : translation}</span>
                     <span className={'absolute bottom-1 right-2 opacity-40 text-[0.825rem]'}>
                         {moment(chatMessage.createdAt?.toDate()).format('h:mm a')}

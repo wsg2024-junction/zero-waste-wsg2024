@@ -3,7 +3,13 @@ import { Timestamp } from '@firebase/firestore';
 export type Area = 'preproduction' | 'cooking' | 'storage' | 'packaging';
 export type GlobalState = {
     dashboardMessages: Record<Area, string>;
+
+    /** Mapping from user ID to number of collected points. */
+    points: Record<string, number>;
 };
+
+export type User = { name: string; role: Role };
+export type Role = 'manager' | 'worker';
 
 export type PackagingDelay = {
     createdAt: Timestamp;
@@ -65,14 +71,6 @@ export type PreproductionProduct = {
     createdBy: string;
     weight: number;
 };
-export type User = {
-    userId: number;
-    username: string;
-    firstname: string;
-    lastname: string;
-    production_step: 'PREPRODUCTION' | 'COOKING' | 'STORAGE' | 'PACKAGING';
-};
-
 export type ChatMessageModel = {
     sender: User;
     message: string;

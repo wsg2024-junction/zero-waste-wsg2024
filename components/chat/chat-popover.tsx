@@ -5,14 +5,46 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import Chat from '@/components/chat/chat';
 import { useState } from 'react';
 import LanguageSelector from '@/components/language-selector/language-selector';
-import { useLanguage } from '@/app/_utils/useLanguage';
+import {useLocale} from "next-intl";
+import {usePathname, useRouter} from "@/i18n/routing";
+import {useParams, useSearchParams} from "next/navigation";
 
 export default function ChatPopover() {
-    const [lang, setLang] = useLanguage();
-    const [expanded, setExpanded] = useState(false);
+    const router = useRouter();
+    const pathname = usePathname();
+    const params = useParams();
+    const locale = useLocale();
+    const [expanded, setExpanded] = useState(true);
+    const queryParams = useSearchParams();
+    const open = queryParams.get('open') === 'true';
+
+    const setLang = (nextLocale: string) => {
+        const queryParams = { open: true };
+
+        router.replace(
+            // @ts-expect-error -- TypeScript will validate that only known `params`
+            // are used in combination with a given `pathname`. Since the two will
+            // always match for the current route, we can skip runtime checks.
+            { pathname: pathname, params: params, query: queryParams },
+            { locale: nextLocale },
+        );
+    };
+    const onOpenChange = (isOpen: boolean) => {
+        const newQueryParams = new URLSearchParams(queryParams.toString());
+        if (isOpen) {
+            newQueryParams.set('open', 'true');
+        } else {
+            newQueryParams.delete('open');
+        }
+
+        router.replace(
+            { pathname, query: Object.fromEntries(newQueryParams.entries()) },
+            undefined,
+        );
+    };
 
     return (
-        <Popover>
+        <Popover defaultOpen={open} onOpenChange={onOpenChange}>
             <PopoverTrigger asChild>
                 <Button
                     variant="secondary"
@@ -35,7 +67,7 @@ export default function ChatPopover() {
                     </Button>
                     <div className={'absolute top-2 left-[50px] z-10'}>
                         <LanguageSelector
-                            lang={lang}
+                            lang={locale}
                             setLang={setLang}
                         />
                     </div>

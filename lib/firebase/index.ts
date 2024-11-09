@@ -13,7 +13,7 @@ import {
     Unsubscribe,
     updateDoc,
 } from 'firebase/firestore';
-import { Area, Batch, BatchPlan, ChatMessageModel, GlobalState, Product } from '../models';
+import {Area, Batch, BatchPlan, ChatMessageModel, GlobalState, Product, User} from '../models';
 
 const app = initializeApp(firebaseConfig);
 
@@ -28,6 +28,14 @@ export async function setDashboardMessage(area: Area, message: string) {
 export function streamGlobalState(onNext: (globalState: GlobalState) => void): Unsubscribe {
     return onSnapshot(globalStateDoc, (doc) => {
         onNext(doc.data() as GlobalState);
+    });
+}
+
+// User
+
+export function streamUsers(onNext: (users: Record<string, User>) => void): Unsubscribe {
+    return onSnapshot(collection(firestore, 'users'), (snapshot) => {
+        onNext(Object.fromEntries(snapshot.docs.map((doc) => [doc.id, doc.data() as User])));
     });
 }
 
