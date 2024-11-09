@@ -4,21 +4,19 @@ import Link from 'next/link';
 
 export default function Home() {
     return (
-        <div className="h-full flex flex-col justify-center">
-            <div className="my-auto flex items-stretch gap-8">
-                <NavigationCard
-                    title="Dashboard"
-                    href="/dashboard"
-                />
-                <NavigationCard
-                    title="Preproduction Tablet App"
-                    href="/preproduction-tablet"
-                />
-                <NavigationCard
-                    title="Manager App"
-                    href="/manager-app"
-                />
-            </div>
+        <div className="h-full flex flex-col gap-16 justify-center items-center">
+            <NavigationCard
+                title="Dashboard"
+                href="/dashboard"
+            />
+            <NavigationCard
+                title="Preproduction Tablet App"
+                href="/preproduction-tablet"
+            />
+            <NavigationCard
+                title="Manager App"
+                href="/manager-app"
+            />
         </div>
     );
 }
@@ -30,7 +28,7 @@ interface NavigationCardProps {
 function NavigationCard({ title, href }: NavigationCardProps) {
     return (
         <Link
-            className="flex-1"
+            className="w-96 h-48"
             href={href}>
             <Card className="h-full flex flex-col justify-center content-center p-8">
                 <H2 className="m-0 text-center border-none">{title}</H2>
