@@ -33,7 +33,9 @@ export function streamGlobalState(onNext: (globalState: GlobalState) => void): U
 
 export function streamUsers(onNext: (users: Record<string, User>) => void): Unsubscribe {
     return onSnapshot(collection(firestore, 'users'), (snapshot) => {
-        onNext(Object.fromEntries(snapshot.docs.map((doc) => [doc.id, {id: doc.id, ...doc.data()} as User])));
+        onNext(
+            Object.fromEntries(snapshot.docs.map((doc) => [doc.id, { id: doc.id, ...doc.data() } as User])),
+        );
     });
 }
 
@@ -51,6 +53,6 @@ export async function sendMessage(message: Omit<ChatMessageModel, 'id'>) {
 }
 export function streamMessages(onNext: (messages: ChatMessageModel[]) => void): Unsubscribe {
     return onSnapshot(query(collection(firestore, 'chat'), orderBy('createdAt')), (snapshot) => {
-        onNext(snapshot.docs.map((doc) => {id: doc.id, ...doc.data()} as ChatMessageModel));
+        onNext(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as ChatMessageModel));
     });
 }

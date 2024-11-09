@@ -22,7 +22,7 @@ export function DashboardCol(props: DashboardColProps) {
                 </div>
             </div>
             <div
-                className={'rounded-xl flex flex-col'}
+                className={'rounded-xl flex flex-col gap-2 p-2'}
                 style={{ background: props.color + '55' }}>
                 {props.batches
                     .filter((batch) => batch.status.stage === props.stage)

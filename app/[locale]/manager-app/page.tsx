@@ -1,3 +1,9 @@
+import { Dashboard } from '@/components/dashboard/dashboard';
+
 export default function ManagerApp() {
-    return <>Manager App</>;
+    return (
+        <div>
+            <Dashboard interactive />
+        </div>
+    );
 }
