@@ -9,6 +9,11 @@ export function useGlobalState(): GlobalState {
     useEffect(() => streamGlobalState(setGlobalState), []);
     return globalState;
 }
+export function useUsers(): Record<string, User> {
+    const [users, setUsers] = useState<Record<string, User>>({});
+    useEffect(() => streamUsers(setUsers), []);
+    return users;
+}
 export function useBatches(): Batch[] {
     const [batches, setBatches] = useState<Batch[]>([]);
     useEffect(() => streamBatches(setBatches), []);
