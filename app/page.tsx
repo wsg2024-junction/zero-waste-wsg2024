@@ -4,19 +4,21 @@ import Link from 'next/link';
 
 export default function Home() {
     return (
-        <div className="flex items-stretch gap-8">
-            <NavigationCard
-                title="Dashboard"
-                href="/dashboard"
-            />
-            <NavigationCard
-                title="Preproduction Tablet App"
-                href="/preproduction-tablet"
-            />
-            <NavigationCard
-                title="Manager App"
-                href="/manager-app"
-            />
+        <div className="h-full flex flex-col justify-center">
+            <div className="my-auto flex items-stretch gap-8">
+                <NavigationCard
+                    title="Dashboard"
+                    href="/dashboard"
+                />
+                <NavigationCard
+                    title="Preproduction Tablet App"
+                    href="/preproduction-tablet"
+                />
+                <NavigationCard
+                    title="Manager App"
+                    href="/manager-app"
+                />
+            </div>
         </div>
     );
 }
