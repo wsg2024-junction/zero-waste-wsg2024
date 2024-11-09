@@ -1,3 +1,5 @@
+'use client';
+
 import {
     Select,
     SelectContent,
@@ -74,7 +76,7 @@ const languages: Language[] = [
     {
         code: 'ko',
         name: 'Korean',
-        flagIcon: 'ko',
+        flagIcon: '🇰🇷',
     },
 ];
 
@@ -87,7 +89,7 @@ export default function LanguageSelector({
 }) {
     return (
         <Select
-            value={lang}
+            defaultValue={lang}
             onValueChange={setLang}>
             <SelectTrigger className={'w-[65px]'}>
                 <LanguagesIcon size={20} />
