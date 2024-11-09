@@ -1,28 +1,18 @@
 'use client';
-import React, { useState } from 'react';
-import ChatMessage, { ChatMessageProperties } from '@/components/chat/chat-message';
-import { Input } from '@/components/ui/input';
+import React, { useEffect, useState } from 'react';
+import ChatMessage from '@/components/chat/chat-message';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { SendIcon } from 'lucide-react';
-import { useLocale } from '@/app/_utils/loadLocale';
-import { useLanguage } from '@/app/_utils/useLanguage';
+import { sendMessage, streamMessages } from '@/lib/firebase';
+import { ChatMessageModel, User } from '@/lib/models';
+import { Timestamp } from '@firebase/firestore';
+import {useTranslations} from "next-intl";
 
-interface ChatProperties {}
 
 const mockUser: User = {
-    userId: 1,
-    username: 'manager_cooking',
-    firstname: 'Max',
-    lastname: 'Mustermann',
-    production_step: 'COOKING',
-};
-
-const mockUser2: User = {
-    userId: 2,
-    username: 'manager_preproduction',
-    firstname: 'Joe',
-    lastname: 'Doe',
-    production_step: 'PREPRODUCTION',
+    name: 'John Doe',
+    role: 'manager',
 };
 
 export default function Chat() {
@@ -30,43 +20,33 @@ export default function Chat() {
     const currentUser = mockUser;
     const [message, setMessage] = useState('');
     const [showOriginal, setShowOriginal] = useState(false);
+    const [messages, setMessages] = useState<ChatMessageModel[]>([]);
 
-    const chatMessages: ChatMessageProperties[] = [
-        {
-            sender: mockUser,
-            receiver: mockUser2,
-            message: 'Hello Maria, I have a question regarding the new product launch.',
-            timestamp: new Date(),
-        },
-        {
-            sender: mockUser2,
-            receiver: mockUser,
-            message: 'Hello Max, what is your question?',
-            timestamp: new Date(),
-        },
-    ];
-
-    const [messages, setMessages] = useState<ChatMessageProperties[]>(chatMessages);
+    useEffect(() => {
+        streamMessages((messages: ChatMessageModel[]) => {
+            console.log('Messages', messages);
+            setMessages(messages);
+        });
+    }, []);
 
     const onUpdateMessage = (event: any) => {
         setMessage(event.currentTarget.value);
     };
 
     const onAddMessage = () => {
-        const newMessage = {
+        const newMessage: ChatMessageModel = {
             sender: currentUser,
-            receiver: mockUser2,
             message: message,
-            timestamp: new Date(),
+            createdAt: Timestamp.now(),
+            area: 'PREPRODUCTION',
         };
         setMessage('');
-        setMessages((prevValue) => {
-            return [...prevValue, newMessage];
+        sendMessage(newMessage).then((t) => {
+            console.log('Message sent', t);
         });
     };
 
-    const [lang] = useLanguage();
-    const locale = useLocale(lang);
+    const t = useTranslations();
 
     return (
         <div className={'relative flex flex-col h-[100%] pb-[4rem]'}>
@@ -75,9 +55,7 @@ export default function Chat() {
                     className={'ml-auto'}
                     variant="link"
                     onClick={() => setShowOriginal(!showOriginal)}>
-                    {showOriginal
-                        ? locale.messages.CHAT_SHOW_TRANSLATION
-                        : locale.messages.CHAT_SHOW_ORIGINAL}
+                    {showOriginal ? t('CHAT_SHOW_TRANSLATION') : t('CHAT_SHOW_ORIGINAL')}
                 </Button>
             </div>
             <div className={'space-y-2 p-1 overflow-y-auto'}>
@@ -99,13 +77,13 @@ export default function Chat() {
                     value={message}
                     onInput={onUpdateMessage}
                     className={'w-full'}
-                    placeholder={locale.messages.CHAT_HINT_ENTER_TEXT}
+                    placeholder={t('CHAT_HINT_ENTER_TEXT')}
                 />
                 <Button
                     className={'flex-shrink-0'}
                     disabled={message.length === 0}
                     variant="secondary"
-                    title={locale.messages.CHAT_SEND}
+                    title={t('CHAT_SEND')}
                     onClick={onAddMessage}
                     size="icon">
                     <SendIcon />

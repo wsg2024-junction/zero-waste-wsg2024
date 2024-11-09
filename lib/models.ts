@@ -8,6 +8,9 @@ export type GlobalState = {
     points: Record<string, number>;
 };
 
+export type User = { name: string; role: Role };
+export type Role = 'manager' | 'worker';
+
 export type PackagingDelay = {
     createdAt: Timestamp;
     estimatedDurationMinutes: number;
@@ -68,10 +71,9 @@ export type PreproductionProduct = {
     createdBy: string;
     weight: number;
 };
-
-export type ChatMessage = {
-    createdAt: Timestamp;
-    createdBy: string;
-    area: Area;
+export type ChatMessageModel = {
+    sender: User;
     message: string;
+    area?: string;
+    createdAt?: Timestamp;
 };

@@ -13,7 +13,7 @@ import {
     Unsubscribe,
     updateDoc,
 } from 'firebase/firestore';
-import { Area, Batch, BatchPlan, ChatMessage, GlobalState, Product } from '../models';
+import {Area, Batch, BatchPlan, ChatMessageModel, GlobalState, Product, User} from '../models';
 
 const app = initializeApp(firebaseConfig);
 
@@ -28,6 +28,14 @@ export async function setDashboardMessage(area: Area, message: string) {
 export function streamGlobalState(onNext: (globalState: GlobalState) => void): Unsubscribe {
     return onSnapshot(globalStateDoc, (doc) => {
         onNext(doc.data() as GlobalState);
+    });
+}
+
+// User
+
+export function streamUsers(onNext: (users: Record<string, User>) => void): Unsubscribe {
+    return onSnapshot(collection(firestore, 'users'), (snapshot) => {
+        onNext(Object.fromEntries(snapshot.docs.map((doc) => [doc.id, doc.data() as User])));
     });
 }
 
@@ -52,11 +60,11 @@ export function streamBatches(onNext: (batches: Batch[]) => void): Unsubscribe {
 
 // Chat
 
-export async function sendMessage(message: ChatMessage) {
+export async function sendMessage(message: ChatMessageModel) {
     await addDoc(collection(firestore, 'chat'), message);
 }
-export function streamMessages(onNext: (messages: ChatMessage[]) => void): Unsubscribe {
+export function streamMessages(onNext: (messages: ChatMessageModel[]) => void): Unsubscribe {
     return onSnapshot(query(collection(firestore, 'chat'), orderBy('createdAt')), (snapshot) => {
-        onNext(snapshot.docs.map((doc) => doc.data() as ChatMessage));
+        onNext(snapshot.docs.map((doc) => doc.data() as ChatMessageModel));
     });
 }
