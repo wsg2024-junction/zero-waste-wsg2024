@@ -13,7 +13,7 @@ import {
     Unsubscribe,
     updateDoc,
 } from 'firebase/firestore';
-import { Area, Batch, BatchPlan, ChatMessage, GlobalState, Product } from '../models';
+import { Area, Batch, BatchPlan, ChatMessage, GlobalState, Product, User } from '../models';
 
 const app = initializeApp(firebaseConfig);
 
