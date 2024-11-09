@@ -54,6 +54,40 @@
       --ring: 95 100% 32.9%;
       --radius: 0.5rem;
     }
+
+    /* Custom scrollbar for WebKit browsers */
+    ::-webkit-scrollbar {
+        width: 12px; /* Width of vertical scrollbar */
+        height: 12px; /* Height of horizontal scrollbar */
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: linear-gradient(180deg, rgba(19, 42, 98, 0.2), rgba(19, 42, 98, 0.4)); /* Subtle gradient, mostly Dark Sky Blue */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Light inner shadow */
+    }
+
+    /* Handle (Thumb) */
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, rgba(19, 42, 98, 0.9), rgba(70, 168, 0, 0.7)); /* Gradient favoring Dark Sky Blue */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Inner shadow for depth */
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, rgba(19, 42, 98, 1), rgba(70, 168, 0, 0.8)); /* Slightly bolder gradient on hover */
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    }
+
+    /* Optional: Horizontal scrollbar thumb style */
+    ::-webkit-scrollbar-thumb:horizontal {
+        background: linear-gradient(45deg, rgba(19, 42, 98, 0.85), rgba(70, 168, 0, 0.65)); /* Subtle gradient for horizontal scrollbar */
+    }
+
+
+
 }
 
 @layer base {
