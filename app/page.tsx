@@ -1,13 +1,38 @@
 import { Card } from '@/components/ui/card';
-import { H1 } from '@/components/ui/typography';
-import * as deepl from 'deepl-node';
-import { deepLConfig } from '@/firebaseConfig';
+import { H2 } from '@/components/ui/typography';
+import Link from 'next/link';
 
-export default async function Home() {
+export default function Home() {
     return (
-        <Card className="w-full">
-            <H1 className="m-4">HK Foods</H1>
-            <H1 className="m-4">HK Sustain</H1>
-        </Card>
+        <div className="h-full flex flex-col gap-16 justify-center items-center">
+            <NavigationCard
+                title="Dashboard"
+                href="/dashboard"
+            />
+            <NavigationCard
+                title="Preproduction Tablet App"
+                href="/preproduction-tablet"
+            />
+            <NavigationCard
+                title="Manager App"
+                href="/manager-app"
+            />
+        </div>
+    );
+}
+
+interface NavigationCardProps {
+    title: string;
+    href: string;
+}
+function NavigationCard({ title, href }: NavigationCardProps) {
+    return (
+        <Link
+            className="w-96 h-48"
+            href={href}>
+            <Card className="h-full flex flex-col justify-center content-center p-8">
+                <H2 className="m-0 text-center border-none">{title}</H2>
+            </Card>
+        </Link>
     );
 }

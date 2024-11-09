@@ -12,6 +12,7 @@ import {
 import { LanguagesIcon } from 'lucide-react';
 import { useLanguage } from '@/app/_utils/useLanguage';
 import { useLocale } from '@/app/_utils/loadLocale';
+import LanguageSelector from '@/components/language-selector/language-selector';
 
 export type AppShellProps = {
     links: {
@@ -19,76 +20,6 @@ export type AppShellProps = {
         url: string;
     }[];
 };
-
-interface Language {
-    code: string;
-    name: string;
-    flagIcon: string;
-}
-
-const languages: Language[] = [
-    {
-        code: 'en-US',
-        name: 'English',
-        flagIcon: '🇺🇸',
-    },
-    {
-        code: 'fi',
-        name: 'Finnish',
-        flagIcon: '🇫🇮',
-    },
-    {
-        code: 'de',
-        name: 'German',
-        flagIcon: '🇩🇪',
-    },
-    {
-        code: 'pl',
-        name: 'Polish',
-        flagIcon: '🇵🇱',
-    },
-    {
-        code: 'ru',
-        name: 'Russian',
-        flagIcon: '🇷🇺',
-    },
-    {
-        code: 'uk',
-        name: 'Ukrainian',
-        flagIcon: '🇺🇦',
-    },
-    {
-        code: 'es',
-        name: 'Estonian',
-        flagIcon: '🇪🇪',
-    },
-    {
-        code: 'ro',
-        name: 'Romanian',
-        flagIcon: '🇷🇴',
-    },
-    {
-        code: 'cs',
-        name: 'Czech',
-        flagIcon: '🇨🇿',
-    },
-    {
-        code: 'id',
-        name: 'Indonesian',
-        flagIcon: '🇮🇩',
-    },
-    {
-        code: 'zh-hans',
-        name: 'Chinese',
-        flagIcon: '🇨🇳',
-    },
-
-    {
-        code: 'ko',
-        name: 'Korean',
-        flagIcon: 'ko',
-    },
-];
 
 export function AppShell(props: React.PropsWithChildren<AppShellProps>) {
     const [lang, setLang] = useLanguage();
@@ -119,27 +50,10 @@ export function AppShell(props: React.PropsWithChildren<AppShellProps>) {
                         ))}
                     </ul>
                 </nav>
-                <Select
-                    value={lang}
-                    onValueChange={setLang}>
-                    <SelectTrigger className={'w-[65px]'}>
-                        <LanguagesIcon size={20} />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectLabel>Language</SelectLabel>
-                            <>
-                                {languages.map((language) => (
-                                    <SelectItem
-                                        key={language.code}
-                                        value={language.code}>
-                                        {language.flagIcon} {language.name}
-                                    </SelectItem>
-                                ))}
-                            </>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
+                <LanguageSelector
+                    lang={lang}
+                    setLang={setLang}
+                />
             </header>
             <main className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden isolate">
                 <div className="flex-1 w-full p-6 mx-auto max-w-7xl lg:px-8">{props.children}</div>

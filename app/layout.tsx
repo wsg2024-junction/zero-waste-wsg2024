@@ -1,4 +1,3 @@
-import { AppShell } from '@/components/app-shell';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -77,17 +76,6 @@ export const metadata: Metadata = {
     description: 'Sustainable Management for HK Foods',
 };
 
-const links = [
-    {
-        name: 'Home',
-        url: '/',
-    },
-    {
-        name: 'Chat',
-        url: '/chat',
-    },
-];
-
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -98,9 +86,7 @@ export default function RootLayout({
             lang="en"
             className="h-full">
             <body className={cn(avenir.className, 'antialiased flex flex-col h-full overflow-hidden')}>
-                <LanguageProvider>
-                    <AppShell links={links}>{children}</AppShell>
-                </LanguageProvider>
+                <LanguageProvider>{children}</LanguageProvider>
             </body>
         </html>
     );

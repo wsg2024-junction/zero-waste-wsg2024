@@ -69,7 +69,7 @@ export default function Chat() {
     const locale = useLocale(lang);
 
     return (
-        <div className={'relative h-[100%] pb-[4rem]'}>
+        <div className={'relative flex flex-col h-[100%] pb-[4rem]'}>
             <div className={'flex flex-row-reverse'}>
                 <Button
                     className={'ml-auto'}
@@ -80,7 +80,7 @@ export default function Chat() {
                         : locale.messages.CHAT_SHOW_ORIGINAL}
                 </Button>
             </div>
-            <div className={'space-y-2'}>
+            <div className={'space-y-2 p-1 overflow-y-auto'}>
                 {messages.map((chatMessage, index) => (
                     <ChatMessage
                         showOriginal={showOriginal}
@@ -90,7 +90,7 @@ export default function Chat() {
                     />
                 ))}
             </div>
-            <div className={'absolute bottom-1 left-1 right-1 flex flex-row gap-2'}>
+            <div className={'absolute bottom-1 w-full flex flex-row gap-2'}>
                 <Input
                     onKeyPress={(event) => {
                         if (event.key === 'Enter') onAddMessage();
@@ -102,6 +102,7 @@ export default function Chat() {
                     placeholder={locale.messages.CHAT_HINT_ENTER_TEXT}
                 />
                 <Button
+                    className={'flex-shrink-0'}
                     disabled={message.length === 0}
                     variant="secondary"
                     title={locale.messages.CHAT_SEND}
