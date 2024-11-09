@@ -60,11 +60,11 @@ export function streamBatches(onNext: (batches: Batch[]) => void): Unsubscribe {
 
 // Chat
 
-export async function sendMessage(message: ChatMessageModel) {
+export async function sendMessage(message: Omit<ChatMessageModel, 'id'>) {
     await addDoc(collection(firestore, 'chat'), message);
 }
 export function streamMessages(onNext: (messages: ChatMessageModel[]) => void): Unsubscribe {
     return onSnapshot(query(collection(firestore, 'chat'), orderBy('createdAt')), (snapshot) => {
-        onNext(snapshot.docs.map((doc) => doc.data() as ChatMessageModel));
+        onNext(snapshot.docs.map((doc) => {id: doc.id, ...doc.data()} as ChatMessageModel));
     });
 }
