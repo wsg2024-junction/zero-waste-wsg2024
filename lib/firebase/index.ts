@@ -35,7 +35,7 @@ export function streamGlobalState(onNext: (globalState: GlobalState) => void): U
 
 export function streamUsers(onNext: (users: Record<string, User>) => void): Unsubscribe {
     return onSnapshot(collection(firestore, 'users'), (snapshot) => {
-        onNext(Object.fromEntries(snapshot.docs.map((doc) => [doc.id, doc.data() as User]));
+        onNext(Object.fromEntries(snapshot.docs.map((doc) => [doc.id, doc.data() as User])));
     });
 }
 
