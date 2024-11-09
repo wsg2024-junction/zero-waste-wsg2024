@@ -42,30 +42,30 @@ export function Dashboard() {
         <div className="grid grid-cols-5">
             <DashboardCol
                 icon={UtensilsCrossed}
-                title={'Preproduction'}
+                stage={'preproduction'}
                 color={'#16a34a'}
                 batches={data.preproductionBatches}
             />
             <DashboardCol
-                title={'Cooking'}
+                stage={'cooking'}
                 icon={CookingPot}
                 color={'#0284c7'}
                 batches={[]}
             />
             <DashboardCol
-                title={'Storage'}
+                stage={'storage'}
                 icon={Warehouse}
                 color={'#ca8a04'}
                 batches={data.storageBatches}
             />
             <DashboardCol
-                title={'Packaging'}
+                stage={'packaging'}
                 icon={PackageOpen}
                 color={'#dc2626'}
                 batches={[]}
             />
             <DashboardCol
-                title={'Done'}
+                stage={'done'}
                 icon={CircleCheckBig}
                 color={'#9333ea'}
                 batches={data.doneBatches}

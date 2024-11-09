@@ -1,5 +1,8 @@
+'use client';
+
 import { Batch, ChatMessage, GlobalState } from '../lib/models';
 import { useEffect, useState } from 'react';
+import { streamBatches, streamGlobalState, streamMessages } from '@/lib/firebase';
 
 export function useGlobalState(): GlobalState {
     const [globalState, setGlobalState] = useState<GlobalState>({

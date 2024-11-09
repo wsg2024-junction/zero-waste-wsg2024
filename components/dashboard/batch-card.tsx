@@ -9,7 +9,7 @@ interface BatchCardProps {
 
 export function BatchCard({ batch }: BatchCardProps) {
     return (
-        <Card className={'p-2 flex flex-col bg-white bg-opacity-80 gap-1'}>
+        <Card className={'mx-2 mt-2 p-2 flex flex-col bg-white bg-opacity-80'}>
             <span className={'font-bold mb-2'}>{batch.product}</span>
             <div className={'grid grid-rows-2 grid-flow-col gap-1'}>
                 <CardInfo>
@@ -39,11 +39,11 @@ export function BatchCard({ batch }: BatchCardProps) {
                     </CardInfo>
                 )}
             </div>
-            <span className={'text-xs text-end'}>{batch.id}</span>
+            <span className={'text-sm text-end'}>{batch.id}</span>
         </Card>
     );
 }
 
 function CardInfo(props: PropsWithChildren<object>) {
-    return <span className={'flex gap-1 items-center text-sm'}>{props.children}</span>;
+    return <span className={'flex gap-1 items-center'}>{props.children}</span>;
 }
