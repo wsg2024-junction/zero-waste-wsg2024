@@ -72,6 +72,7 @@ export type PreproductionProduct = {
     weight: number;
 };
 export type ChatMessageModel = {
+    id: string;
     sender: User;
     message: string;
     area?: string;
