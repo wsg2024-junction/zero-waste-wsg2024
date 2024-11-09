@@ -65,10 +65,17 @@ export type PreproductionProduct = {
     createdBy: string;
     weight: number;
 };
+export type User = {
+    userId: number;
+    username: string;
+    firstname: string;
+    lastname: string;
+    production_step: 'PREPRODUCTION' | 'COOKING' | 'STORAGE' | 'PACKAGING';
+};
 
-export type ChatMessage = {
-    createdAt: Timestamp;
-    createdBy: string;
-    area: Area;
+export type ChatMessageModel = {
+    sender: User;
     message: string;
+    area?: string;
+    createdAt?: Timestamp;
 };

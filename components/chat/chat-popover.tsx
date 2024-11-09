@@ -4,8 +4,11 @@ import { MaximizeIcon, MessageSquareIcon, MinimizeIcon } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import Chat from '@/components/chat/chat';
 import { useState } from 'react';
+import LanguageSelector from '@/components/language-selector/language-selector';
+import { useLanguage } from '@/app/_utils/useLanguage';
 
 export default function ChatPopover() {
+    const [lang, setLang] = useLanguage();
     const [expanded, setExpanded] = useState(false);
 
     return (
@@ -30,6 +33,12 @@ export default function ChatPopover() {
                         size="icon">
                         {expanded ? <MinimizeIcon /> : <MaximizeIcon />}
                     </Button>
+                    <div className={'absolute top-2 left-[50px] z-10'}>
+                        <LanguageSelector
+                            lang={lang}
+                            setLang={setLang}
+                        />
+                    </div>
                     <Chat />
                 </div>
             </PopoverContent>

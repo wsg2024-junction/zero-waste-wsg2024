@@ -13,7 +13,7 @@ import {
     Unsubscribe,
     updateDoc,
 } from 'firebase/firestore';
-import { Area, Batch, BatchPlan, ChatMessage, GlobalState, Product } from '../models';
+import { Area, Batch, BatchPlan, ChatMessageModel, GlobalState, Product } from '../models';
 
 const app = initializeApp(firebaseConfig);
 
@@ -52,11 +52,11 @@ export function streamBatches(onNext: (batches: Batch[]) => void): Unsubscribe {
 
 // Chat
 
-export async function sendMessage(message: ChatMessage) {
+export async function sendMessage(message: ChatMessageModel) {
     await addDoc(collection(firestore, 'chat'), message);
 }
-export function streamMessages(onNext: (messages: ChatMessage[]) => void): Unsubscribe {
+export function streamMessages(onNext: (messages: ChatMessageModel[]) => void): Unsubscribe {
     return onSnapshot(query(collection(firestore, 'chat'), orderBy('createdAt')), (snapshot) => {
-        onNext(snapshot.docs.map((doc) => doc.data() as ChatMessage));
+        onNext(snapshot.docs.map((doc) => doc.data() as ChatMessageModel));
     });
 }

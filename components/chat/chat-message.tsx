@@ -1,18 +1,18 @@
 'use client';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
 import moment from 'moment';
-import * as deepl from 'deepl-node';
 import { translate } from '@/lib/deepl';
-import { LanguageContext, useLanguage } from '@/app/_utils/useLanguage';
+import { useLanguage } from '@/app/_utils/useLanguage';
 import { useLocale } from '@/app/_utils/loadLocale';
+import { ChatMessageModel, User } from '@/lib/models';
 
 export interface ChatMessageProperties {
     sender: User;
-    receiver: User;
     message: string;
-    timestamp: Date;
+    area?: string;
+    createdAt?: Date;
 }
 
 export default function ChatMessage({
@@ -22,7 +22,7 @@ export default function ChatMessage({
 }: {
     showOriginal?: boolean;
     currentUser: User;
-    chatMessage: ChatMessageProperties;
+    chatMessage: ChatMessageModel;
 }) {
     const [lang] = useLanguage();
     const locale = useLocale(lang);
@@ -39,7 +39,7 @@ export default function ChatMessage({
     return (
         <div>
             <div className={`w-fit opacity-40 text-[0.825rem] ${isCurrentUser ? 'ml-auto' : ''}`}>
-                {locale.messages['GENERAL_' + chatMessage.sender.production_step]}
+                {locale.messages['GENERAL_' + chatMessage.area]}
             </div>
             <div className={`flex gap-2 ${isCurrentUser ? 'flex-row-reverse' : ''}`}>
                 <div>
@@ -54,7 +54,7 @@ export default function ChatMessage({
                     className={`relative min-w-[5rem] p-2 pb-6 text-wrap break-words overflow-hidden  max-w-[75%] ${isCurrentUser ? 'ml-auto bg-primary-200 ' : ''}`}>
                     <span>{showOriginal ? chatMessage.message : translation}</span>
                     <span className={'absolute bottom-1 right-2 opacity-40 text-[0.825rem]'}>
-                        {moment(chatMessage.timestamp).format('h:mm a')}
+                        {moment(chatMessage.createdAt?.toDate()).format('h:mm a')}
                     </span>
                 </Card>
             </div>
