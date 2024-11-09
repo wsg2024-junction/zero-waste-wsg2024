@@ -10,5 +10,6 @@
     "GENERAL_COOKING": "Cooking",
     "GENERAL_STORAGE": "Storage",
     "GENERAL_PACKAGING": "Packaging",
-    "WEIGHT": "Weight"
+    "WEIGHT": "Weight",
+    "HINT_AUTOMATIC_TRANSLATION": "This text is automatically translated to the workers selected language."
 }

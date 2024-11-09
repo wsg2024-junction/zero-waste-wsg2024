@@ -12,17 +12,14 @@ export default function DashboardPage() {
     const messages = useGlobalState().dashboardMessages[area];
 
     return (
-        <div
-            className={
-                'grid grid-cols-[1fr_min-content_max-content] grid-rows-[1fr_min-content] w-full text-lg'
-            }>
+        <div className={'relative flex pb-12 flex-row gap-2 w-full text-lg'}>
             <Dashboard />
             <Separator
                 orientation={'vertical'}
-                className={'mr-2'}
+                className={'mx-2'}
             />
             <Leaderboard />
-            <footer className={'mt-2 col-span-3 text-center'}>{messages}</footer>
+            <footer className={'absolute bottom-1 -translate-x-1/2 left-1/2 text-center'}>{messages}</footer>
         </div>
     );
 }
