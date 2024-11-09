@@ -1,4 +1,10 @@
 import { Timestamp } from '@firebase/firestore';
+export enum AreaEnum {
+    PREPRODUCTION = 'preproduction',
+    COOKING = 'cooking',
+    STORAGE = 'storage',
+    PACKAGING = 'packaging',
+}
 
 export type Area = 'preproduction' | 'cooking' | 'storage' | 'packaging';
 export type GlobalState = {

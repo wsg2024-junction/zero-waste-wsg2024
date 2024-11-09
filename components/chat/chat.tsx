@@ -66,12 +66,11 @@ export default function Chat() {
                 <div ref={scrolldownTargetRef}></div>
 
                 {messages.toReversed().map((chatMessage) => {
-                    console.log('chatMessage', chatMessage);
                     return (
                         <ChatMessage
                             showOriginal={showOriginal}
                             currentUser={currentUser}
-                            key={chatMessage.createdAt?.toDate().getTime()}
+                            key={chatMessage.id}
                             chatMessage={chatMessage}
                         />
                     );
