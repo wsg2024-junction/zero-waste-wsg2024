@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState } from 'react';
 import { TargetLanguageCode } from 'deepl-node';
-import { loadLocale } from '@/app/_utils/loadLocale';
 
 interface LanguageContextProps {
     lang: TargetLanguageCode;
@@ -14,13 +13,15 @@ export const LanguageContext = createContext<LanguageContextProps>({
     setLang: () => {},
 });
 
+const localStorage = typeof window !== 'undefined' ? window.localStorage : null;
+
 export const LanguageProvider = ({ children }: React.PropsWithChildren) => {
     const [lang, setLang] = useState<TargetLanguageCode>(
         (localStorage?.getItem('lang') as TargetLanguageCode) || 'en-US',
     );
 
     const setLanguage = (lang: TargetLanguageCode) => {
-        localStorage.setItem('lang', lang);
+        localStorage?.setItem('lang', lang);
         setLang(lang);
     };
 
