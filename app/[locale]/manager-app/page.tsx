@@ -11,7 +11,6 @@ import {
 import { Area, AreaEnum } from '@/lib/models';
 import { useEffect, useState } from 'react';
 import humanizeString from 'humanize-string';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useGlobalState } from '@/hooks/useModels';
 import { Textarea } from '@/components/ui/textarea';
@@ -19,20 +18,19 @@ import { setDashboardMessage } from '@/lib/firebase';
 import { useDeepLTranslate } from '@/hooks/useDeepLTranslate';
 import { useLocale, useTranslations } from 'next-intl';
 import { TargetLanguageCode } from 'deepl-node';
+import ChatPopover from '@/components/chat/chat-popover';
+import { Dashboard } from '@/components/dashboard/dashboard';
 
 export default function ManagerApp() {
     const locale = useLocale();
     const t = useTranslations();
     const globalMOTDs = useGlobalState();
-    const areas = Object.keys(AreaEnum).map((key) => AreaEnum[key] as string);
-    const [currentArea, setCurrentArea] = useState(areas[0]);
+    const areas = Object.keys(AreaEnum).map((key) => AreaEnum[key as keyof typeof AreaEnum] as Area);
+    const [currentArea, setCurrentArea] = useState<Area>(areas[0]);
     const [currentMOTD, setCurrentMOTD] = useState<string>(globalMOTDs.dashboardMessages[currentArea]);
     const [translation, setText] = useDeepLTranslate(locale as TargetLanguageCode);
 
-    useEffect(() => {
-        console.log(translation);
-        setCurrentMOTD(translation);
-    }, [translation]);
+    useEffect(() => setCurrentMOTD(translation), [translation]);
 
     useEffect(() => {
         if (!globalMOTDs) return;
@@ -47,7 +45,8 @@ export default function ManagerApp() {
     };
 
     return (
-        <div className={'flex flex-col '}>
+        <div className={'flex flex-col'}>
+            <Dashboard interactive />
             <Select
                 defaultValue={currentArea}
                 onValueChange={setCurrentArea}>
@@ -82,6 +81,7 @@ export default function ManagerApp() {
                 onClick={onSubmitMOTD}>
                 Submit
             </Button>
+            <ChatPopover />
         </div>
     );
 }
