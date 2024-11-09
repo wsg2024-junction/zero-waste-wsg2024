@@ -1,17 +1,18 @@
 'use client';
+import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
+import Image from 'next/image';
+import { ChatMessageModel, User } from '@/lib/models';
 import { translate } from '@/lib/deepl';
 import { TargetLanguageCode } from 'deepl-node';
 import moment from 'moment';
 import { useLocale, useTranslations } from 'next-intl';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 export interface ChatMessageProperties {
     sender: User;
-    receiver: User;
     message: string;
-    timestamp: Date;
+    area?: string;
+    createdAt?: Date;
 }
 
 export default function ChatMessage({
@@ -21,11 +22,11 @@ export default function ChatMessage({
 }: {
     showOriginal?: boolean;
     currentUser: User;
-    chatMessage: ChatMessageProperties;
+    chatMessage: ChatMessageModel;
 }) {
     const locale = useLocale();
     const t = useTranslations();
-    const isCurrentUser = chatMessage.sender.userId === currentUser.userId;
+    const isCurrentUser = chatMessage.sender.name === currentUser.name;
 
     const [translation, setTranslation] = useState<string>(chatMessage.message);
 
@@ -38,7 +39,7 @@ export default function ChatMessage({
     return (
         <div>
             <div className={`w-fit opacity-40 text-[0.825rem] ${isCurrentUser ? 'ml-auto' : ''}`}>
-                {t('GENERAL_' + chatMessage.sender.production_step)}
+                {t('GENERAL_' + chatMessage.area?.toUpperCase())}
             </div>
             <div className={`flex gap-2 ${isCurrentUser ? 'flex-row-reverse' : ''}`}>
                 <div>
@@ -55,7 +56,7 @@ export default function ChatMessage({
                     }`}>
                     <span>{showOriginal ? chatMessage.message : translation}</span>
                     <span className={'absolute bottom-1 right-2 opacity-40 text-[0.825rem]'}>
-                        {moment(chatMessage.timestamp).format('h:mm a')}
+                        {moment(chatMessage.createdAt?.toDate()).format('h:mm a')}
                     </span>
                 </Card>
             </div>

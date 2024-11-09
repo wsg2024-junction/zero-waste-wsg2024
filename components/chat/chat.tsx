@@ -1,27 +1,18 @@
 'use client';
-import ChatMessage, { ChatMessageProperties } from '@/components/chat/chat-message';
+import React, { useEffect, useState } from 'react';
+import ChatMessage from '@/components/chat/chat-message';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { SendIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { sendMessage, streamMessages } from '@/lib/firebase';
+import { ChatMessageModel, User } from '@/lib/models';
+import { Timestamp } from '@firebase/firestore';
+import {useTranslations} from "next-intl";
 
-interface ChatProperties {}
 
 const mockUser: User = {
-    userId: 1,
-    username: 'manager_cooking',
-    firstname: 'Max',
-    lastname: 'Mustermann',
-    production_step: 'COOKING',
-};
-
-const mockUser2: User = {
-    userId: 2,
-    username: 'manager_preproduction',
-    firstname: 'Joe',
-    lastname: 'Doe',
-    production_step: 'PREPRODUCTION',
+    name: 'John Doe',
+    role: 'manager',
 };
 
 export default function Chat() {
@@ -29,38 +20,29 @@ export default function Chat() {
     const currentUser = mockUser;
     const [message, setMessage] = useState('');
     const [showOriginal, setShowOriginal] = useState(false);
+    const [messages, setMessages] = useState<ChatMessageModel[]>([]);
 
-    const chatMessages: ChatMessageProperties[] = [
-        {
-            sender: mockUser,
-            receiver: mockUser2,
-            message: 'Hello Maria, I have a question regarding the new product launch.',
-            timestamp: new Date(),
-        },
-        {
-            sender: mockUser2,
-            receiver: mockUser,
-            message: 'Hello Max, what is your question?',
-            timestamp: new Date(),
-        },
-    ];
-
-    const [messages, setMessages] = useState<ChatMessageProperties[]>(chatMessages);
+    useEffect(() => {
+        streamMessages((messages: ChatMessageModel[]) => {
+            console.log('Messages', messages);
+            setMessages(messages);
+        });
+    }, []);
 
     const onUpdateMessage = (event: any) => {
         setMessage(event.currentTarget.value);
     };
 
     const onAddMessage = () => {
-        const newMessage = {
+        const newMessage: ChatMessageModel = {
             sender: currentUser,
-            receiver: mockUser2,
             message: message,
-            timestamp: new Date(),
+            createdAt: Timestamp.now(),
+            area: 'PREPRODUCTION',
         };
         setMessage('');
-        setMessages((prevValue) => {
-            return [...prevValue, newMessage];
+        sendMessage(newMessage).then((t) => {
+            console.log('Message sent', t);
         });
     };
 
