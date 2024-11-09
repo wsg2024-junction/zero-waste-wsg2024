@@ -10,7 +10,7 @@ export interface ChatMessageProperties {
     timestamp: Date;
 }
 
-export default async function ChatMessage({
+export default function ChatMessage({
     currentUser,
     chatMessage,
 }: {
@@ -30,10 +30,10 @@ export default async function ChatMessage({
                     alt="HK Foods"></Image>
             </div>
             <Card
-                className={`relative p-3 pb-6 text-wrap break-words overflow-hidden  max-w-[75%] ${isCurrentUser ? 'ml-auto bg-primary-200 ' : ''}`}>
+                className={`relative min-w-[5rem] p-2 pb-6 text-wrap break-words overflow-hidden  max-w-[75%] ${isCurrentUser ? 'ml-auto bg-primary-200 ' : ''}`}>
                 <span>{chatMessage.message}</span>
-                <span className={'absolute bottom-1 right-2 opacity-40 text-[0.875rem]'}>
-                    {moment(chatMessage.timestamp).format('DD/MM/YYYY, h:mm a')}
+                <span className={'absolute bottom-1 right-2 opacity-40 text-[0.825rem]'}>
+                    {moment(chatMessage.timestamp).format('h:mm a')}
                 </span>
             </Card>
         </div>
