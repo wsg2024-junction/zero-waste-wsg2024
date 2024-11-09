@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ChatMessage from '@/components/chat/chat-message';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,8 +7,7 @@ import { SendIcon } from 'lucide-react';
 import { sendMessage, streamMessages } from '@/lib/firebase';
 import { ChatMessageModel, User } from '@/lib/models';
 import { Timestamp } from '@firebase/firestore';
-import {useTranslations} from "next-intl";
-
+import { useTranslations } from 'next-intl';
 
 const mockUser: User = {
     name: 'John Doe',
@@ -17,15 +16,20 @@ const mockUser: User = {
 
 export default function Chat() {
     // const cookieStore = await cookies(); // Get user from cookies
-    const currentUser = mockUser;
+    const currentUser = localStorage.getItem('user')
+        ? JSON.parse(localStorage.getItem('user') as string)
+        : mockUser;
     const [message, setMessage] = useState('');
     const [showOriginal, setShowOriginal] = useState(false);
     const [messages, setMessages] = useState<ChatMessageModel[]>([]);
 
+    const scrolldownTargetRef = useRef<HTMLDivElement>();
     useEffect(() => {
         streamMessages((messages: ChatMessageModel[]) => {
-            console.log('Messages', messages);
             setMessages(messages);
+            setTimeout(() => {
+                scrolldownTargetRef.current?.scrollIntoView({ behavior: 'smooth' });
+            });
         });
     }, []);
 
@@ -58,15 +62,20 @@ export default function Chat() {
                     {showOriginal ? t('CHAT_SHOW_TRANSLATION') : t('CHAT_SHOW_ORIGINAL')}
                 </Button>
             </div>
-            <div className={'space-y-2 p-1 overflow-y-auto'}>
-                {messages.map((chatMessage, index) => (
-                    <ChatMessage
-                        showOriginal={showOriginal}
-                        currentUser={currentUser}
-                        key={index}
-                        chatMessage={chatMessage}
-                    />
-                ))}
+            <div className={'space-y-2 p-1 overflow-y-auto flex-col-reverse flex'}>
+                <div ref={scrolldownTargetRef}></div>
+
+                {messages.toReversed().map((chatMessage) => {
+                    console.log('chatMessage', chatMessage);
+                    return (
+                        <ChatMessage
+                            showOriginal={showOriginal}
+                            currentUser={currentUser}
+                            key={chatMessage.createdAt?.toDate().getTime()}
+                            chatMessage={chatMessage}
+                        />
+                    );
+                })}
             </div>
             <div className={'absolute bottom-1 w-full flex flex-row gap-2'}>
                 <Input
