@@ -31,6 +31,14 @@ export function streamGlobalState(onNext: (globalState: GlobalState) => void): U
     });
 }
 
+// User
+
+export function streamUsers(onNext: (users: User[]) => void): Unsubscribe {
+    return onSnapshot(collection(firestore, 'users'), (snapshot) => {
+        onNext(snapshot.docs.map((doc) => doc.data() as User));
+    });
+}
+
 // Batches
 
 export async function createBatch(number: number, product: Product, planned: BatchPlan) {
