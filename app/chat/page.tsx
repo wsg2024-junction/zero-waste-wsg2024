@@ -1,6 +1,6 @@
-import React from 'react'
-import Chat from "@/components/chat/chat";
+import React from 'react';
+import Chat from '@/components/chat/chat';
 
-export default function ChatPage() {
-  return <Chat/>
+export default async function ChatPage() {
+    return <Chat />;
 }

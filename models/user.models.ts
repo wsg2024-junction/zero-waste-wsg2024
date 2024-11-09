@@ -3,4 +3,5 @@ interface User {
     username: string;
     firstname: string;
     lastname: string;
+    production_step: 'PREPRODUCTION' | 'COOKING' | 'STORAGE' | 'PACKAGING';
 }
