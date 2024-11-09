@@ -18,6 +18,8 @@ import { setDashboardMessage } from '@/lib/firebase';
 import { useDeepLTranslate } from '@/hooks/useDeepLTranslate';
 import { useLocale, useTranslations } from 'next-intl';
 import { TargetLanguageCode } from 'deepl-node';
+import ChatPopover from '@/components/chat/chat-popover';
+import { Dashboard } from '@/components/dashboard/dashboard';
 
 export default function ManagerApp() {
     const locale = useLocale();
@@ -28,10 +30,7 @@ export default function ManagerApp() {
     const [currentMOTD, setCurrentMOTD] = useState<string>(globalMOTDs.dashboardMessages[currentArea]);
     const [translation, setText] = useDeepLTranslate(locale as TargetLanguageCode);
 
-    useEffect(() => {
-        console.log(translation);
-        setCurrentMOTD(translation);
-    }, [translation]);
+    useEffect(() => setCurrentMOTD(translation), [translation]);
 
     useEffect(() => {
         if (!globalMOTDs) return;
@@ -46,7 +45,8 @@ export default function ManagerApp() {
     };
 
     return (
-        <div className={'flex flex-col '}>
+        <div className={'flex flex-col'}>
+            <Dashboard interactive />
             <Select
                 defaultValue={currentArea}
                 onValueChange={setCurrentArea}>
@@ -81,6 +81,7 @@ export default function ManagerApp() {
                 onClick={onSubmitMOTD}>
                 Submit
             </Button>
+            <ChatPopover />
         </div>
     );
 }
