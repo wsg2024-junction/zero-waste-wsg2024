@@ -7,24 +7,27 @@ import { SendIcon } from 'lucide-react';
 
 interface ChatProperties {}
 
-const mockUser = {
+const mockUser: User = {
     userId: 1,
     username: 'manager_cooking',
     firstname: 'Max',
     lastname: 'Mustermann',
+    production_step: 'Cooking',
 };
 
-const mockUser2 = {
+const mockUser2: User = {
     userId: 2,
     username: 'manager_preproduction',
     firstname: 'Joe',
     lastname: 'Doe',
+    production_step: 'Pre-Production',
 };
 
 export default function Chat() {
     // const cookieStore = await cookies(); // Get user from cookies
     const currentUser = mockUser;
     const [message, setMessage] = useState('');
+    const [showOriginal, setShowOriginal] = useState(false);
 
     const chatMessages: ChatMessageProperties[] = [
         {
@@ -61,10 +64,19 @@ export default function Chat() {
     };
 
     return (
-        <div className={'relative m-2 h-max pb-[4rem]'}>
+        <div className={'relative h-[100%] pb-[4rem]'}>
+            <div className={'flex flex-row-reverse'}>
+                <Button
+                    className={'ml-auto'}
+                    variant="link"
+                    onClick={() => setShowOriginal(!showOriginal)}>
+                    {showOriginal ? 'Show Translation' : 'Show Original'}
+                </Button>
+            </div>
             <div className={'space-y-2'}>
                 {messages.map((chatMessage, index) => (
                     <ChatMessage
+                        showOriginal={showOriginal}
                         currentUser={currentUser}
                         key={index}
                         chatMessage={chatMessage}
