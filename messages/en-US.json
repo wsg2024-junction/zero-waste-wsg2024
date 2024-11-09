@@ -9,5 +9,6 @@
     "GENERAL_PREPRODUCTION": "Pre-Production",
     "GENERAL_COOKING": "Cooking",
     "GENERAL_STORAGE": "Storage",
-    "GENERAL_PACKAGING": "Packaging"
+    "GENERAL_PACKAGING": "Packaging",
+    "WEIGHT": "Weight"
 }
