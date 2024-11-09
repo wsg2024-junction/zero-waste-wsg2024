@@ -1,4 +1,6 @@
-import { Batch, ChatMessage, GlobalState, User } from '../lib/models';
+'use client';
+
+import { Batch, ChatMessageModel, GlobalState, User } from '@/lib/models';
 import { useEffect, useState } from 'react';
 import { streamBatches, streamGlobalState, streamMessages, streamUsers } from '@/lib/firebase';
 
@@ -20,8 +22,8 @@ export function useBatches(): Batch[] {
     useEffect(() => streamBatches(setBatches), []);
     return batches;
 }
-export function useMessages(): ChatMessage[] {
-    const [messages, setMessages] = useState<ChatMessage[]>([]);
+export function useMessages(): ChatMessageModel[] {
+    const [messages, setMessages] = useState<ChatMessageModel[]>([]);
     useEffect(() => streamMessages(setMessages), []);
     return messages;
 }

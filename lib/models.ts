@@ -22,55 +22,38 @@ export type PackagingDelay = {
     estimatedDurationMinutes: number;
 };
 
-export type Product = 'hope' | 'faith';
 export type Batch = {
     number: number;
-    product: Product;
+    product: string;
     status:
         | {
-              stage: 'planned';
-              planned: BatchPlan;
-          }
-        | {
               stage: 'preproduction';
-              planResult: PlanResult;
-              preproduction: { products: PreproductionProduct[] };
+              plannedTotalWeight: number;
+              plannedProductCount: number;
+              products: PreproductionProduct[];
           }
         | {
               stage: 'cooking';
-              planResult: PlanResult;
-              preproductionResult: PreproductionResult;
+              products: PreproductionProduct[];
+              productCount: number;
+              totalWeight: number;
           }
         | {
               stage: 'storage';
-              planResult: PlanResult;
-              preproductionResult: PreproductionResult;
-              cookingResult: CookingResult;
+              totalWeight: number;
+              daysLeft: number;
           }
         | {
               stage: 'packaging';
-              planResult: PlanResult;
-              preproductionResult: PreproductionResult;
-              cookingResult: CookingResult;
-              storageResult: StorageResult;
-              packaging: { packageWeights: number[] };
+              totalWeight: number;
           }
         | {
               stage: 'done';
-              planResult: PlanResult;
-              preproductionResult: PreproductionResult;
-              cookingResult: CookingResult;
-              storageResult: StorageResult;
-              packagingResult: PackagingResult;
+              packageWeights: number[];
+              underweightProducts: number;
+              overweightTotalKg: number;
           };
 };
-export type StageStart = { startedAt: Timestamp };
-export type BatchPlan = { productCount: number; weight: number };
-export type PlanResult = StageStart & BatchPlan;
-export type PreproductionResult = StageStart & { products: PreproductionProduct[]; totalWeight: number };
-export type CookingResult = StageStart & { totalWeight: number; involvedPeopleIds: string[] };
-export type StorageResult = StageStart & { totalWeight: number; involvedPeopleIds: string[] };
-export type PackagingResult = StageStart & { packageWeights: number[] };
 
 export type PreproductionProduct = {
     createdAt: Timestamp;
