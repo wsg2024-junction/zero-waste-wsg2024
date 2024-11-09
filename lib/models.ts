@@ -3,6 +3,9 @@ import { Timestamp } from '@firebase/firestore';
 export type Area = 'preproduction' | 'cooking' | 'storage' | 'packaging';
 export type GlobalState = {
     dashboardMessages: Record<Area, string>;
+
+    /** Mapping from user ID to number of collected points. */
+    points: Record<string, number>;
 };
 
 export type PackagingDelay = {
