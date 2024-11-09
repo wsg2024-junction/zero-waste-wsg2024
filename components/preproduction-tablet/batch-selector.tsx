@@ -7,10 +7,14 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Label } from '../ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
+export type PreproductionBatch = Omit<Batch, 'status'> & {
+    status: Extract<Batch['status'], { stage: 'preproduction' }>;
+};
+
 export type BatchSelectorProps = {
-    batches: Batch[];
-    selectedBatch: Batch | undefined;
-    onSelected: (batch: Batch) => void;
+    batches: PreproductionBatch[];
+    selectedBatch: PreproductionBatch | undefined;
+    onSelected: (batch: PreproductionBatch) => void;
 };
 
 export function BatchSelector(props: BatchSelectorProps) {

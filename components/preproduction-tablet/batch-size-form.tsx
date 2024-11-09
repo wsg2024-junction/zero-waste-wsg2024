@@ -93,7 +93,7 @@ export function BatchSizeForm(props: BatchSizeFormType) {
                 </Form>
             </div>
 
-            <div className="rounded-md border max-w-sm">
+            <div className="rounded-md border w-full">
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -127,7 +127,7 @@ export function BatchSizeForm(props: BatchSizeFormType) {
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex max-w-sm justify-between items-center">
+            <div className="flex w-full justify-between items-center">
                 <P className="text-[0.8rem] font-medium text-destructive">{submitError}</P>
                 <Button onClick={submit}>Submit</Button>
             </div>

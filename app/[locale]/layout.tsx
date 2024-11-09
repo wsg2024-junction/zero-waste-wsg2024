@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster';
 import { routing } from '@/i18n/routing';
 import { avenir } from '@/lib/fonts/avenir';
 import { cn } from '@/lib/utils';
@@ -33,6 +34,7 @@ export default async function RootLayout({
             className="h-full">
             <body className={cn(avenir.className, 'antialiased flex flex-col h-full overflow-hidden')}>
                 <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+                <Toaster></Toaster>
             </body>
         </html>
     );

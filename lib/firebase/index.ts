@@ -4,10 +4,12 @@ import {
     addDoc,
     collection,
     doc,
+    DocumentData,
     getFirestore,
     onSnapshot,
     orderBy,
     query,
+    setDoc,
     Unsubscribe,
     updateDoc,
 } from 'firebase/firestore';
@@ -43,6 +45,12 @@ export function streamBatches(onNext: (batches: Batch[]) => void): Unsubscribe {
     return onSnapshot(collection(firestore, 'batches'), (snapshot) => {
         onNext(snapshot.docs.map((doc) => ({ number: parseInt(doc.id), ...doc.data() }) as Batch));
     });
+}
+
+export async function updateBatch(batch: Batch) {
+    const data = { ...batch } as DocumentData;
+    delete data.number;
+    await setDoc(doc(firestore, 'batches', batch.number.toString()), data);
 }
 
 // Chat

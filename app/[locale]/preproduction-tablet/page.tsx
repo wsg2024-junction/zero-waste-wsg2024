@@ -1,43 +1,68 @@
 'use client';
 
-import { BatchSelector } from '@/components/preproduction-tablet/batch-selector';
+import { BatchSelector, PreproductionBatch } from '@/components/preproduction-tablet/batch-selector';
 import { BatchSizeForm } from '@/components/preproduction-tablet/batch-size-form';
+import { BatchStatusModal } from '@/components/preproduction-tablet/batch-status-modal';
 import { H4 } from '@/components/ui/typography';
 import { useBatches } from '@/hooks/useModels';
 import { updateBatch } from '@/lib/firebase';
-import { Batch } from '@/lib/models';
+import { Timestamp } from '@firebase/firestore';
 import { useState } from 'react';
 
 export default function PreproductionApp() {
     const batches = useBatches();
-    const preproductionBatches = batches.filter((batch) => batch.status.stage === 'preproduction');
-    const [selectedBatch, setSelectedBatch] = useState<Batch>();
+    const preproductionBatches = batches.filter(
+        (batch): batch is PreproductionBatch => batch.status.stage === 'preproduction',
+    );
+
+    const [selectedBatchNumber, setSelectedBatchNumber] = useState<number>();
+    const selectedBatch = preproductionBatches.find((batch) => batch.number === selectedBatchNumber);
+
+    const [showStatus, setShowStatus] = useState(false);
 
     return (
-        <div className="space-y-4">
-            <BatchSelector
-                batches={preproductionBatches}
-                selectedBatch={selectedBatch}
-                onSelected={setSelectedBatch}></BatchSelector>
-            {selectedBatch === undefined ? (
-                <H4>Please select a batch</H4>
-            ) : preproductionBatches.every((batch) => batch.number !== selectedBatch.number) ? (
-                <H4>Batch got moved out of production</H4>
-            ) : (
-                <>
-                    <H4>Please enter your measurements</H4>
-                    <BatchSizeForm
-                        onSubmit={(measurements) => {
-                            updateBatch({
-                                ...selectedBatch,
-                                status: {
-                                    ...selectedBatch.status,
-                                    samples: [...selectedBatch.status.samples],
-                                },
-                            });
-                        }}></BatchSizeForm>
-                </>
+        <>
+            <div className="space-y-4">
+                <BatchSelector
+                    batches={preproductionBatches}
+                    selectedBatch={selectedBatch}
+                    onSelected={(batch) => setSelectedBatchNumber(batch.number)}></BatchSelector>
+                {selectedBatch === undefined ? (
+                    <H4>Please select a batch</H4>
+                ) : (
+                    <>
+                        <H4>Please enter your measurements</H4>
+                        <BatchSizeForm
+                            onSubmit={(measurements) => {
+                                const cUser = JSON.parse(localStorage.getItem('user') as string);
+                                updateBatch({
+                                    ...selectedBatch,
+                                    status: {
+                                        ...selectedBatch.status,
+                                        samples: [
+                                            ...(selectedBatch.status.samples ?? []),
+                                            {
+                                                createdAt: Timestamp.now(),
+                                                createdBy: cUser.id,
+                                                weights: measurements.map(
+                                                    (measurement) => measurement.weight,
+                                                ),
+                                            },
+                                        ],
+                                    },
+                                }).then(() => {
+                                    setShowStatus(true);
+                                });
+                            }}></BatchSizeForm>
+                    </>
+                )}
+            </div>
+            {!!selectedBatch && (
+                <BatchStatusModal
+                    open={showStatus}
+                    onOpenChange={setShowStatus}
+                    batch={selectedBatch}></BatchStatusModal>
             )}
-        </div>
+        </>
     );
 }
