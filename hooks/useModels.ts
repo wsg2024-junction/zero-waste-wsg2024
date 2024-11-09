@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 export function useGlobalState(): GlobalState {
     const [globalState, setGlobalState] = useState<GlobalState>({
         dashboardMessages: { preproduction: '', cooking: '', storage: '', packaging: '' },
+        points: {},
     });
     useEffect(() => streamGlobalState(setGlobalState), []);
     return globalState;
