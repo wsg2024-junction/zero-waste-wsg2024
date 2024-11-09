@@ -25,6 +25,7 @@ export type PackagingDelay = {
 export type Batch = {
     number: number;
     product: string;
+    createdAt: Timestamp;
     status:
         | {
               stage: 'preproduction';
@@ -34,22 +35,32 @@ export type Batch = {
           }
         | {
               stage: 'cooking';
+              preproductionCompletedAt: Timestamp;
               products: PreproductionProduct[];
               productCount: number;
               totalWeight: number;
           }
         | {
               stage: 'storage';
+              preproductionCompletedAt: Timestamp;
+              cookingCompletedAt: Timestamp;
               totalWeight: number;
               daysLeft: number;
           }
         | {
               stage: 'packaging';
+              preproductionCompletedAt: Timestamp;
+              cookingCompletedAt: Timestamp;
+              storageCompletedAt: Timestamp;
               totalWeight: number;
           }
         | {
               stage: 'done';
               packageWeights: number[];
+              preproductionCompletedAt: Timestamp;
+              cookingCompletedAt: Timestamp;
+              storageCompletedAt: Timestamp;
+              packagingCompletedAt: Timestamp;
               underweightProducts: number;
               overweightTotalKg: number;
           };
