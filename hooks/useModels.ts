@@ -7,6 +7,7 @@ import { streamBatches, streamGlobalState, streamMessages, streamUsers } from '@
 export function useGlobalState(): GlobalState {
     const [globalState, setGlobalState] = useState<GlobalState>({
         dashboardMessages: { preproduction: '', cooking: '', storage: '', packaging: '' },
+        status: { preproduction: 'OK', cooking: 'OK', storage: 'OK', packaging: 'OK' },
         points: {},
     });
     useEffect(() => streamGlobalState(setGlobalState), []);

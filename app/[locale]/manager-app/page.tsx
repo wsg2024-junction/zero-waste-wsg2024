@@ -19,6 +19,10 @@ import { setDashboardMessage } from '@/lib/firebase';
 import { useDeepLTranslate } from '@/hooks/useDeepLTranslate';
 import { useLocale, useTranslations } from 'next-intl';
 import { TargetLanguageCode } from 'deepl-node';
+import StatusSelection from '@/components/manager-status-selection/StatusSelection';
+import { Card } from '@/components/ui/card';
+import StatusSelectionPopover from '@/components/manager-status-selection/StatusSelectionPopover';
+import ChatPopover from '@/components/chat/chat-popover';
 
 export default function ManagerApp() {
     const locale = useLocale();
@@ -30,7 +34,6 @@ export default function ManagerApp() {
     const [translation, setText] = useDeepLTranslate(locale as TargetLanguageCode);
 
     useEffect(() => {
-        console.log(translation);
         setCurrentMOTD(translation);
     }, [translation]);
 
@@ -47,41 +50,45 @@ export default function ManagerApp() {
     };
 
     return (
-        <div className={'flex flex-col '}>
-            <Select
-                defaultValue={currentArea}
-                onValueChange={setCurrentArea}>
-                <SelectTrigger>
-                    <SelectValue placeholder={'Area'} />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectGroup>
-                        <SelectLabel>Stage</SelectLabel>
-                        <>
-                            {areas.map((area) => (
-                                <SelectItem
-                                    key={area}
-                                    value={area}>
-                                    {humanizeString(area)}
-                                </SelectItem>
-                            ))}
-                        </>
-                    </SelectGroup>
-                </SelectContent>
-            </Select>
-            <Textarea
-                className={'mt-2'}
-                value={currentMOTD}
-                onInput={onUpdateMOTD}
-                placeholder={'Enter message of the day...'}
-            />
-            <span className={'text-[0.825rem] opacity-50'}>{t('HINT_AUTOMATIC_TRANSLATION')}</span>
-            <Button
-                className={'mt-2'}
-                variant={'secondary'}
-                onClick={onSubmitMOTD}>
-                Submit
-            </Button>
-        </div>
+        <>
+            <div className={'flex flex-col '}>
+                <Select
+                    defaultValue={currentArea}
+                    onValueChange={setCurrentArea}>
+                    <SelectTrigger>
+                        <SelectValue placeholder={'Area'} />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectLabel>Stage</SelectLabel>
+                            <>
+                                {areas.map((area) => (
+                                    <SelectItem
+                                        key={area}
+                                        value={area}>
+                                        {humanizeString(area)}
+                                    </SelectItem>
+                                ))}
+                            </>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+                <Textarea
+                    className={'mt-2'}
+                    value={currentMOTD}
+                    onInput={onUpdateMOTD}
+                    placeholder={'Enter message of the day...'}
+                />
+                <span className={'text-[0.825rem] opacity-50'}>{t('HINT_AUTOMATIC_TRANSLATION')}</span>
+                <Button
+                    className={'mt-2'}
+                    variant={'secondary'}
+                    onClick={onSubmitMOTD}>
+                    Submit
+                </Button>
+                <ChatPopover />
+                <StatusSelectionPopover />
+            </div>
+        </>
     );
 }

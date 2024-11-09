@@ -5,10 +5,17 @@ export enum AreaEnum {
     STORAGE = 'storage',
     PACKAGING = 'packaging',
 }
+export enum AreaStatus {
+    OK = 'OK',
+    SLOWED = 'SLOWED',
+    STOPPED = 'STOPPED',
+    EMERGENCY = 'EMERGENCY',
+}
 
 export type Area = 'preproduction' | 'cooking' | 'storage' | 'packaging';
 export type GlobalState = {
     dashboardMessages: Record<Area, string>;
+    status: Record<Area, AreaStatus>;
 
     /** Mapping from user ID to number of collected points. */
     points: Record<string, number>;
