@@ -12,7 +12,6 @@ import {
     updateDoc,
 } from 'firebase/firestore';
 import { Area, Batch, ChatMessageModel, GlobalState, User } from '../models';
-
 const app = initializeApp(firebaseConfig);
 
 export const firestore = getFirestore(app);

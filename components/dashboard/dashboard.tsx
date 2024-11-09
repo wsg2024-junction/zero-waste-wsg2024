@@ -14,7 +14,7 @@ export function Dashboard({ interactive }: DashboardProps) {
 
     return (
         <DashboardInteractiveContext.Provider value={interactive ?? false}>
-            <div className="grid grid-cols-5">
+            <div className="flex flex-col flex-grow min-w-0 gap-2 xl:flex-row">
                 <DashboardCol
                     icon={UtensilsCrossed}
                     stage={'preproduction'}

@@ -78,14 +78,14 @@ export function BatchCard({ batch }: BatchCardProps) {
         );
         batchInfo.push(
             <CardInfo>
-                <Trash2 />
-                {batch.status.underweightProducts}
+                <ArchiveRestore />
+                {batch.status.overweightTotalKg}&#x202f;kg
             </CardInfo>,
         );
         batchInfo.push(
             <CardInfo>
-                <ArchiveRestore />
-                {batch.status.overweightTotalKg}&#x202f;kg
+                <Trash2 />
+                {batch.status.underweightProducts}
             </CardInfo>,
         );
     }
@@ -93,12 +93,12 @@ export function BatchCard({ batch }: BatchCardProps) {
     const card = (
         <Card
             className={classNames(
-                'p-2 flex flex-col bg-white bg-opacity-80',
+                'relative min-w-40 p-2 flex flex-col bg-white bg-opacity-80',
                 isInteractive && 'cursor-pointer hover:shadow-lg transition',
             )}>
             <span className={'font-bold mb-2'}>{batch.product}</span>
-            <div className={'grid grid-rows-2 grid-flow-col gap-1'}>{...batchInfo}</div>
-            <span className={'text-sm text-end'}>{batch.number}</span>
+            <div className={'flex flex-nowrap flex-col gap-1'}>{...batchInfo}</div>
+            <span className={'absolute bottom-2 right-2 text-sm text-end'}>{batch.number}</span>
         </Card>
     );
 
