@@ -1,8 +1,7 @@
 import { ForwardRefExoticComponent, RefAttributes } from 'react';
 import { LucideProps } from 'lucide-react';
-import { Batch } from '@/models/batch.models';
 import { BatchCard } from './batch-card';
-import { Area } from '@/lib/models';
+import { Area, Batch } from '@/lib/models';
 import { DashboardTitle } from '@/components/dashboard/dashboard-title';
 
 interface DashboardColProps {
@@ -25,12 +24,14 @@ export function DashboardCol(props: DashboardColProps) {
             <div
                 className={'rounded-xl flex flex-col'}
                 style={{ background: props.color + '55' }}>
-                {props.batches.map((batch) => (
-                    <BatchCard
-                        key={batch.id}
-                        batch={batch}
-                    />
-                ))}
+                {props.batches
+                    .filter((batch) => batch.status.stage === props.stage)
+                    .map((batch) => (
+                        <BatchCard
+                            key={batch.number}
+                            batch={batch}
+                        />
+                    ))}
             </div>
         </div>
     );
