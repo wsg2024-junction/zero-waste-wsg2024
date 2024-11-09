@@ -1,4 +1,4 @@
-import { Batch, ChatMessage, GlobalState } from '../lib/models';
+import { Batch, ChatMessage, GlobalState, User } from '../lib/models';
 import { useEffect, useState } from 'react';
 
 export function useGlobalState(): GlobalState {
