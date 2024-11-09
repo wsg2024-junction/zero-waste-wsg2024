@@ -4,7 +4,6 @@ import { PropsWithChildren, ReactElement, useContext } from 'react';
 import { Batch } from '@/lib/models';
 import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
 import classNames from 'classnames';
-import { usePathname } from 'next/navigation';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -22,7 +21,6 @@ interface BatchCardProps {
 
 export function BatchCard({ batch }: BatchCardProps) {
     const isInteractive = useContext(DashboardInteractiveContext);
-    const currentPath = usePathname();
 
     const batchInfo: ReactElement[] = [];
     if (batch.status.stage === 'preproduction') {
