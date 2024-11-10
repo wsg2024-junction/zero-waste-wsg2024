@@ -1,16 +1,9 @@
-import {
-    CircleCheckBig,
-    CookingPot,
-    PackageOpen,
-    TriangleAlertIcon,
-    UtensilsCrossed,
-    Warehouse,
-} from 'lucide-react';
-import { DashboardCol } from './dashboard-col';
+import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
 import { useBatches } from '@/hooks/useModels';
 import { Area } from '@/lib/models';
-import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
 import classNames from 'classnames';
+import { CircleCheckBig, CookingPot, PackageOpen, UtensilsCrossed, Warehouse } from 'lucide-react';
+import { DashboardCol } from './dashboard-col';
 
 interface DashboardProps {
     className?: string;
