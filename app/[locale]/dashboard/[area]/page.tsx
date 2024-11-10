@@ -39,27 +39,37 @@ export default function DashboardPage() {
     const translatedMessage = useDeepLTranslated(locale as TargetLanguageCode, message);
 
     return (
-        <div className={'relative flex pb-12 flex-row gap-2 w-full text-lg'}>
-            {worstState === AreaStatus.EMERGENCY && (
-                <div
-                    className={
-                        'fixed top-0 left-0 w-full h-full z-20 bg-red-800 opacity-95 text-white flex flex-col justify-center items-center animate-emergency'
-                    }>
-                    <TriangleAlertIcon size={64} />
-                    <span className={'font-bold text-3xl'}>EMERGENCY</span>
-                    <span className={'font-bold text-md'}>Please seek your nearest manager!</span>
-                </div>
-            )}
-            <Dashboard currentArea={area} />
-            <Separator
-                orientation={'vertical'}
-                className={'mx-2'}
-            />
-            <Leaderboard />
-            <footer className={'absolute bottom-1 -translate-x-1/2 left-1/2 text-center'}>
-                {translatedMessage}
-            </footer>
-        </div>
+        <>
+            <div
+                className={
+                    'xl:hidden z-50 flex flex-col justify-center items-center fixed bottom-0 left-0 right-0 top-0 bg-red-100 p-4'
+                }>
+                <h1 className={'text-lg font-bold m-0 max-w-52 text-center'}>
+                    This page is only available on large TVs and Desktop PCs!
+                </h1>
+            </div>
+            <div className={'relative flex pb-12 flex-row gap-2 w-full text-lg'}>
+                {worstState === AreaStatus.EMERGENCY && (
+                    <div
+                        className={
+                            'fixed top-0 left-0 w-full h-full z-20 bg-red-800 opacity-95 text-white flex flex-col justify-center items-center animate-emergency'
+                        }>
+                        <TriangleAlertIcon size={64} />
+                        <span className={'font-bold text-3xl'}>EMERGENCY</span>
+                        <span className={'font-bold text-md'}>Please seek your nearest manager!</span>
+                    </div>
+                )}
+                <Dashboard currentArea={area} />
+                <Separator
+                    orientation={'vertical'}
+                    className={'mx-2'}
+                />
+                <Leaderboard />
+                <footer className={'absolute bottom-1 -translate-x-1/2 left-1/2 text-center'}>
+                    {translatedMessage}
+                </footer>
+            </div>
+        </>
     );
 }
 
