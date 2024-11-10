@@ -1,13 +1,61 @@
 {
-    "NAV_HOME": "Home",
+    "NAV_HOME": "Startseite",
     "NAV_CHAT": "Chat",
     "NAV_LANG": "Sprache",
     "CHAT_SHOW_ORIGINAL": "Original anzeigen",
     "CHAT_SHOW_TRANSLATION": "Übersetzung anzeigen",
-    "CHAT_HINT_ENTER_TEXT": "Geben Sie hier den Text ein...",
+    "CHAT_HINT_ENTER_TEXT": "Text hier eingeben …",
     "CHAT_SEND": "Senden",
     "GENERAL_PREPRODUCTION": "Vorproduktion",
     "GENERAL_COOKING": "Kochen",
     "GENERAL_STORAGE": "Lagerung",
-    "GENERAL_PACKAGING": "Verpackung"
+    "GENERAL_PACKAGING": "Verpackung",
+    "stage": "Bühne",
+    "preproduction": {
+        "batch": "Charge",
+        "selectBatch": "Charge auswählen …",
+        "searchBatch": "Charge suchen …",
+        "noBatchAvailable": "Keine Charge verfügbar.",
+        "weight": "Gewicht",
+        "enterWeight": "Bitte ein gültiges Gewicht eingeben",
+        "measurements": "Maßnahmen",
+        "noMeasurements": "Keine Maßnahmen eingetragen",
+        "submit": "Absenden",
+        "weightOverview": "Übersicht Zielgewicht",
+        "deviation": "Abweichung",
+        "targetWeight": "Zielgewicht",
+        "actualWeight": "Tatsächliches Gewicht",
+        "decrease": "Portionsgröße um verringern",
+        "increase": "Portionsgröße um erhöhen",
+        "recentSamples": "Kürzliche Proben",
+        "close": "Schließen"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Status",
+            "ok": "OK",
+            "slowed": "VERLANGSAMMT",
+            "stopped": "STOPP",
+            "emergency": "NOTFALL!"
+        },
+        "message": {
+            "title": "Dashboard-Nachricht senden",
+            "placeholder": "Nachricht des Tages eingeben …",
+            "automaticTranslationHint": "Dieser Text wird automatisch in die vom Arbeiter ausgewählte Sprache übersetzt.",
+            "submit": "Absenden"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Verwendbare Produkte",
+            "usableProductsPerBatch": "Verwendbare Produkte pro Charge"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Geplante Produktanzahl",
+        "plannedTotalWeight": "Geplantes Gesamtgewicht",
+        "productCount": "Produktanzahl",
+        "totalWeight": "Gesamtgewicht",
+        "maxStorageLeft": "Maximale verbleibende Lagerzeit",
+        "overweightTotal": "Gesamtübergewicht",
+        "underweightProducts": "Produkte mit Untergewicht"
+    }
 }

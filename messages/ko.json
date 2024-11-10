@@ -4,10 +4,58 @@
     "NAV_LANG": "언어",
     "CHAT_SHOW_ORIGINAL": "원본 보기",
     "CHAT_SHOW_TRANSLATION": "번역 보기",
-    "CHAT_HINT_ENTER_TEXT": "여기에 텍스트를 입력하세요...",
+    "CHAT_HINT_ENTER_TEXT": "여기에 텍스트 입력…",
     "CHAT_SEND": "보내기",
-    "GENERAL_PREPRODUCTION": "사전 제작",
-    "GENERAL_COOKING": "요리",
+    "GENERAL_PREPRODUCTION": "프리프로덕션",
+    "GENERAL_COOKING": "조리",
     "GENERAL_STORAGE": "저장",
-    "GENERAL_PACKAGING": "포장"
+    "GENERAL_PACKAGING": "포장",
+    "stage": "단계",
+    "preproduction": {
+        "batch": "배치",
+        "selectBatch": "배치 선택…",
+        "searchBatch": "배치 검색…",
+        "noBatchAvailable": "사용 가능한 배치가 없습니다.",
+        "weight": "무게",
+        "enterWeight": "유효한 무게를 입력하세요",
+        "measurements": "측정치",
+        "noMeasurements": "측정값이 입력되지 않았습니다",
+        "submit": "제출",
+        "weightOverview": "목표 무게 개요",
+        "deviation": "편차",
+        "targetWeight": "목표 무게",
+        "actualWeight": "실제 무게",
+        "decrease": "포션 크기를 감소시키기",
+        "increase": "포션 크기를 증가시키기",
+        "recentSamples": "최근 샘플",
+        "close": "닫기"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "상태",
+            "ok": "확인",
+            "slowed": "느려짐",
+            "stopped": "중지됨",
+            "emergency": "긴급 상황!"
+        },
+        "message": {
+            "title": "대시보드 메시지 보내기",
+            "placeholder": "오늘의 메시지 입력…",
+            "automaticTranslationHint": "이 텍스트는 자동으로 작업자가 선택한 언어로 번역됩니다.",
+            "submit": "제출"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "사용 가능한 제품",
+            "usableProductsPerBatch": "배치당 사용 가능한 제품"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "계획된 제품 수",
+        "plannedTotalWeight": "계획된 총 무게",
+        "productCount": "제품 수",
+        "totalWeight": "총 무게",
+        "maxStorageLeft": "남은 최대 저장 공간",
+        "overweightTotal": "과체중 총합",
+        "underweightProducts": "저체중 제품"
+    }
 }

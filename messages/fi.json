@@ -1,13 +1,61 @@
 {
-    "NAV_HOME": "Koti",
+    "NAV_HOME": "Aloitussivu",
     "NAV_CHAT": "Keskustelu",
     "NAV_LANG": "Kieli",
     "CHAT_SHOW_ORIGINAL": "Näytä alkuperäinen",
     "CHAT_SHOW_TRANSLATION": "Näytä käännös",
-    "CHAT_HINT_ENTER_TEXT": "Kirjoita teksti tähän...",
+    "CHAT_HINT_ENTER_TEXT": "Syötä teksti tähän…",
     "CHAT_SEND": "Lähetä",
     "GENERAL_PREPRODUCTION": "Esituotanto",
-    "GENERAL_COOKING": "Ruonlaitto",
+    "GENERAL_COOKING": "Ruoanlaitto",
     "GENERAL_STORAGE": "Varastointi",
-    "GENERAL_PACKAGING": "Pakkaaminen"
+    "GENERAL_PACKAGING": "Pakkaaminen",
+    "stage": "Vaihe",
+    "preproduction": {
+        "batch": "Erä",
+        "selectBatch": "Valitse erä…",
+        "searchBatch": "Etsi erää…",
+        "noBatchAvailable": "Ei saatavilla olevaa erää.",
+        "weight": "Paino",
+        "enterWeight": "Syötä kelvollinen paino",
+        "measurements": "Mitat",
+        "noMeasurements": "Mittauksia ei ole syötetty",
+        "submit": "Lähetä",
+        "weightOverview": "Tavoitepainon yhteenveto",
+        "deviation": "Poikkeama",
+        "targetWeight": "Tavoitepaino",
+        "actualWeight": "Todellinen paino",
+        "decrease": "Vähennä annoskokoa",
+        "increase": "Lisää annoskokoa",
+        "recentSamples": "Viimeaikaiset näytteet",
+        "close": "Sulje"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Tila",
+            "ok": "OK",
+            "slowed": "HIDASTETTU",
+            "stopped": "SEIS",
+            "emergency": "HÄDÄNTAITO!"
+        },
+        "message": {
+            "title": "Lähetä kojelaudan viesti",
+            "placeholder": "Syötä päivän viesti…",
+            "automaticTranslationHint": "Tämä teksti käännetään automaattisesti työntekijän valitsemaan kieleen.",
+            "submit": "Lähetä"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Käytettävät tuotteet",
+            "usableProductsPerBatch": "Käytettävät tuotteet erää kohden"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Suunniteltu tuote määrä",
+        "plannedTotalWeight": "Suunniteltu kokonaispaino",
+        "productCount": "Tuotemäärä",
+        "totalWeight": "Kokonaispaino",
+        "maxStorageLeft": "Jäljellä oleva maksimivarastotila",
+        "overweightTotal": "Ylipainon yhteensä",
+        "underweightProducts": "Alipainoiset tuotteet"
+    }
 }

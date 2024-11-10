@@ -4,10 +4,58 @@
     "NAV_LANG": "Język",
     "CHAT_SHOW_ORIGINAL": "Pokaż oryginał",
     "CHAT_SHOW_TRANSLATION": "Pokaż tłumaczenie",
-    "CHAT_HINT_ENTER_TEXT": "Wpisz tekst tutaj...",
+    "CHAT_HINT_ENTER_TEXT": "Wpisz tekst tutaj…",
     "CHAT_SEND": "Wyślij",
-    "GENERAL_PREPRODUCTION": "Przedprodukcja",
+    "GENERAL_PREPRODUCTION": "Przedprodukacja",
     "GENERAL_COOKING": "Gotowanie",
-    "GENERAL_STORAGE": "Przechowywanie",
-    "GENERAL_PACKAGING": "Pakowanie"
+    "GENERAL_STORAGE": "Magazynowanie",
+    "GENERAL_PACKAGING": "Pakowanie",
+    "stage": "Etap",
+    "preproduction": {
+        "batch": "Partia",
+        "selectBatch": "Wybierz partię…",
+        "searchBatch": "Szukaj partii…",
+        "noBatchAvailable": "Brak dostępnej partii.",
+        "weight": "Waga",
+        "enterWeight": "Proszę wprowadzić prawidłową wagę",
+        "measurements": "Pomiar",
+        "noMeasurements": "Brak wprowadzonych pomiarów",
+        "submit": "Zatwierdź",
+        "weightOverview": "Przegląd wagi docelowej",
+        "deviation": "Odchylenie",
+        "targetWeight": "Docelowa waga",
+        "actualWeight": "Rzeczywista waga",
+        "decrease": "Zmniejsz wielkość porcji o",
+        "increase": "Zwiększ wielkość porcji o",
+        "recentSamples": "Najnowsze próbki",
+        "close": "Zamknij"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Status",
+            "ok": "OK",
+            "slowed": "WOLNY",
+            "stopped": "ZATRZYMANY",
+            "emergency": "NAGŁA SITUACJA!"
+        },
+        "message": {
+            "title": "Wyślij wiadomość do pulpitu nawigacyjnego",
+            "placeholder": "Wpisz wiadomość dnia…",
+            "automaticTranslationHint": "Ten tekst jest automatycznie tłumaczony na język wybrany przez pracownika.",
+            "submit": "Zatwierdź"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Produkty do wykorzystania",
+            "usableProductsPerBatch": "Produkty do wykorzystania na partię"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Planowana liczba produktów",
+        "plannedTotalWeight": "Planowana łączna waga",
+        "productCount": "Liczba produktów",
+        "totalWeight": "Łączna waga",
+        "maxStorageLeft": "Pozostała maksymalna przestrzeń magazynowa",
+        "overweightTotal": "Całkowita nadwaga",
+        "underweightProducts": "Produkty o niedowadze"
+    }
 }
