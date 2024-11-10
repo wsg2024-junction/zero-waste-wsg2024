@@ -14,7 +14,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix
 import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { PropsWithChildren, ReactElement, useContext } from 'react';
-import { Button } from 'react-day-picker';
 import { Card } from '../ui/card';
 import { DialogFooter, DialogHeader } from '../ui/dialog';
 import { StageIcon } from './stage-icon';
