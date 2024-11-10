@@ -4,9 +4,10 @@ import { Dashboard } from '@/components/dashboard/dashboard';
 import { Leaderboard } from '@/components/dashboard/leaderboard';
 import { languages } from '@/components/language-selector/language-selector';
 import { Separator } from '@/components/ui/separator';
+import { useDeepLTranslated } from '@/hooks/useDeepLTranslate';
 import { useGlobalState } from '@/hooks/useModels';
-import { usePathname, useRouter } from '@/i18n/routing';
 import { Area, AreaStatus } from '@/lib/models';
+import { TargetLanguageCode } from 'deepl-node';
 import { TriangleAlertIcon } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
@@ -17,7 +18,6 @@ function hasState(states: Record<Area, AreaStatus>, state: AreaStatus) {
 }
 export default function DashboardPage() {
     const { area } = useParams<{ area: Area }>();
-    const messages = useGlobalState().dashboardMessages[area];
     const globalState = useGlobalState();
     const [worstState, setWorstState] = useState(AreaStatus.OK);
 
@@ -28,25 +28,15 @@ export default function DashboardPage() {
         else setWorstState(AreaStatus.OK);
     }, [globalState]);
 
-    const router = useRouter();
-    const pathname = usePathname();
-    const params = useParams();
-    const locale = useLocale();
+    const initialLocale = useLocale();
+    const [locale, setLocale] = useState(initialLocale);
+    usePeriodic(() => {
+        const currentIndex = languages.findIndex((it) => it.code == locale);
+        return setLocale(languages[(currentIndex + 1) % languages.length].code);
+    }, 4000);
 
-    usePeriodic(
-        () =>
-            router.replace(
-                // @ts-expect-error -- TypeScript will validate that only known `params`
-                // are used in combination with a given `pathname`. Since the two will
-                // always match for the current route, we can skip runtime checks.
-                { pathname, params },
-                {
-                    locale: languages[(languages.findIndex((it) => it.code == locale) + 1) % languages.length]
-                        .code,
-                },
-            ),
-        3000,
-    );
+    const message = useGlobalState().dashboardMessages[area];
+    const translatedMessage = useDeepLTranslated(locale as TargetLanguageCode, message);
 
     return (
         <div className={'relative flex pb-12 flex-row gap-2 w-full text-lg'}>
@@ -66,7 +56,9 @@ export default function DashboardPage() {
                 className={'mx-2'}
             />
             <Leaderboard />
-            <footer className={'absolute bottom-1 -translate-x-1/2 left-1/2 text-center'}>{messages}</footer>
+            <footer className={'absolute bottom-1 -translate-x-1/2 left-1/2 text-center'}>
+                {translatedMessage}
+            </footer>
         </div>
     );
 }
