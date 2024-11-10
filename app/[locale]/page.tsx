@@ -100,6 +100,7 @@ export default function Home() {
                         }
                     />
                     <NavigationCard
+                        disabled={currentUser?.role !== 'worker'}
                         title="Tablet App for Preproduction Area"
                         href="/preproduction-tablet"
                         description={
@@ -119,9 +120,17 @@ export default function Home() {
                         }
                     />
                 </div>
-                <p className={'text-center max-w-[600px] px-8 opacity-50 text-base'}>
+                <p className={'text-center max-w-[600px] px-8 opacity-50 text-base mb-16'}>
                     You can hover over an app card to see a brief description of the app.
                 </p>
+                <NavigationCard
+                    title="How it works"
+                    href="/readme"
+                    description={'Read our product documentation here!'}
+                    className={
+                        'shadow:md hover:shadow-lg transition bg-secondary text-secondary-foreground hover:scale-95'
+                    }
+                />
             </div>
             <div
                 className={'p-2 w-full text-center text-sm text-gray-400'}

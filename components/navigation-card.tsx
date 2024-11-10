@@ -2,18 +2,29 @@ import { Card } from '@/components/ui/card';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { H4 } from '@/components/ui/typography';
 import { Link } from '@/i18n/routing';
+import classNames from 'classnames';
 
 interface NavigationCardProps {
     title: string;
     href: string;
     description: string;
     disabled?: boolean;
+    className?: string;
 }
 
-export function NavigationCard({ title, href, description, disabled = false }: NavigationCardProps) {
+export function NavigationCard({
+    title,
+    href,
+    description,
+    disabled = false,
+    className,
+}: NavigationCardProps) {
     const card = (
         <Card
-            className={`${disabled ? 'bg-gray-100' : ''} h-full flex flex-col justify-center content-center p-6`}>
+            className={classNames(
+                `${disabled ? 'bg-gray-100' : ''} h-full flex flex-col justify-center content-center p-6`,
+                className,
+            )}>
             <H4 className={`${disabled ? 'opacity-50' : ''} m-0 text-center border-none`}>{title}</H4>
         </Card>
     );
