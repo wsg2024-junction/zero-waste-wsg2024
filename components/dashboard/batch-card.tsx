@@ -5,15 +5,16 @@ import { Batch } from '@/lib/models';
 import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
 import classNames from 'classnames';
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 interface BatchCardProps {
     batch: Batch;
@@ -103,20 +104,24 @@ export function BatchCard({ batch }: BatchCardProps) {
     );
 
     return isInteractive ? (
-        <AlertDialog>
-            <AlertDialogTrigger asChild>{card}</AlertDialogTrigger>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>Batch {batch.number}</AlertDialogTitle>
-                    <AlertDialogDescription className={'flex flex-col gap-1'}>
-                        {...batchInfo}
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogAction>OK</AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+        <Dialog>
+            <DialogTrigger asChild>{card}</DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Batch {batch.number}</DialogTitle>
+                    <DialogDescription className={'flex flex-col gap-1'}>{...batchInfo}</DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                    <DialogClose>
+                        <Button
+                            className={'text-white'}
+                            type={'button'}>
+                            OK
+                        </Button>
+                    </DialogClose>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     ) : (
         card
     );
