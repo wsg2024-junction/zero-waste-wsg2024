@@ -23,6 +23,12 @@ export function BatchCard({ batch }: BatchCardProps) {
     const isInteractive = useContext(DashboardInteractiveContext);
 
     const batchInfo: ReactElement[] = [];
+    const detailInfo: ReactElement[] = [
+        <CardInfo>
+            <UtensilsCrossed />
+            {batch.createdAt}
+        </CardInfo>,
+    ];
     if (batch.status.stage === 'preproduction') {
         batchInfo.push(
             <CardInfo>
