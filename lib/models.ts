@@ -13,12 +13,13 @@ export enum AreaStatus {
 }
 
 export type Area = 'preproduction' | 'cooking' | 'storage' | 'packaging';
+export type Score = { points: number; streak: number };
 export type GlobalState = {
     dashboardMessages: Record<Area, string>;
     status: Record<Area, AreaStatus>;
 
     /** Mapping from user ID to number of collected points. */
-    points: Record<string, number>;
+    points: Record<string, Score>;
 };
 
 export type User = { id: string; name: string; role: Role };

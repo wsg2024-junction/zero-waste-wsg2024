@@ -1,22 +1,23 @@
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { Card } from '@/components/ui/card';
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
 import { Batch } from '@/lib/models';
+import { cn } from '@/lib/utils';
 import { Timestamp } from '@firebase/firestore';
-import classNames from 'classnames';
+import { TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
 import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { PropsWithChildren, ReactElement, useContext } from 'react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+import { Button } from 'react-day-picker';
+import { Tooltip } from 'recharts';
+import { Card } from '../ui/card';
+import { DialogFooter, DialogHeader } from '../ui/dialog';
 import { StageIcon } from './stage-icon';
 
 interface BatchCardProps {
@@ -87,7 +88,7 @@ export function BatchCard({ batch }: BatchCardProps) {
 
     const card = (
         <Card
-            className={classNames(
+            className={cn(
                 'relative min-w-40 p-2 flex flex-col bg-white bg-opacity-80',
                 isInteractive && 'cursor-pointer hover:shadow-lg transition',
             )}>
@@ -121,12 +122,12 @@ export function BatchCard({ batch }: BatchCardProps) {
     const packagingCompletedAt = (batch.status as any).packagingCompletedAt as Timestamp | undefined;
 
     return isInteractive ? (
-        <AlertDialog>
-            <AlertDialogTrigger asChild>{card}</AlertDialogTrigger>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>Batch {batch.number}</AlertDialogTitle>
-                    <AlertDialogDescription className={'flex flex-col gap-1'}>
+        <Dialog>
+            <DialogTrigger asChild>{card}</DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Batch {batch.number}</DialogTitle>
+                    <DialogDescription className={'flex flex-col gap-1'}>
                         {...batchInfo.map((it) => (
                             <CardInfo key={it.title}>
                                 {it.icon}
@@ -153,13 +154,19 @@ export function BatchCard({ batch }: BatchCardProps) {
                             <StageIcon stage="done" />
                             {packagingCompletedAt?.toDate().toLocaleString() ?? '—'}
                         </CardInfo>
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogAction>OK</AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+                    </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                    <DialogClose>
+                        <Button
+                            className={'text-white'}
+                            type={'button'}>
+                            OK
+                        </Button>
+                    </DialogClose>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     ) : (
         card
     );

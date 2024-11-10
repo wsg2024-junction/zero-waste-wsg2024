@@ -1,4 +1,5 @@
-import { Area, Batch } from '@/lib/models';
+import { Area, AreaStatus, Batch } from '@/lib/models';
+import { CheckIcon, PauseIcon, TriangleAlertIcon, TurtleIcon } from 'lucide-react';
 import { BatchCard } from './batch-card';
 import { STAGE_DESIGN, StageIcon } from './stage-icon';
 
@@ -7,6 +8,7 @@ interface DashboardColProps {
     batches: Batch[];
     isLast?: boolean;
     selected?: boolean;
+    status?: AreaStatus;
 }
 
 export function DashboardCol(props: DashboardColProps) {
@@ -22,8 +24,19 @@ export function DashboardCol(props: DashboardColProps) {
                 </div>
             </div>
             <div
-                className={'rounded-xl overflow-x-auto gap-2 p-2 flex flex-row h-full w-full xl:flex-col'}
+                className={
+                    'rounded-xl overflow-x-auto gap-2 p-2 flex flex-row-reverse h-full w-full xl:flex-col'
+                }
                 style={{ background: color + '55' }}>
+                <div className={'ml-auto'}>
+                    {props.status === AreaStatus.OK && <CheckIcon className={'text-green-600'} />}
+                    {props.status === AreaStatus.SLOWED && <TurtleIcon className={'text-orange-600'} />}
+                    {props.status === AreaStatus.STOPPED && <PauseIcon className={'text-red-600'} />}
+                    {props.status === AreaStatus.EMERGENCY && (
+                        <TriangleAlertIcon className={'text-red-800'} />
+                    )}
+                    {!props.status && <div className={'h-[24px]'}></div>}
+                </div>
                 {props.batches
                     .filter((batch) => batch.status.stage === props.stage)
                     .map((batch) => (
