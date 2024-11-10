@@ -11,9 +11,9 @@ import { Batch } from '@/lib/models';
 import { cn } from '@/lib/utils';
 import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
 import { PropsWithChildren, ReactElement, useContext } from 'react';
-import { Button } from 'react-day-picker';
 import { Card } from '../ui/card';
 import { DialogFooter, DialogHeader } from '../ui/dialog';
+import { Button } from '@/components/ui/button';
 
 interface BatchCardProps {
     batch: Batch;
@@ -110,15 +110,6 @@ export function BatchCard({ batch }: BatchCardProps) {
                     <DialogTitle>Batch {batch.number}</DialogTitle>
                     <DialogDescription className={'flex flex-col gap-1'}>{...batchInfo}</DialogDescription>
                 </DialogHeader>
-                <DialogFooter>
-                    <DialogClose>
-                        <Button
-                            className={'text-white'}
-                            type={'button'}>
-                            OK
-                        </Button>
-                    </DialogClose>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     ) : (
