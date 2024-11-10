@@ -1,4 +1,5 @@
 'use client';
+import { NavigationCard } from '@/components/navigation-card';
 import {
     Select,
     SelectContent,
@@ -8,10 +9,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { useEffect, useState } from 'react';
-import { User } from '@/lib/models';
 import { useUsers } from '@/hooks/useModels';
-import { NavigationCard } from '@/components/navigation-card';
+import { User } from '@/lib/models';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
     const users = useUsers();
@@ -41,16 +41,20 @@ export default function Home() {
                 <div className={' text-center'}>
                     <h2 className={'text-lg font-bold'}>Hello Stranger! </h2>
                     <p className={'text-center max-w-[600px] px-8'}>
-                        This is a demo for an app that is used in a zero-waste factory.
+                        This is a demo for a platform that is used in a zero-waste factory.
                         <br />
                         You can navigate to the different apps by clicking on the cards below.
+                        <br />
+                        <br />
+                        You can even open multiple apps in different tabs or browser windows – everything is
+                        synced in real-time!
                         <br />
                         <br />
                         However, make sure to{' '}
                         <b>
                             <u>select a user</u>
                         </b>{' '}
-                        first.
+                        first:
                     </p>
                 </div>
 
@@ -84,15 +88,17 @@ export default function Home() {
                         href="/dashboard"
                         description={
                             "The dashboard provides an overview of the factory's different production status (Pre-Production, Cooking, Storing, Packaging). \n\n" +
-                            'It shows the different batches and their current status (like weight, item count, storing time, ...). \n\n' +
+                            'It shows the different batches and their current status (like weight, item count, storing time, ...).\n\n' +
                             'It also shows a leaderboard of the most productive workers to engage in a gamified and fun way to increase productivity.'
                         }
                     />
                     <NavigationCard
-                        title="Preproduction Tablet App"
+                        title="Tablet App for Preproduction Area"
                         href="/preproduction-tablet"
                         description={
-                            'The Preproduction Tablet App is used by the workers in the preproduction phase. \n\n'
+                            'This Tablet App is used by the workers in the preproduction phase.\n\n' +
+                            'Workers enter the the weights of samples of the produced products, and the app shows how the weight should be adjusted.\n\n' +
+                            'Additionally, workers can earn points by keeping the produced output as close to the target weight as possible. Keeping the weight closer for longer increases the streak and gives more points.'
                         }
                     />
                     <NavigationCard
@@ -100,7 +106,7 @@ export default function Home() {
                         title="Manager App"
                         href="/manager-app"
                         description={
-                            "The Manager App enables managers to gain a comprehensive overview of the factory's operations and seamlessly navigate various stages, overcoming language barriers. \n\n" +
+                            "The Manager App enables managers to gain a comprehensive overview of the factory's operations and seamlessly navigate various stages, overcoming language barriers.\n\n" +
                             'They can see the current status of the factory, the producitivty of workers and the different production phases. \n\n' +
                             'Using AI, we also improved communication by providing real-time translation of messages with workers and fellow managers.'
                         }

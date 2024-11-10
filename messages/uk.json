@@ -4,10 +4,58 @@
     "NAV_LANG": "Мова",
     "CHAT_SHOW_ORIGINAL": "Показати оригінал",
     "CHAT_SHOW_TRANSLATION": "Показати переклад",
-    "CHAT_HINT_ENTER_TEXT": "Введіть текст тут...",
-    "CHAT_SEND": "Надіслати",
-    "GENERAL_PREPRODUCTION": "Передвиробництво",
-    "GENERAL_COOKING": "Приготування",
+    "CHAT_HINT_ENTER_TEXT": "Введіть текст тут…",
+    "CHAT_SEND": "Відправити",
+    "GENERAL_PREPRODUCTION": "Предвиробництво",
+    "GENERAL_COOKING": "Готування",
     "GENERAL_STORAGE": "Зберігання",
-    "GENERAL_PACKAGING": "Упаковка"
+    "GENERAL_PACKAGING": "Упаковка",
+    "stage": "Етап",
+    "preproduction": {
+        "batch": "Партія",
+        "selectBatch": "Вибрати партію…",
+        "searchBatch": "Шукати партію…",
+        "noBatchAvailable": "Партія недоступна.",
+        "weight": "Вага",
+        "enterWeight": "Будь ласка, введіть дійсну вагу",
+        "measurements": "Вимірювання",
+        "noMeasurements": "Вимірювання не введені",
+        "submit": "Відправити",
+        "weightOverview": "Огляд цільової ваги",
+        "deviation": "Відхилення",
+        "targetWeight": "Цільова вага",
+        "actualWeight": "Фактична вага",
+        "decrease": "Зменшити розмір порції на",
+        "increase": "Збільшити розмір порції на",
+        "recentSamples": "Останні зразки",
+        "close": "Закрити"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Статус",
+            "ok": "ОК",
+            "slowed": "МЕДЛЕННО",
+            "stopped": "СТОП",
+            "emergency": "НЕЗВИЧАЙНА СИТУАЦІЯ!"
+        },
+        "message": {
+            "title": "Відправити повідомлення на панель керування",
+            "placeholder": "Введіть повідомлення дня…",
+            "automaticTranslationHint": "Цей текст автоматично перекладається на мову, вибрану працівником.",
+            "submit": "Відправити"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Використовувані продукти",
+            "usableProductsPerBatch": "Використовувані продукти на партію"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Запланована кількість продуктів",
+        "plannedTotalWeight": "Запланована загальна вага",
+        "productCount": "Кількість продуктів",
+        "totalWeight": "Загальна вага",
+        "maxStorageLeft": "Максимум доступного місця для зберігання",
+        "overweightTotal": "Загальний перевищений вага",
+        "underweightProducts": "Продукти з недовагами"
+    }
 }

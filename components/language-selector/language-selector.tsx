@@ -98,13 +98,15 @@ export default function LanguageSelector({
                 <SelectGroup>
                     <SelectLabel>Language</SelectLabel>
                     <>
-                        {languages.map((language) => (
-                            <SelectItem
-                                key={language.code}
-                                value={language.code}>
-                                {language.flagIcon} {language.name}
-                            </SelectItem>
-                        ))}
+                        {languages
+                            .toSorted((a, b) => a.name.localeCompare(b.name))
+                            .map((language) => (
+                                <SelectItem
+                                    key={language.code}
+                                    value={language.code}>
+                                    {language.flagIcon} {language.name}
+                                </SelectItem>
+                            ))}
                     </>
                 </SelectGroup>
             </SelectContent>

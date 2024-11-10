@@ -4,17 +4,17 @@
     "NAV_LANG": "Language",
     "CHAT_SHOW_ORIGINAL": "Show Original",
     "CHAT_SHOW_TRANSLATION": "Show Translation",
-    "CHAT_HINT_ENTER_TEXT": "Enter text here...",
+    "CHAT_HINT_ENTER_TEXT": "Enter text here…",
     "CHAT_SEND": "Send",
     "GENERAL_PREPRODUCTION": "Pre-Production",
     "GENERAL_COOKING": "Cooking",
     "GENERAL_STORAGE": "Storage",
     "GENERAL_PACKAGING": "Packaging",
-    "HINT_AUTOMATIC_TRANSLATION": "This text is automatically translated to the workers selected language.",
+    "stage": "Stage",
     "preproduction": {
         "batch": "Batch",
-        "selectBatch": "Select batch...",
-        "searchBatch": "Search batch...",
+        "selectBatch": "Select batch…",
+        "searchBatch": "Search batch…",
         "noBatchAvailable": "No batch available.",
         "weight": "Weight",
         "enterWeight": "Please enter a valid weight",
@@ -29,5 +29,33 @@
         "increase": "Increase the portion size by",
         "recentSamples": "Recent samples",
         "close": "Close"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Status",
+            "ok": "OK",
+            "slowed": "SLOW",
+            "stopped": "STOP",
+            "emergency": "EMERGENCY!"
+        },
+        "message": {
+            "title": "Send Dashboard Message",
+            "placeholder": "Enter message of the day…",
+            "automaticTranslationHint": "This text is automatically translated to the worker‘s selected language.",
+            "submit": "Submit"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Usable Products",
+            "usableProductsPerBatch": "Usable Products per Batch"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Planned Product Count",
+        "plannedTotalWeight": "Planned Total Weight",
+        "productCount": "Product Count",
+        "totalWeight": "Total Weight",
+        "maxStorageLeft": "Max Storage Left",
+        "overweightTotal": "Overweight Total",
+        "underweightProducts": "Underweight Products"
     }
 }
