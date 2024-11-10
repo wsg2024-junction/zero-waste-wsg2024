@@ -1,8 +1,8 @@
 'use client';
 
-import { AreaEnum } from '@/lib/models';
 import { Card } from '@/components/ui/card';
 import { H4 } from '@/components/ui/typography';
+import { AreaEnum } from '@/lib/models';
 import { usePathname } from 'next/navigation';
 
 export default function DashboardSelectionPage() {
@@ -10,6 +10,9 @@ export default function DashboardSelectionPage() {
 
     return (
         <div className="flex flex-col gap-2 mt-[10vh] items-center">
+            <p className={'text-center max-w-[600px]'}>
+                Please select a food production area for which to show the dashboard:
+            </p>
             <div className={'grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8'}>
                 {Object.values(AreaEnum).map((area) => (
                     <a

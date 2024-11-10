@@ -1,7 +1,7 @@
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Link } from '@/i18n/routing';
 import { Card } from '@/components/ui/card';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { H4 } from '@/components/ui/typography';
+import { Link } from '@/i18n/routing';
 
 interface NavigationCardProps {
     title: string;
@@ -41,7 +41,7 @@ export function NavigationCard({ title, href, description, disabled = false }: N
                     </div>
                     {disabled && (
                         <div className={'text-red-700 font-bold mt-3'}>
-                            You need to select a &#39;manager&#39; role to navigate to the manager app!
+                            You need to select a user with the “manager” role to navigate to the manager app!
                         </div>
                     )}
                 </div>
