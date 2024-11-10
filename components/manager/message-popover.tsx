@@ -1,9 +1,12 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { Send } from 'lucide-react';
 import { ManagerMessage } from '@/components/manager/manager-message';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Send } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export function ManagerMessagePopover() {
+    const t = useTranslations();
+
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -20,7 +23,7 @@ export function ManagerMessagePopover() {
                 collisionPadding={10}
                 sticky="always">
                 <div className={'h-[100%] w-[100%] overflow-x-auto'}>
-                    <h2 className={'font-bold text-lg mb-2'}>Send Dashboard Message</h2>
+                    <h2 className={'font-bold text-lg mb-2'}>{t('managerApp.message.title')}</h2>
                     <ManagerMessage />
                 </div>
             </PopoverContent>

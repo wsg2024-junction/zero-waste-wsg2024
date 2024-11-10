@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import {
     Bar,
     CartesianGrid,
@@ -37,14 +38,15 @@ const calculateDomain = (dataKey: keyof DataPoint, offsetPercentage = 0.1) => {
     return [roundedMin, roundedMax];
 };
 
-const tooltipFormatter = (value: number, name: string) => {
-    if (name === 'estimatedUsableProductsPerBatch') {
-        return [`${value.toFixed(1)}%`, 'Usable Products per Batch'];
-    }
-    return [value, 'Usable Products'];
-};
-
 export function PredictionChart() {
+    const t = useTranslations();
+    const tooltipFormatter = (value: number, name: string) => {
+        if (name === 'estimatedUsableProductsPerBatch') {
+            return [`${value.toFixed(1)} %`, t('managerApp.predictionChart.usableProductsPerBatch')];
+        }
+        return [value, t('managerApp.predictionChart.totalUsableProducts')];
+    };
+
     return (
         <div className="h-56 text-secondary-foreground">
             <ResponsiveContainer>

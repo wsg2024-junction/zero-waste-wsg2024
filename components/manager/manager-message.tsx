@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import {
     Select,
     SelectContent,
@@ -8,15 +9,14 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { useGlobalState } from '@/hooks/useModels';
-import { Area, AreaEnum } from '@/lib/models';
 import { useDeepLTranslate } from '@/hooks/useDeepLTranslate';
+import { useGlobalState } from '@/hooks/useModels';
 import { setDashboardMessage } from '@/lib/firebase';
+import { Area, AreaEnum } from '@/lib/models';
+import { TargetLanguageCode } from 'deepl-node';
 import humanizeString from 'humanize-string';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { TargetLanguageCode } from 'deepl-node';
 
 export function ManagerMessage() {
     const locale = useLocale();
@@ -51,7 +51,7 @@ export function ManagerMessage() {
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
-                        <SelectLabel>Stage</SelectLabel>
+                        <SelectLabel>{t('stage')}</SelectLabel>
                         <>
                             {areas.map((area) => (
                                 <SelectItem
@@ -68,15 +68,17 @@ export function ManagerMessage() {
                 className={'mt-2'}
                 value={currentMOTD}
                 onInput={onUpdateMOTD}
-                placeholder={'Enter message of the day...'}
+                placeholder={t('managerApp.message.placeholder')}
             />
             <div className={'flex justify-between items-center'}>
-                <span className={'text-[0.825rem] opacity-50'}>{t('HINT_AUTOMATIC_TRANSLATION')}</span>
+                <span className={'text-[0.825rem] opacity-50'}>
+                    {t('managerApp.message.automaticTranslationHint')}
+                </span>
                 <Button
                     className={'mt-2'}
                     variant={'secondary'}
                     onClick={onSubmitMOTD}>
-                    Submit
+                    {t('managerApp.message.submit')}
                 </Button>
             </div>
         </>
