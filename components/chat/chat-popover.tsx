@@ -52,7 +52,7 @@ export default function ChatPopover() {
             <PopoverTrigger asChild>
                 <Button
                     variant="secondary"
-                    className={'absolute bottom-4 right-4 w-12 h-12 shadow-xl'}>
+                    className={'fixed bottom-4 right-4 w-12 h-12 shadow-xl'}>
                     <MessageSquareIcon />
                 </Button>
             </PopoverTrigger>
