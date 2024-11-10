@@ -1,13 +1,13 @@
 'use client';
+import { Button } from '@/components/ui/button';
+import { setAreaState } from '@/lib/firebase';
 import { Area, AreaEnum, AreaStatus } from '@/lib/models';
 import humanizeString from 'humanize-string';
-import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
 import { CheckIcon, PauseIcon, TriangleAlertIcon, TurtleIcon } from 'lucide-react';
-import { setAreaState } from '@/lib/firebase';
+import { useEffect, useState } from 'react';
 
 export default function StatusSelection({ status }: { status: Record<string, AreaStatus> }) {
-    const areas = Object.keys(AreaEnum).map((key) => AreaEnum[key] as string);
+    const areas = Object.values(AreaEnum);
 
     const onChangeStatus = (area: string, status: AreaStatus) => {
         setAreaState(area as Area, status);
