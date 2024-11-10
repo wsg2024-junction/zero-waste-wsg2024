@@ -10,7 +10,7 @@ export function ManagerMessagePopover() {
                 <Button
                     variant="secondary"
                     className={
-                        'text-black hover:text-black bg-amber-200 hover:bg-amber-300 absolute bottom-20 right-4 w-12 h-12 shadow-xl'
+                        'text-black hover:text-black bg-amber-200 hover:bg-amber-300 fixed bottom-20 right-4 w-12 h-12 shadow-xl'
                     }>
                     <Send />
                 </Button>
