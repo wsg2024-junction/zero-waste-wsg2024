@@ -38,6 +38,7 @@ export type Batch = {
               plannedTotalWeight: number;
               plannedProductCount: number;
               products: PreproductionProduct[];
+              samples: Sample[];
           }
         | {
               stage: 'cooking';
@@ -66,6 +67,11 @@ export type PreproductionProduct = {
     createdAt: Timestamp;
     createdBy: string;
     weight: number;
+};
+export type Sample = {
+    createdAt: Timestamp;
+    createdBy: string;
+    weights: number[];
 };
 export type ChatMessageModel = {
     id: string;
