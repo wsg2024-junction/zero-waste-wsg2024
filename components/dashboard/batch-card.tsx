@@ -1,13 +1,27 @@
 import { Card } from '@/components/ui/card';
 import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
-import { PropsWithChildren, ReactElement } from 'react';
+import { PropsWithChildren, ReactElement, useContext } from 'react';
 import { Batch } from '@/lib/models';
+import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
+import classNames from 'classnames';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 interface BatchCardProps {
     batch: Batch;
 }
 
 export function BatchCard({ batch }: BatchCardProps) {
+    const isInteractive = useContext(DashboardInteractiveContext);
+
     const batchInfo: ReactElement[] = [];
     if (batch.status.stage === 'preproduction') {
         batchInfo.push(
@@ -76,12 +90,35 @@ export function BatchCard({ batch }: BatchCardProps) {
         );
     }
 
-    return (
-        <Card className={'relative min-w-40 p-2 flex flex-col bg-white bg-opacity-80'}>
+    const card = (
+        <Card
+            className={classNames(
+                'relative min-w-40 p-2 flex flex-col bg-white bg-opacity-80',
+                isInteractive && 'cursor-pointer hover:shadow-lg transition',
+            )}>
             <span className={'font-bold mb-2'}>{batch.product}</span>
             <div className={'flex flex-nowrap flex-col gap-1'}>{...batchInfo}</div>
             <span className={'absolute bottom-2 right-2 text-sm text-end'}>{batch.number}</span>
         </Card>
+    );
+
+    return isInteractive ? (
+        <AlertDialog>
+            <AlertDialogTrigger asChild>{card}</AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Batch {batch.number}</AlertDialogTitle>
+                    <AlertDialogDescription className={'flex flex-col gap-1'}>
+                        {...batchInfo}
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogAction>OK</AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
+    ) : (
+        card
     );
 }
 
