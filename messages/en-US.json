@@ -29,5 +29,14 @@
         "increase": "Increase the portion size by",
         "recentSamples": "Recent samples",
         "close": "Close"
+    },
+    "dashboard": {
+        "plannedProductCount": "Planned Product Count",
+        "plannedTotalWeight": "Planned Total Weight",
+        "productCount": "Product Count",
+        "totalWeight": "Total Weight",
+        "maxStorageLeft": "Max Storage Left",
+        "overweightTotal": "Overweight Total",
+        "underweightProducts": "Underweight Products"
     }
 }
