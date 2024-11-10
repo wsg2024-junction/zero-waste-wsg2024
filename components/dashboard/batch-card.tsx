@@ -1,9 +1,3 @@
-import { Card } from '@/components/ui/card';
-import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
-import { PropsWithChildren, ReactElement, useContext } from 'react';
-import { Batch } from '@/lib/models';
-import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
-import classNames from 'classnames';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -14,6 +8,14 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { Card } from '@/components/ui/card';
+import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
+import { Batch } from '@/lib/models';
+import { Timestamp } from '@firebase/firestore';
+import classNames from 'classnames';
+import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
+import { PropsWithChildren, ReactElement, useContext } from 'react';
+import { StageIcon } from './stage-icon';
 
 interface BatchCardProps {
     batch: Batch;
@@ -23,12 +25,7 @@ export function BatchCard({ batch }: BatchCardProps) {
     const isInteractive = useContext(DashboardInteractiveContext);
 
     const batchInfo: ReactElement[] = [];
-    const detailInfo: ReactElement[] = [
-        <CardInfo>
-            <UtensilsCrossed />
-            {batch.createdAt}
-        </CardInfo>,
-    ];
+    const detailInfo: ReactElement[] = [];
     if (batch.status.stage === 'preproduction') {
         batchInfo.push(
             <CardInfo>
@@ -108,6 +105,15 @@ export function BatchCard({ batch }: BatchCardProps) {
         </Card>
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const preproductionCompletedAt = (batch.status as any).preproductionCompletedAt as Timestamp | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const cookingCompletedAt = (batch.status as any).cookingCompletedAt as Timestamp | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const storageCompletedAt = (batch.status as any).storageCompletedAt as Timestamp | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const packagingCompletedAt = (batch.status as any).packagingCompletedAt as Timestamp | undefined;
+
     return isInteractive ? (
         <AlertDialog>
             <AlertDialogTrigger asChild>{card}</AlertDialogTrigger>
@@ -116,6 +122,27 @@ export function BatchCard({ batch }: BatchCardProps) {
                     <AlertDialogTitle>Batch {batch.number}</AlertDialogTitle>
                     <AlertDialogDescription className={'flex flex-col gap-1'}>
                         {...batchInfo}
+                        <CardInfo>
+                            <StageIcon stage="preproduction" />
+                            {batch.createdAt.toDate().toLocaleString()}
+                        </CardInfo>
+                        <CardInfo>
+                            <StageIcon stage="cooking" />
+                            {preproductionCompletedAt?.toDate().toLocaleString() ?? '—'}
+                        </CardInfo>
+                        <CardInfo>
+                            <StageIcon stage="storage" />
+                            {cookingCompletedAt?.toDate().toLocaleString() ?? '—'}
+                        </CardInfo>
+                        <CardInfo>
+                            <StageIcon stage="packaging" />
+                            {storageCompletedAt?.toDate().toLocaleString() ?? '—'}
+                        </CardInfo>
+                        <CardInfo>
+                            <StageIcon stage="done" />
+                            {packagingCompletedAt?.toDate().toLocaleString() ?? '—'}
+                        </CardInfo>
+                        {...detailInfo}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
