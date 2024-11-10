@@ -17,9 +17,10 @@
       --popover: 95 0% 100%;
       --popover-foreground: 95 95% 10%;
       --primary: 95 100% 32.9%;
+      --chart-1: 95 100% 32.9%;
       --primary-foreground: 0 0% 100%;
-      --secondary: 95 10% 90%;
-      --secondary-foreground: 0 0% 0%;
+      --secondary: #132a62;
+      --secondary-foreground: 0 0% 100%;
       --muted: 57 10% 95%;
       --muted-foreground: 95 0% 40%;
       --accent: 57 10% 90%;
@@ -86,7 +87,22 @@
         background: linear-gradient(45deg, rgba(19, 42, 98, 0.85), rgba(70, 168, 0, 0.65)); /* Subtle gradient for horizontal scrollbar */
     }
 
+    .animate-emergency {
 
+        animation: emergency-pulse 700ms cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes emergency-pulse {
+        0%, 100% {
+            opacity: 1;
+            background-color: darkred;
+        }
+        50% {
+            opacity: .9;
+            background-color: #bB0000FF;
+            transform: scale(1.2);
+        }
+    }
 
 }
 
