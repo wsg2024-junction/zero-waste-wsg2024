@@ -77,7 +77,10 @@ export function PredictionChart() {
                             dx: 25,
                         }}
                     />
-                    <Tooltip formatter={tooltipFormatter} />
+                    <Tooltip
+                        formatter={tooltipFormatter}
+                        separator=": "
+                    />
 
                     <Bar
                         yAxisId="left"
