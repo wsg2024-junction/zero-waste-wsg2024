@@ -56,10 +56,6 @@ export async function sendMessage(message: Omit<ChatMessageModel, 'id'>) {
 }
 export function streamMessages(onNext: (messages: ChatMessageModel[]) => void): Unsubscribe {
     return onSnapshot(query(collection(firestore, 'chat'), orderBy('createdAt')), (snapshot) => {
-        onNext(
-            snapshot.docs.map((doc) => {
-                return { id: doc.id, ...doc.data() } as ChatMessageModel;
-            }),
-        );
+        onNext(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as ChatMessageModel));
     });
 }

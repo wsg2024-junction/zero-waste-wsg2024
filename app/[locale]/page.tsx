@@ -1,7 +1,4 @@
 'use client';
-import { Card } from '@/components/ui/card';
-import { H2, H3, H4 } from '@/components/ui/typography';
-import { Link } from '@/i18n/routing';
 import {
     Select,
     SelectContent,
@@ -14,9 +11,7 @@ import {
 import { useEffect, useState } from 'react';
 import { User } from '@/lib/models';
 import { useUsers } from '@/hooks/useModels';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CalendarDays } from 'lucide-react';
+import { NavigationCard } from '@/components/navigation-card';
 
 export default function Home() {
     const users = useUsers();
@@ -118,35 +113,5 @@ export default function Home() {
                 </p>
             </div>
         </div>
-    );
-}
-
-interface NavigationCardProps {
-    title: string;
-    href: string;
-    description: string;
-}
-
-function NavigationCard({ title, href, description }: NavigationCardProps) {
-    return (
-        <HoverCard>
-            <HoverCardTrigger asChild>
-                <Link
-                    className="w-60 h-32"
-                    href={href}>
-                    <Card className="h-full flex flex-col justify-center content-center p-6">
-                        <H4 className="m-0 text-center border-none">{title}</H4>
-                    </Card>
-                </Link>
-            </HoverCardTrigger>
-            <HoverCardContent className={'w-80'}>
-                <div className="flex justify-between space-x-4">
-                    <div className="space-y-1">
-                        <h4 className="text-sm font-semibold">{title}</h4>
-                        <p className="text-sm whitespace-pre-wrap">{description}</p>
-                    </div>
-                </div>
-            </HoverCardContent>
-        </HoverCard>
     );
 }

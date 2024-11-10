@@ -11,7 +11,6 @@ import {
 import { Area, AreaEnum } from '@/lib/models';
 import { useEffect, useState } from 'react';
 import humanizeString from 'humanize-string';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useGlobalState } from '@/hooks/useModels';
 import { Textarea } from '@/components/ui/textarea';
@@ -19,23 +18,21 @@ import { setDashboardMessage } from '@/lib/firebase';
 import { useDeepLTranslate } from '@/hooks/useDeepLTranslate';
 import { useLocale, useTranslations } from 'next-intl';
 import { TargetLanguageCode } from 'deepl-node';
-import StatusSelection from '@/components/manager-status-selection/StatusSelection';
-import { Card } from '@/components/ui/card';
 import StatusSelectionPopover from '@/components/manager-status-selection/StatusSelectionPopover';
 import ChatPopover from '@/components/chat/chat-popover';
+import { Dashboard } from '@/components/dashboard/dashboard';
+import { PredictionChart } from '@/components/manager/prediction-chart';
 
 export default function ManagerApp() {
     const locale = useLocale();
     const t = useTranslations();
     const globalMOTDs = useGlobalState();
-    const areas = Object.keys(AreaEnum).map((key) => AreaEnum[key] as string);
-    const [currentArea, setCurrentArea] = useState(areas[0]);
+    const areas = Object.keys(AreaEnum).map((key) => AreaEnum[key as keyof typeof AreaEnum] as Area);
+    const [currentArea, setCurrentArea] = useState<Area>(areas[0]);
     const [currentMOTD, setCurrentMOTD] = useState<string>(globalMOTDs.dashboardMessages[currentArea]);
     const [translation, setText] = useDeepLTranslate(locale as TargetLanguageCode);
 
-    useEffect(() => {
-        setCurrentMOTD(translation);
-    }, [translation]);
+    useEffect(() => setCurrentMOTD(translation), [translation]);
 
     useEffect(() => {
         if (!globalMOTDs) return;
@@ -50,45 +47,48 @@ export default function ManagerApp() {
     };
 
     return (
-        <>
-            <div className={'flex flex-col '}>
-                <Select
-                    defaultValue={currentArea}
-                    onValueChange={setCurrentArea}>
-                    <SelectTrigger>
-                        <SelectValue placeholder={'Area'} />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectLabel>Stage</SelectLabel>
-                            <>
-                                {areas.map((area) => (
-                                    <SelectItem
-                                        key={area}
-                                        value={area}>
-                                        {humanizeString(area)}
-                                    </SelectItem>
-                                ))}
-                            </>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-                <Textarea
-                    className={'mt-2'}
-                    value={currentMOTD}
-                    onInput={onUpdateMOTD}
-                    placeholder={'Enter message of the day...'}
-                />
-                <span className={'text-[0.825rem] opacity-50'}>{t('HINT_AUTOMATIC_TRANSLATION')}</span>
-                <Button
-                    className={'mt-2'}
-                    variant={'secondary'}
-                    onClick={onSubmitMOTD}>
-                    Submit
-                </Button>
-                <ChatPopover />
-                <StatusSelectionPopover />
-            </div>
-        </>
+        <div className={'flex flex-col'}>
+            <Dashboard
+                interactive
+                className={'mb-8'}
+            />
+            <PredictionChart />
+            <Select
+                defaultValue={currentArea}
+                onValueChange={setCurrentArea}>
+                <SelectTrigger>
+                    <SelectValue placeholder={'Area'} />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                        <SelectLabel>Stage</SelectLabel>
+                        <>
+                            {areas.map((area) => (
+                                <SelectItem
+                                    key={area}
+                                    value={area}>
+                                    {humanizeString(area)}
+                                </SelectItem>
+                            ))}
+                        </>
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
+            <Textarea
+                className={'mt-2'}
+                value={currentMOTD}
+                onInput={onUpdateMOTD}
+                placeholder={'Enter message of the day...'}
+            />
+            <span className={'text-[0.825rem] opacity-50'}>{t('HINT_AUTOMATIC_TRANSLATION')}</span>
+            <Button
+                className={'mt-2'}
+                variant={'secondary'}
+                onClick={onSubmitMOTD}>
+                Submit
+            </Button>
+            <ChatPopover />
+            <StatusSelectionPopover />
+        </div>
     );
 }

@@ -35,7 +35,7 @@ const config: Config = {
                     '950': '#123201',
                 },
                 secondary: {
-                    DEFAULT: 'hsl(var(--secondary))',
+                    DEFAULT: 'var(--secondary)',
                     foreground: 'hsl(var(--secondary-foreground))',
                 },
                 muted: {

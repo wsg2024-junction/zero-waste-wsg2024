@@ -1,24 +1,19 @@
 'use client';
 
-import { Dashboard } from '@/components/dashboard/dashboard';
-import { Separator } from '@/components/ui/separator';
-import { Leaderboard } from '@/components/dashboard/Leaderboard';
-import { useState } from 'react';
-import { Area } from '@/lib/models';
-import { useGlobalState } from '@/hooks/useModels';
-
-export default function DashboardPage() {
-    const [area, setArea] = useState<Area>('preproduction');
-    const messages = useGlobalState().dashboardMessages[area];
+import { NavigationCard } from '@/components/navigation-card';
+import { AreaEnum } from '@/lib/models';
+export default function DashboardSelectionPage() {
     return (
-        <div className={'relative flex pb-12 flex-row gap-2 w-full text-lg'}>
-            <Dashboard />
-            <Separator
-                orientation={'vertical'}
-                className={'mx-2'}
-            />
-            <Leaderboard />
-            <footer className={'absolute bottom-1 -translate-x-1/2 left-1/2 text-center'}>{messages}</footer>
+        <div className="flex flex-col gap-2 mt-[10vh] items-center">
+            <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8'}>
+                {Object.values(AreaEnum).map((area) => (
+                    <NavigationCard
+                        key={area}
+                        title={area[0].toUpperCase() + area.slice(1)}
+                        href={`/dashboard/${area}`}
+                    />
+                ))}
+            </div>
         </div>
     );
 }
