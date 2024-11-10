@@ -47,16 +47,23 @@ interface ScoreCardProps {
 
 export function ScoreCard({ score, rank }: ScoreCardProps) {
     return (
-        <Card className={'col-span-3 p-2 grid grid-cols-subgrid gap-5'}>
-            <div className={'flex items-center gap-1'}>
-                <span>{score.score.points}</span>
-                <Coins className={'w-4 h-4'} />
+        <Card className={'col-span-3 p-2 grid grid-rows-2 grid-cols-4'}>
+            <p className="row-span-2 align-middle text-xl self-center font-semibold">{rank}.</p>
+            <p className="col-span-3">{score.name}</p>
+            <div className="col-span-3 flex flex-row items-baseline gap-2">
+                <div className={'flex items-center'}>
+                    <Coins className={'w-4 h-4'} />
+                    <span>
+                        {score.score.points > 100
+                            ? Math.round(score.score.points)
+                            : Math.round(score.score.points * 10) / 10}
+                    </span>
+                </div>
+                <div className="flex items-center">
+                    <FlameIcon className={'w-4 h-4'} />
+                    <span>{score.score.streak}</span>
+                </div>
             </div>
-            <span className={'whitespace-nowrap text-center'}>{score.name}</span>
-            <span className="opacity-60 flex items-center">
-                {score.score.streak} <FlameIcon />
-            </span>
-            <span className={'text-end'}>{rank}.</span>
         </Card>
     );
 }
