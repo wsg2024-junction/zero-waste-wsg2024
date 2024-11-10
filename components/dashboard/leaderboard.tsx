@@ -1,6 +1,5 @@
 import { Card } from '@/components/ui/card';
 import { Coins, Trophy } from 'lucide-react';
-import { DashboardTitle } from '@/components/dashboard/dashboard-title';
 import { useGlobalState, useUsers } from '@/hooks/useModels';
 
 export function Leaderboard() {
@@ -9,14 +8,14 @@ export function Leaderboard() {
 
     const scores: Score[] = Object.entries(points).map(([name, score]) => ({
         name: users[name].name,
-        score
+        score,
     }));
 
     return (
         <div className={'bg-teal-400 bg-opacity-50 rounded-xl p-2'}>
             <div className={'flex mb-2 gap-2 justify-center'}>
                 <Trophy />
-                <DashboardTitle>Leaderboard</DashboardTitle>
+                <h2 className={`text-xl`}>Leaderboard</h2>
             </div>
             <div className={'grid gap-2 grid-cols-[min-content_1fr_min-content]'}>
                 {scores.sort(byScore).map((score, idx) => (
@@ -53,7 +52,7 @@ export function ScoreCard({ score, rank }: ScoreCardProps) {
                 <Coins className={'w-4 h-4'} />
             </div>
             <span className={'whitespace-nowrap text-center'}>{score.name}</span>
-            <span className={"text-end"} >{rank}.</span>
+            <span className={'text-end'}>{rank}.</span>
         </Card>
     );
 }

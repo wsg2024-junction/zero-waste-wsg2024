@@ -16,7 +16,7 @@ export interface Language {
     flagIcon: string;
 }
 
-const languages: Language[] = [
+export const languages: Language[] = [
     {
         code: 'en-US',
         name: 'English',
