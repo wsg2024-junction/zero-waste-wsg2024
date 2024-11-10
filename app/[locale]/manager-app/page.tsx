@@ -18,8 +18,10 @@ import { setDashboardMessage } from '@/lib/firebase';
 import { useDeepLTranslate } from '@/hooks/useDeepLTranslate';
 import { useLocale, useTranslations } from 'next-intl';
 import { TargetLanguageCode } from 'deepl-node';
+import StatusSelectionPopover from '@/components/manager-status-selection/StatusSelectionPopover';
 import ChatPopover from '@/components/chat/chat-popover';
 import { Dashboard } from '@/components/dashboard/dashboard';
+import { PredictionChart } from '@/components/manager/prediction-chart';
 
 export default function ManagerApp() {
     const locale = useLocale();
@@ -46,7 +48,11 @@ export default function ManagerApp() {
 
     return (
         <div className={'flex flex-col'}>
-            <Dashboard interactive />
+            <Dashboard
+                interactive
+                className={'mb-8'}
+            />
+            <PredictionChart />
             <Select
                 defaultValue={currentArea}
                 onValueChange={setCurrentArea}>
@@ -82,6 +88,7 @@ export default function ManagerApp() {
                 Submit
             </Button>
             <ChatPopover />
+            <StatusSelectionPopover />
         </div>
     );
 }

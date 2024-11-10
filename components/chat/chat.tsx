@@ -54,9 +54,8 @@ export default function Chat() {
 
     return (
         <div className={'relative flex flex-col h-[100%] pb-[4rem]'}>
-            <div className={'flex flex-row-reverse'}>
+            <div className={'flex flex-row'}>
                 <Button
-                    className={'ml-auto'}
                     variant="link"
                     onClick={() => setShowOriginal(!showOriginal)}>
                     {showOriginal ? t('CHAT_SHOW_TRANSLATION') : t('CHAT_SHOW_ORIGINAL')}
