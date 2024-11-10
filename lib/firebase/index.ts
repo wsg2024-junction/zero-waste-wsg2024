@@ -4,14 +4,16 @@ import {
     addDoc,
     collection,
     doc,
+    DocumentData,
     getFirestore,
     onSnapshot,
     orderBy,
     query,
+    setDoc,
     Unsubscribe,
     updateDoc,
 } from 'firebase/firestore';
-import { Area, Batch, ChatMessageModel, GlobalState, User } from '../models';
+import { Area, AreaStatus, Batch, ChatMessageModel, GlobalState, User } from '../models';
 const app = initializeApp(firebaseConfig);
 
 export const firestore = getFirestore(app);
@@ -21,6 +23,10 @@ export const firestore = getFirestore(app);
 const globalStateDoc = doc(firestore, 'globalState', 'globalState');
 export async function setDashboardMessage(area: Area, message: string) {
     await updateDoc(globalStateDoc, { [`dashboardMessages.${area}`]: message });
+}
+
+export async function setAreaState(area: Area, state: AreaStatus) {
+    await updateDoc(globalStateDoc, { [`status.${area}`]: state });
 }
 export function streamGlobalState(onNext: (globalState: GlobalState) => void): Unsubscribe {
     return onSnapshot(globalStateDoc, (doc) => {
@@ -43,6 +49,12 @@ export function streamBatches(onNext: (batches: Batch[]) => void): Unsubscribe {
     return onSnapshot(collection(firestore, 'batches'), (snapshot) => {
         onNext(snapshot.docs.map((doc) => ({ number: parseInt(doc.id), ...doc.data() }) as Batch));
     });
+}
+
+export async function updateBatch(batch: Batch) {
+    const data = { ...batch } as DocumentData;
+    delete data.number;
+    await setDoc(doc(firestore, 'batches', batch.number.toString()), data);
 }
 
 // Chat

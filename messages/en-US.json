@@ -10,5 +10,24 @@
     "GENERAL_COOKING": "Cooking",
     "GENERAL_STORAGE": "Storage",
     "GENERAL_PACKAGING": "Packaging",
-    "HINT_AUTOMATIC_TRANSLATION": "This text is automatically translated to the workers selected language."
+    "HINT_AUTOMATIC_TRANSLATION": "This text is automatically translated to the workers selected language.",
+    "preproduction": {
+        "batch": "Batch",
+        "selectBatch": "Select batch...",
+        "searchBatch": "Search batch...",
+        "noBatchAvailable": "No batch available.",
+        "weight": "Weight",
+        "enterWeight": "Please enter a valid weight",
+        "measurements": "Measurements",
+        "noMeasurements": "No measurements entered",
+        "submit": "Submit",
+        "weightOverview": "Target weight overview",
+        "deviation": "Deviation",
+        "targetWeight": "Target weight",
+        "actualWeight": "Actual weight",
+        "decrease": "Decrease the portion size by",
+        "increase": "Increase the portion size by",
+        "recentSamples": "Recent samples",
+        "close": "Close"
+    }
 }
