@@ -1,3 +1,7 @@
+import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
+import { useBatches, useGlobalState } from '@/hooks/useModels';
+import { Area, AreaStatus } from '@/lib/models';
+import { cn } from '@/lib/utils';
 import {
     CircleCheckBig,
     CookingPot,
@@ -6,12 +10,8 @@ import {
     UtensilsCrossed,
     Warehouse,
 } from 'lucide-react';
-import { DashboardCol } from './dashboard-col';
-import { useBatches, useGlobalState } from '@/hooks/useModels';
 import { useEffect, useState } from 'react';
-import { Area, AreaStatus } from '@/lib/models';
-import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
-import classNames from 'classnames';
+import { DashboardCol } from './dashboard-col';
 
 function hasState(states: Record<Area, AreaStatus>, state: AreaStatus) {
     return Object.values(states).includes(state);
@@ -35,7 +35,7 @@ export function Dashboard({ className, interactive }: DashboardProps) {
 
     return (
         <DashboardInteractiveContext.Provider value={interactive ?? false}>
-            <div className={classNames(className, 'flex flex-col flex-grow min-w-0 gap-2 xl:flex-row')}>
+            <div className={cn(className, 'flex flex-col flex-grow min-w-0 gap-2 xl:flex-row')}>
                 {worstState === AreaStatus.EMERGENCY && (
                     <div
                         className={

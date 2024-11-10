@@ -1,9 +1,3 @@
-import { Card } from '@/components/ui/card';
-import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
-import { PropsWithChildren, ReactElement, useContext } from 'react';
-import { Batch } from '@/lib/models';
-import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
-import classNames from 'classnames';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -14,6 +8,12 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { Card } from '@/components/ui/card';
+import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
+import { Batch } from '@/lib/models';
+import { cn } from '@/lib/utils';
+import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
+import { PropsWithChildren, ReactElement, useContext } from 'react';
 
 interface BatchCardProps {
     batch: Batch;
@@ -92,7 +92,7 @@ export function BatchCard({ batch }: BatchCardProps) {
 
     const card = (
         <Card
-            className={classNames(
+            className={cn(
                 'relative min-w-40 p-2 flex flex-col bg-white bg-opacity-80',
                 isInteractive && 'cursor-pointer hover:shadow-lg transition',
             )}>

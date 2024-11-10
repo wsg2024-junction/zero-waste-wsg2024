@@ -1,15 +1,16 @@
-import { Card } from '@/components/ui/card';
-import { Coins, Trophy } from 'lucide-react';
 import { DashboardTitle } from '@/components/dashboard/dashboard-title';
+import { Card } from '@/components/ui/card';
 import { useGlobalState, useUsers } from '@/hooks/useModels';
+import { Score } from '@/lib/models';
+import { Coins, FlameIcon, Trophy } from 'lucide-react';
 
 export function Leaderboard() {
     const users = useUsers();
     const { points } = useGlobalState();
 
-    const scores: Score[] = Object.entries(points).map(([name, score]) => ({
+    const scores: LeaderboardEntry[] = Object.entries(points).map(([name, score]) => ({
         name: users[name].name,
-        score
+        score,
     }));
 
     return (
@@ -31,17 +32,17 @@ export function Leaderboard() {
     );
 }
 
-interface Score {
+interface LeaderboardEntry {
     name: string;
-    score: number;
+    score: Score;
 }
 
-function byScore(scoreA: Score, scoreB: Score) {
-    return scoreB.score - scoreA.score;
+function byScore(scoreA: LeaderboardEntry, scoreB: LeaderboardEntry) {
+    return scoreB.score.points - scoreA.score.points;
 }
 
 interface ScoreCardProps {
-    score: Score;
+    score: LeaderboardEntry;
     rank: number;
 }
 
@@ -49,11 +50,14 @@ export function ScoreCard({ score, rank }: ScoreCardProps) {
     return (
         <Card className={'col-span-3 p-2 grid grid-cols-subgrid gap-5'}>
             <div className={'flex items-center gap-1'}>
-                <span>{score.score}</span>
+                <span>{score.score.points}</span>
                 <Coins className={'w-4 h-4'} />
             </div>
             <span className={'whitespace-nowrap text-center'}>{score.name}</span>
-            <span className={"text-end"} >{rank}.</span>
+            <span className="opacity-60 flex items-center">
+                {score.score.streak} <FlameIcon />
+            </span>
+            <span className={'text-end'}>{rank}.</span>
         </Card>
     );
 }
