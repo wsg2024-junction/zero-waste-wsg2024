@@ -27,7 +27,7 @@ export default function StatusSelectionPopover() {
                 <Button
                     variant="outline"
                     className={
-                        `text-white hover:text-white absolute bottom-20 right-4 w-12 h-12 shadow-xl` +
+                        `text-white hover:text-white absolute bottom-36 right-4 w-12 h-12 shadow-xl` +
                         `${worstState === AreaStatus.EMERGENCY ? ' hover:bg-red-900 bg-red-900 ' : ''}` +
                         `${worstState === AreaStatus.STOPPED ? ' hover:bg-red-500 bg-red-500 ' : ''}` +
                         `${worstState === AreaStatus.SLOWED ? ' hover:bg-orange-600 bg-orange-500 ' : ''}` +
