@@ -1,20 +1,19 @@
-import { Card } from '@/components/ui/card';
-import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
-import { PropsWithChildren, ReactElement, useContext } from 'react';
-import { Batch } from '@/lib/models';
-import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
-import classNames from 'classnames';
 import {
     Dialog,
     DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
-    DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
+import { Batch } from '@/lib/models';
+import { cn } from '@/lib/utils';
+import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
+import { PropsWithChildren, ReactElement, useContext } from 'react';
+import { Button } from 'react-day-picker';
+import { Card } from '../ui/card';
+import { DialogFooter, DialogHeader } from '../ui/dialog';
 
 interface BatchCardProps {
     batch: Batch;
@@ -93,7 +92,7 @@ export function BatchCard({ batch }: BatchCardProps) {
 
     const card = (
         <Card
-            className={classNames(
+            className={cn(
                 'relative min-w-40 p-2 flex flex-col bg-white bg-opacity-80',
                 isInteractive && 'cursor-pointer hover:shadow-lg transition',
             )}>

@@ -184,7 +184,7 @@ export function BatchStatusModal(props: BatchStatusModalProps) {
     );
 }
 
-function round1(x: number) {
+export function round1(x: number) {
     return Math.round(10 * x) / 10;
 }
 
@@ -200,7 +200,7 @@ function prompt(x: number) {
     return x > 0 ? ('decrease' as const) : x < 0 ? ('increase' as const) : undefined;
 }
 
-function latestSample(batch: PreproductionBatch) {
+export function latestSample(batch: PreproductionBatch) {
     let latest: PreproductionBatch['status']['samples'][number] | null = null;
     for (const sample of batch.status.samples) {
         if (!latest || sample.createdAt > latest.createdAt) {

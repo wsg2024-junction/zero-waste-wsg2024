@@ -47,12 +47,13 @@ const tooltipFormatter = (value: number, name: string) => {
 export function PredictionChart() {
     return (
         <div className="h-56 text-secondary-foreground">
-            <ResponsiveContainer
-                width="100%"
-                height="100%">
+            <ResponsiveContainer>
                 <ComposedChart data={chartData}>
                     <CartesianGrid horizontal={false} />
-                    <XAxis dataKey="week" />
+                    <XAxis
+                        dataKey="week"
+                        label={{ value: 'Calendar Week' }}
+                    />
                     <YAxis
                         yAxisId="left"
                         orientation="left"
