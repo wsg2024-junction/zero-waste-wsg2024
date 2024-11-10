@@ -1,7 +1,7 @@
 import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
 import { useBatches } from '@/hooks/useModels';
 import { Area } from '@/lib/models';
-import classNames from 'classnames';
+import { cn } from '@/lib/utils';
 import { CircleCheckBig, CookingPot, PackageOpen, UtensilsCrossed, Warehouse } from 'lucide-react';
 import { DashboardCol } from './dashboard-col';
 
@@ -16,7 +16,7 @@ export function Dashboard({ className, interactive, currentArea }: DashboardProp
 
     return (
         <DashboardInteractiveContext.Provider value={interactive ?? false}>
-            <div className={classNames(className, 'flex flex-col flex-grow min-w-0 gap-2 xl:flex-row')}>
+            <div className={cn(className, 'flex flex-col flex-grow min-w-0 gap-2 xl:flex-row')}>
                 <DashboardCol
                     icon={UtensilsCrossed}
                     selected={currentArea === 'preproduction'}
