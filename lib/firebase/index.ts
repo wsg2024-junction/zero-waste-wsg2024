@@ -11,7 +11,7 @@ import {
     Unsubscribe,
     updateDoc,
 } from 'firebase/firestore';
-import { Area, Batch, ChatMessageModel, GlobalState, User } from '../models';
+import { Area, AreaStatus, Batch, ChatMessageModel, GlobalState, User } from '../models';
 const app = initializeApp(firebaseConfig);
 
 export const firestore = getFirestore(app);
@@ -21,6 +21,10 @@ export const firestore = getFirestore(app);
 const globalStateDoc = doc(firestore, 'globalState', 'globalState');
 export async function setDashboardMessage(area: Area, message: string) {
     await updateDoc(globalStateDoc, { [`dashboardMessages.${area}`]: message });
+}
+
+export async function setAreaState(area: Area, state: AreaStatus) {
+    await updateDoc(globalStateDoc, { [`status.${area}`]: state });
 }
 export function streamGlobalState(onNext: (globalState: GlobalState) => void): Unsubscribe {
     return onSnapshot(globalStateDoc, (doc) => {

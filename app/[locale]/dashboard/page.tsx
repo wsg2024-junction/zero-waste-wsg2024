@@ -2,7 +2,6 @@
 
 import { NavigationCard } from '@/components/navigation-card';
 import { AreaEnum } from '@/lib/models';
-
 export default function DashboardSelectionPage() {
     return (
         <div className="flex flex-col gap-2 mt-[10vh] items-center">
