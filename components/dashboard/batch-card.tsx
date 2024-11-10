@@ -94,7 +94,9 @@ export function BatchCard({ batch }: BatchCardProps) {
                                     {it.value}
                                 </CardInfo>
                             </TooltipTrigger>
-                            <TooltipContent>{it.title}</TooltipContent>
+                            <TooltipContent>
+                                <Card className={'p-2'}>{it.title}</Card>
+                            </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
                 ))}
