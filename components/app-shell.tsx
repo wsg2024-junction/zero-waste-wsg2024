@@ -32,7 +32,7 @@ export function AppShell(props: React.PropsWithChildren<AppShellProps>) {
     return (
         <div className="h-full flex flex-col">
             <header className="border-b flex justify-between items-center p-2 gap-2">
-                <nav className="flex h-16 px-4 items-center p-2  max-w-7xl lg:px-8">
+                <nav className="flex h-16 px-4 items-center p-2 max-w-7xl lg:px-8">
                     <Link
                         href="/"
                         className="mr-12">
@@ -62,7 +62,7 @@ export function AppShell(props: React.PropsWithChildren<AppShellProps>) {
                 />
             </header>
             <main className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden isolate">
-                <div className="flex-1 w-full p-6 mx-auto max-w-7xl lg:px-8">{props.children}</div>
+                <div className="flex-1 w-full p-6 mx-auto max-w-[90rem] lg:px-8">{props.children}</div>
             </main>
         </div>
     );

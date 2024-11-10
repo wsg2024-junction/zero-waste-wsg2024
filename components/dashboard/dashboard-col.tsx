@@ -22,7 +22,7 @@ export function DashboardCol(props: DashboardColProps) {
                 </div>
             </div>
             <div
-                className={'rounded-xl  overflow-x-auto  gap-2 p-2 flex flex-row h-full w-full xl:flex-col'}
+                className={'rounded-xl overflow-x-auto gap-2 p-2 flex flex-row h-full w-full xl:flex-col'}
                 style={{ background: props.color + '55' }}>
                 {props.batches
                     .filter((batch) => batch.status.stage === props.stage)
