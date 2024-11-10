@@ -21,6 +21,7 @@ import {
     SmileIcon,
 } from 'lucide-react';
 import moment from 'moment';
+import { useTranslations } from 'next-intl';
 import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { H4 } from '../ui/typography';
@@ -40,12 +41,16 @@ export type BatchStatusModalProps = {
 };
 
 export function BatchStatusModal(props: BatchStatusModalProps) {
+    const t = useTranslations('preproduction');
+
     const currentSample = latestSample(props.batch);
     const targetWeight =
         (props.batch.status.plannedTotalWeight * 1000) / props.batch.status.plannedProductCount;
     const average =
         currentSample.weights.reduce((sum, weight) => sum + weight, 0) / currentSample.weights.length;
     const deviation = average - targetWeight;
+
+    const cta = prompt(deviation);
 
     const recentSamples = props.batch.status.samples
         .filter((sample) => sample.createdAt > Timestamp.fromDate(moment().subtract(4, 'h').toDate()))
@@ -67,12 +72,12 @@ export function BatchStatusModal(props: BatchStatusModalProps) {
             onOpenChange={props.onOpenChange}>
             <DialogContent className="sm:max-w-lg">
                 <DialogHeader>
-                    <DialogTitle>Production Status</DialogTitle>
+                    <DialogTitle>{t('weightOverview')}</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4">
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">Deviation</CardTitle>
+                            <CardTitle className="text-sm font-medium">{t('deviation')}</CardTitle>
                             <ArrowDownUpIcon />
                         </CardHeader>
                         <CardContent>
@@ -96,19 +101,19 @@ export function BatchStatusModal(props: BatchStatusModalProps) {
                             </div>
                             <div className="flex flex-row gap-4">
                                 <p className="text-xs text-muted-foreground">
-                                    Target weight: {round1(targetWeight)} g
+                                    {t('targetWeight')}: {round1(targetWeight)} g
                                 </p>
                                 <p className="text-xs text-muted-foreground">
-                                    Actual weight: {round1(average)} g
+                                    {t('actualWeight')}: {round1(average)} g
                                 </p>
                             </div>
                         </CardContent>
                     </Card>
-                    {deviation !== 0 && (
+                    {cta && (
                         <div className="flex flex-row gap-x-2">
                             <ActionIcon deviation={deviation}></ActionIcon>
                             <div className="text-xl font-semibold">
-                                {prompt(deviation)} {Math.abs(round1(deviation))} g
+                                {cta && t(cta)} {' ' + Math.abs(round1(deviation))} g
                             </div>
                         </div>
                     )}
@@ -117,7 +122,7 @@ export function BatchStatusModal(props: BatchStatusModalProps) {
                             <Button
                                 variant="ghost"
                                 className="w-full flex items-center justify-between space-x-4">
-                                <H4 className="font-semibold">Recent samples</H4>
+                                <H4 className="font-semibold">{t('recentSamples')}</H4>
                                 <ChevronsUpDownIcon className="h-4 w-4" />
                             </Button>
                         </CollapsibleTrigger>
@@ -170,7 +175,7 @@ export function BatchStatusModal(props: BatchStatusModalProps) {
                         <Button
                             type="button"
                             variant="secondary">
-                            Close
+                            {t('close')}
                         </Button>
                     </DialogClose>
                 </DialogFooter>
@@ -192,7 +197,7 @@ function ActionIcon(props: { deviation: number }) {
 }
 
 function prompt(x: number) {
-    return x > 0 ? 'Decrease the portion size by ' : x < 0 ? 'Increase the portion size by ' : undefined;
+    return x > 0 ? ('decrease' as const) : x < 0 ? ('increase' as const) : undefined;
 }
 
 function latestSample(batch: PreproductionBatch) {

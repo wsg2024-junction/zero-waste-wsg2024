@@ -1,6 +1,7 @@
 import { Batch } from '@/lib/models';
 import { cn } from '@/lib/utils';
 import { Check, ChevronsUpDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command';
@@ -18,11 +19,12 @@ export type BatchSelectorProps = {
 };
 
 export function BatchSelector(props: BatchSelectorProps) {
+    const t = useTranslations('preproduction');
     const [open, setOpen] = useState(false);
 
     return (
         <div className="flex items-center space-x-4">
-            <Label htmlFor="batchSelector">Batch</Label>
+            <Label htmlFor="batchSelector">{t('batch')}</Label>
             <Popover
                 open={open}
                 onOpenChange={setOpen}>
@@ -34,16 +36,16 @@ export function BatchSelector(props: BatchSelectorProps) {
                         aria-expanded={open}
                         className="w-[200px] justify-between">
                         {props.selectedBatch && props.selectedBatch.number
-                            ? `Batch ${props.selectedBatch.number}`
-                            : 'Select batch...'}
+                            ? `${t('batch')} ${props.selectedBatch.number}`
+                            : t('selectBatch')}
                         <ChevronsUpDown className="opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[200px] p-0">
                     <Command>
-                        <CommandInput placeholder="Search batch..." />
+                        <CommandInput placeholder={t('searchBatch')} />
                         <CommandList>
-                            <CommandEmpty>No batch available.</CommandEmpty>
+                            <CommandEmpty>{t('noBatchAvailable')}</CommandEmpty>
                             <CommandGroup>
                                 {props.batches.map((batch) => (
                                     <CommandItem
@@ -54,7 +56,7 @@ export function BatchSelector(props: BatchSelectorProps) {
                                             props.onSelected(batch);
                                             setOpen(false);
                                         }}>
-                                        Batch {batch.number}
+                                        {t('batch')} {batch.number}
                                         <Check
                                             className={cn(
                                                 'ml-auto',

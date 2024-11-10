@@ -3,7 +3,6 @@
 import { BatchSelector, PreproductionBatch } from '@/components/preproduction-tablet/batch-selector';
 import { BatchSizeForm } from '@/components/preproduction-tablet/batch-size-form';
 import { BatchStatusModal } from '@/components/preproduction-tablet/batch-status-modal';
-import { H4 } from '@/components/ui/typography';
 import { useBatches } from '@/hooks/useModels';
 import { updateBatch } from '@/lib/firebase';
 import { Timestamp } from '@firebase/firestore';
@@ -27,34 +26,27 @@ export default function PreproductionApp() {
                     batches={preproductionBatches}
                     selectedBatch={selectedBatch}
                     onSelected={(batch) => setSelectedBatchNumber(batch.number)}></BatchSelector>
-                {selectedBatch === undefined ? (
-                    <H4>Please select a batch</H4>
-                ) : (
-                    <>
-                        <H4>Please enter your measurements</H4>
-                        <BatchSizeForm
-                            onSubmit={(measurements) => {
-                                const cUser = JSON.parse(localStorage.getItem('user') as string);
-                                updateBatch({
-                                    ...selectedBatch,
-                                    status: {
-                                        ...selectedBatch.status,
-                                        samples: [
-                                            ...(selectedBatch.status.samples ?? []),
-                                            {
-                                                createdAt: Timestamp.now(),
-                                                createdBy: cUser.id,
-                                                weights: measurements.map(
-                                                    (measurement) => measurement.weight,
-                                                ),
-                                            },
-                                        ],
-                                    },
-                                }).then(() => {
-                                    setShowStatus(true);
-                                });
-                            }}></BatchSizeForm>
-                    </>
+                {selectedBatch !== undefined && (
+                    <BatchSizeForm
+                        onSubmit={(measurements) => {
+                            const cUser = JSON.parse(localStorage.getItem('user') as string);
+                            updateBatch({
+                                ...selectedBatch,
+                                status: {
+                                    ...selectedBatch.status,
+                                    samples: [
+                                        ...(selectedBatch.status.samples ?? []),
+                                        {
+                                            createdAt: Timestamp.now(),
+                                            createdBy: cUser.id,
+                                            weights: measurements.map((measurement) => measurement.weight),
+                                        },
+                                    ],
+                                },
+                            }).then(() => {
+                                setShowStatus(true);
+                            });
+                        }}></BatchSizeForm>
                 )}
             </div>
             {!!selectedBatch && (

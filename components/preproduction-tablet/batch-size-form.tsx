@@ -19,18 +19,17 @@ export type BatchSizeFormType = {
     onSubmit: (sizes: Measurement[]) => void;
 };
 
-const weightSchema = z.object({
-    weight: z.coerce
-        .number({
-            invalid_type_error: 'Please enter a valid weight',
-            required_error: 'Please enter a valid weight',
-        })
-        .positive('Please enter a valid weight'),
-});
-
 export function BatchSizeForm(props: BatchSizeFormType) {
-    const t = useTranslations();
+    const t = useTranslations('preproduction');
 
+    const weightSchema = z.object({
+        weight: z.coerce
+            .number({
+                invalid_type_error: t('enterWeight'),
+                required_error: t('enterWeight'),
+            })
+            .positive(t('enterWeight')),
+    });
     const weightForm = useForm<z.infer<typeof weightSchema>>({
         resolver: zodResolver(weightSchema),
         defaultValues: {
@@ -48,7 +47,7 @@ export function BatchSizeForm(props: BatchSizeFormType) {
 
     const submit = () => {
         if (measurements.length === 0) {
-            setSubmitError('No measurements entered');
+            setSubmitError(t('noMeasurements'));
             return;
         }
 
@@ -68,13 +67,13 @@ export function BatchSizeForm(props: BatchSizeFormType) {
                             name="weight"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel htmlFor="weight">{t('WEIGHT')} (g)</FormLabel>
+                                    <FormLabel htmlFor="weight">{t('weight')} (g)</FormLabel>
                                     <FormControl>
                                         <div className="flex max-w-sm items-center space-x-2">
                                             <Input
                                                 id="weight"
                                                 type="number"
-                                                placeholder={`${t('WEIGHT')}...`}
+                                                placeholder={`${t('weight')}...`}
                                                 {...field}
                                             />
                                             <Button
@@ -97,7 +96,7 @@ export function BatchSizeForm(props: BatchSizeFormType) {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Measurements</TableHead>
+                            <TableHead>{t('measurements')}</TableHead>
                             <TableHead className="w-9"></TableHead>
                         </TableRow>
                     </TableHeader>
@@ -121,15 +120,15 @@ export function BatchSizeForm(props: BatchSizeFormType) {
                         ))}
                         {measurements.length === 0 && (
                             <TableRow>
-                                <TableCell>No measurements entered</TableCell>
+                                <TableCell>{t('noMeasurements')}</TableCell>
                             </TableRow>
                         )}
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex w-full justify-between items-center">
+            <div className="flex w-full justify-between items-baseline">
                 <P className="text-[0.8rem] font-medium text-destructive">{submitError}</P>
-                <Button onClick={submit}>Submit</Button>
+                <Button onClick={submit}>{t('submit')}</Button>
             </div>
         </>
     );
