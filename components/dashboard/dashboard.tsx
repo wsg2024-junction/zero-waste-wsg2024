@@ -4,17 +4,19 @@ import { CircleCheckBig, CookingPot, PackageOpen, UtensilsCrossed, Warehouse } f
 import { DashboardCol } from './dashboard-col';
 import { useBatches } from '@/hooks/useModels';
 import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
+import classNames from 'classnames';
 
 interface DashboardProps {
+    className?: string;
     interactive?: boolean;
 }
 
-export function Dashboard({ interactive }: DashboardProps) {
+export function Dashboard({ className, interactive }: DashboardProps) {
     const batches = useBatches();
 
     return (
         <DashboardInteractiveContext.Provider value={interactive ?? false}>
-            <div className="flex flex-col flex-grow min-w-0 gap-2 xl:flex-row">
+            <div className={classNames(className, 'flex flex-col flex-grow min-w-0 gap-2 xl:flex-row')}>
                 <DashboardCol
                     icon={UtensilsCrossed}
                     stage={'preproduction'}
