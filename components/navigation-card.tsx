@@ -52,7 +52,9 @@ export function NavigationCard({
                     </div>
                     {disabled && (
                         <div className={'text-red-700 font-bold mt-3'}>
-                            You need to select a user with the “manager” role to navigate to the manager app!
+                            {title === 'Manager App'
+                                ? 'You need to select a user with the “manager” role to navigate to the manager app!'
+                                : 'You need to select a user with the “worker” role to navigate to the tablet app for preproduction area!'}
                         </div>
                     )}
                 </div>

@@ -19,7 +19,7 @@ export function ManagerMessagePopover() {
                 </Button>
             </PopoverTrigger>
             <PopoverContent
-                className={'w-96 max-w-[90vw] h-96 md:h-64'}
+                className={'w-96 max-w-[90vw] h-fit'}
                 collisionPadding={10}
                 sticky="always">
                 <div className={'h-[100%] w-[100%] overflow-x-auto'}>

@@ -128,7 +128,11 @@ export function BatchSizeForm(props: BatchSizeFormType) {
             </div>
             <div className="flex w-full justify-between items-baseline">
                 <P className="text-[0.8rem] font-medium text-destructive">{submitError}</P>
-                <Button onClick={submit}>{t('submit')}</Button>
+                <Button
+                    className={'text-white'}
+                    onClick={submit}>
+                    {t('submit')}
+                </Button>
             </div>
         </>
     );

@@ -62,7 +62,7 @@ export default function ChatPopover() {
                 sticky="always">
                 <div className={'h-[100%] w-[100%]'}>
                     <Button
-                        className={'absolute top-2 right-2 z-10'}
+                        className={'absolute top-2 right-2 z-10 text-white'}
                         onClick={() => {
                             setExpanded((t) => !t);
                         }}

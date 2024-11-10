@@ -57,28 +57,28 @@ function SingleAreaStatusSelection({
             <div className={'flex flex-row gap-2'}>
                 <Button
                     onClick={() => onChangeStatus('OK')}
-                    variant="ghost"
+                    variant="outline"
                     className={`border-green-600 ${currentStatus === 'OK' ? 'hover:bg-green-600 hover:text-white bg-green-500 text-white' : 'text-green-600'}`}>
                     <CheckIcon />
                     <span>{t('managerApp.areaStatus.ok')}</span>
                 </Button>
                 <Button
                     onClick={() => onChangeStatus('SLOWED')}
-                    variant="ghost"
+                    variant="outline"
                     className={`border-orange-600  ${currentStatus === 'SLOWED' ? 'hover:bg-orange-600 hover:text-white bg-orange-500 text-white' : 'text-orange-600'}`}>
                     <TurtleIcon />
                     <span>{t('managerApp.areaStatus.slowed')}</span>
                 </Button>
                 <Button
                     onClick={() => onChangeStatus('STOPPED')}
-                    variant="ghost"
+                    variant="outline"
                     className={`border-red-600 ${currentStatus === 'STOPPED' ? 'hover:bg-red-600 hover:text-white bg-red-500 text-white' : 'text-red-600'}`}>
                     <PauseIcon />
                     <span>{t('managerApp.areaStatus.stopped')}</span>
                 </Button>
                 <Button
                     onClick={() => onChangeStatus('EMERGENCY')}
-                    variant={currentStatus === 'EMERGENCY' ? 'destructive' : 'ghost'}
+                    variant={currentStatus === 'EMERGENCY' ? 'destructive' : 'outline'}
                     className={`border-red-600 ${currentStatus === 'EMERGENCY' ? '' : 'text-red-600'}`}>
                     <TriangleAlertIcon />
                     <span>{t('managerApp.areaStatus.emergency')}</span>

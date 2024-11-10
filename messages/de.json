@@ -34,9 +34,9 @@
         "areaStatus": {
             "status": "Status",
             "ok": "OK",
-            "slowed": "VERLANGSAMMT",
+            "slowed": "VERLANGSAMT",
             "stopped": "STOPP",
-            "emergency": "NOTFALL!"
+            "emergency": "ALAAAARM!"
         },
         "message": {
             "title": "Dashboard-Nachricht senden",

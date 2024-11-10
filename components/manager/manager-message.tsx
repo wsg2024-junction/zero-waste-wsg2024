@@ -45,7 +45,7 @@ export function ManagerMessage() {
     };
 
     return (
-        <>
+        <div className={'p-1'}>
             <Select
                 defaultValue={currentArea}
                 onValueChange={setCurrentArea}>
@@ -68,12 +68,12 @@ export function ManagerMessage() {
                 </SelectContent>
             </Select>
             <Textarea
-                className={'mt-2'}
+                className={'mt-2 resize-none h-52'}
                 value={currentMOTD}
                 onInput={onUpdateMOTD}
                 placeholder={t('managerApp.message.placeholder')}
             />
-            <div className={'flex justify-between items-center'}>
+            <div className={'flex justify-between items-center mt-1'}>
                 <span className={'text-[0.825rem] opacity-50'}>
                     {t('managerApp.message.automaticTranslationHint')}
                 </span>
@@ -84,6 +84,6 @@ export function ManagerMessage() {
                     {t('managerApp.message.submit')}
                 </Button>
             </div>
-        </>
+        </div>
     );
 }
