@@ -4,10 +4,58 @@
     "NAV_LANG": "Keel",
     "CHAT_SHOW_ORIGINAL": "Näita originaali",
     "CHAT_SHOW_TRANSLATION": "Näita tõlget",
-    "CHAT_HINT_ENTER_TEXT": "Sisesta tekst siia...",
+    "CHAT_HINT_ENTER_TEXT": "Sisesta tekst siia…",
     "CHAT_SEND": "Saada",
     "GENERAL_PREPRODUCTION": "Eeltootmine",
-    "GENERAL_COOKING": "Küpsetamine",
+    "GENERAL_COOKING": "Kokkamine",
     "GENERAL_STORAGE": "Ladustamine",
-    "GENERAL_PACKAGING": "Pakendamine"
+    "GENERAL_PACKAGING": "Pakendamine",
+    "stage": "Etapp",
+    "preproduction": {
+        "batch": "Partii",
+        "selectBatch": "Vali partii…",
+        "searchBatch": "Otsi partiid…",
+        "noBatchAvailable": "Partii pole saadaval.",
+        "weight": "Kaal",
+        "enterWeight": "Palun sisesta kehtiv kaal",
+        "measurements": "Mõõtmised",
+        "noMeasurements": "Mõõtmisi ei ole sisestatud",
+        "submit": "Esita",
+        "weightOverview": "Eesmärgi kaalu ülevaade",
+        "deviation": "Kaldumine",
+        "targetWeight": "Eesmärk kaal",
+        "actualWeight": "Tegelik kaal",
+        "decrease": "Vähenda portsjoni suurust",
+        "increase": "Suurenda portsjoni suurust",
+        "recentSamples": "Hiljutised proovid",
+        "close": "Sulge"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Staatus",
+            "ok": "OK",
+            "slowed": "AEGUNUD",
+            "stopped": "PEATATUD",
+            "emergency": "HÄDAOLUKORD!"
+        },
+        "message": {
+            "title": "Saada armatuurlaua sõnum",
+            "placeholder": "Sisesta päeva sõnum…",
+            "automaticTranslationHint": "See tekst tõlgitakse automaatselt töötaja valitud keelde.",
+            "submit": "Esita"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Kasutatavad tooted",
+            "usableProductsPerBatch": "Kasutatavad tooted partiis"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Plaanitav toodete arv",
+        "plannedTotalWeight": "Plaanitud kogukaal",
+        "productCount": "Toodete arv",
+        "totalWeight": "Kogukaal",
+        "maxStorageLeft": "Jäänud maksimaalne ladustamisvõime",
+        "overweightTotal": "Ülekaalu kogus",
+        "underweightProducts": "Alakaalu tooted"
+    }
 }

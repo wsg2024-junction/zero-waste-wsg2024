@@ -4,10 +4,58 @@
     "NAV_LANG": "Bahasa",
     "CHAT_SHOW_ORIGINAL": "Tampilkan Asli",
     "CHAT_SHOW_TRANSLATION": "Tampilkan Terjemahan",
-    "CHAT_HINT_ENTER_TEXT": "Masukkan teks di sini...",
+    "CHAT_HINT_ENTER_TEXT": "Masukkan teks di sini…",
     "CHAT_SEND": "Kirim",
-    "GENERAL_PREPRODUCTION": "Pra-produksi",
+    "GENERAL_PREPRODUCTION": "Pra-Produksi",
     "GENERAL_COOKING": "Memasak",
     "GENERAL_STORAGE": "Penyimpanan",
-    "GENERAL_PACKAGING": "Pengemasan"
+    "GENERAL_PACKAGING": "Pengemasan",
+    "stage": "Tahap",
+    "preproduction": {
+        "batch": "Batch",
+        "selectBatch": "Pilih batch…",
+        "searchBatch": "Cari batch…",
+        "noBatchAvailable": "Tidak ada batch yang tersedia.",
+        "weight": "Berat",
+        "enterWeight": "Harap masukkan berat yang valid",
+        "measurements": "Pengukuran",
+        "noMeasurements": "Tidak ada pengukuran yang dimasukkan",
+        "submit": "Kirim",
+        "weightOverview": "Tinjauan Berat Target",
+        "deviation": "Deviasi",
+        "targetWeight": "Berat Target",
+        "actualWeight": "Berat Aktual",
+        "decrease": "Kurangi ukuran porsi sebesar",
+        "increase": "Tambah ukuran porsi sebesar",
+        "recentSamples": "Contoh Terbaru",
+        "close": "Tutup"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Status",
+            "ok": "OK",
+            "slowed": "LAMBAT",
+            "stopped": "BERHENTI",
+            "emergency": "DARURAT!"
+        },
+        "message": {
+            "title": "Kirim Pesan Dashboard",
+            "placeholder": "Masukkan pesan hari ini…",
+            "automaticTranslationHint": "Teks ini akan diterjemahkan secara otomatis ke bahasa yang dipilih oleh pekerja.",
+            "submit": "Kirim"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Produk yang Dapat Digunakan",
+            "usableProductsPerBatch": "Produk yang Dapat Digunakan per Batch"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Jumlah Produk yang Direncanakan",
+        "plannedTotalWeight": "Berat Total yang Direncanakan",
+        "productCount": "Jumlah Produk",
+        "totalWeight": "Berat Total",
+        "maxStorageLeft": "Sisa Penyimpanan Maksimal",
+        "overweightTotal": "Total Kelebihan Berat",
+        "underweightProducts": "Produk dengan Berat Kurang"
+    }
 }

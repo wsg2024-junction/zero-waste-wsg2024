@@ -4,10 +4,58 @@
     "NAV_LANG": "Jazyk",
     "CHAT_SHOW_ORIGINAL": "Zobrazit originál",
     "CHAT_SHOW_TRANSLATION": "Zobrazit překlad",
-    "CHAT_HINT_ENTER_TEXT": "Zadejte text zde...",
+    "CHAT_HINT_ENTER_TEXT": "Zadejte text zde…",
     "CHAT_SEND": "Odeslat",
     "GENERAL_PREPRODUCTION": "Předprodukce",
     "GENERAL_COOKING": "Vaření",
     "GENERAL_STORAGE": "Skladování",
-    "GENERAL_PACKAGING": "Balení"
+    "GENERAL_PACKAGING": "Balení",
+    "stage": "Stupeň",
+    "preproduction": {
+        "batch": "Šarže",
+        "selectBatch": "Vyberte šarži…",
+        "searchBatch": "Hledat šarži…",
+        "noBatchAvailable": "Žádná šarže není k dispozici.",
+        "weight": "Hmotnost",
+        "enterWeight": "Prosím, zadejte platnou hmotnost",
+        "measurements": "Měření",
+        "noMeasurements": "Žádná měření nejsou zavedena",
+        "submit": "Odeslat",
+        "weightOverview": "Přehled cílové hmotnosti",
+        "deviation": "Odchylka",
+        "targetWeight": "Cílová hmotnost",
+        "actualWeight": "Skutečná hmotnost",
+        "decrease": "Zmenšit velikost porce o",
+        "increase": "Zvětšit velikost porce o",
+        "recentSamples": "Nedávné vzorky",
+        "close": "Zavřít"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Status",
+            "ok": "OK",
+            "slowed": "ZPOMALENO",
+            "stopped": "ZASTAVENO",
+            "emergency": "NEBEZPEČÍ!"
+        },
+        "message": {
+            "title": "Odeslat zprávu na dashboard",
+            "placeholder": "Zadejte zprávu dne…",
+            "automaticTranslationHint": "Tento text je automaticky přeložen do jazyka vybraného pracovníkem.",
+            "submit": "Odeslat"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Použitelné produkty",
+            "usableProductsPerBatch": "Použitelné produkty na šarži"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Plánovaný počet produktů",
+        "plannedTotalWeight": "Plánovaná celková hmotnost",
+        "productCount": "Počet produktů",
+        "totalWeight": "Celková hmotnost",
+        "maxStorageLeft": "Maximální zbývající skladovací kapacita",
+        "overweightTotal": "Celková nadváha",
+        "underweightProducts": "Produkty s podváhou"
+    }
 }

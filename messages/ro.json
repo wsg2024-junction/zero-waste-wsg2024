@@ -1,13 +1,61 @@
 {
     "NAV_HOME": "Acasă",
     "NAV_CHAT": "Chat",
-    "NAV_LANG": "Limbă",
+    "NAV_LANG": "Limba",
     "CHAT_SHOW_ORIGINAL": "Afișează originalul",
     "CHAT_SHOW_TRANSLATION": "Afișează traducerea",
-    "CHAT_HINT_ENTER_TEXT": "Introduceți text aici...",
+    "CHAT_HINT_ENTER_TEXT": "Introduceți textul aici…",
     "CHAT_SEND": "Trimite",
     "GENERAL_PREPRODUCTION": "Pre-producție",
-    "GENERAL_COOKING": "Gătit",
+    "GENERAL_COOKING": "Gătire",
     "GENERAL_STORAGE": "Depozitare",
-    "GENERAL_PACKAGING": "Ambalare"
+    "GENERAL_PACKAGING": "Ambalare",
+    "stage": "Stadiu",
+    "preproduction": {
+        "batch": "Lot",
+        "selectBatch": "Selectați lotul…",
+        "searchBatch": "Căutați lotul…",
+        "noBatchAvailable": "Nu există lot disponibil.",
+        "weight": "Greutate",
+        "enterWeight": "Vă rugăm să introduceți o greutate validă",
+        "measurements": "Măsurători",
+        "noMeasurements": "Nu au fost introduse măsurători",
+        "submit": "Trimite",
+        "weightOverview": "Prezentare generală a greutății țintă",
+        "deviation": "Abatere",
+        "targetWeight": "Greutate țintă",
+        "actualWeight": "Greutate reală",
+        "decrease": "Reduceți dimensiunea porției cu",
+        "increase": "Creșteți dimensiunea porției cu",
+        "recentSamples": "Mostre recente",
+        "close": "Închide"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Status",
+            "ok": "OK",
+            "slowed": "ÎNCETINIT",
+            "stopped": "OPRIT",
+            "emergency": "URGENȚĂ!"
+        },
+        "message": {
+            "title": "Trimite mesaj la tabloul de bord",
+            "placeholder": "Introduceți mesajul zilei…",
+            "automaticTranslationHint": "Acest text este tradus automat în limba aleasă de lucrător.",
+            "submit": "Trimite"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Produse utilizabile",
+            "usableProductsPerBatch": "Produse utilizabile pe lot"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Numărul de produse planificate",
+        "plannedTotalWeight": "Greutatea totală planificată",
+        "productCount": "Numărul de produse",
+        "totalWeight": "Greutatea totală",
+        "maxStorageLeft": "Spațiu maxim de depozitare rămas",
+        "overweightTotal": "Total de produse supraponderale",
+        "underweightProducts": "Produse subgreutate"
+    }
 }

@@ -16,7 +16,7 @@ export function Leaderboard() {
         <div className={'bg-teal-400 bg-opacity-50 rounded-xl p-2'}>
             <div className={'flex mb-2 gap-2 justify-center'}>
                 <Trophy />
-                <h2 className={`text-xl`}>Leaderboard</h2>
+                <h2 className={`text-xl ml-1`}>Leaderboard</h2>
             </div>
             <div className={'grid gap-2 grid-cols-[min-content_1fr_min-content]'}>
                 {scores.sort(byScore).map((score, idx) => (

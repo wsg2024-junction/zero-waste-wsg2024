@@ -1,9 +1,10 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { CheckIcon, PauseIcon, TriangleAlertIcon, TurtleIcon } from 'lucide-react';
 import StatusSelection from '@/components/manager-status-selection/StatusSelection';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useGlobalState } from '@/hooks/useModels';
 import { Area, AreaStatus } from '@/lib/models';
+import { CheckIcon, PauseIcon, TriangleAlertIcon, TurtleIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 function hasState(states: Record<Area, AreaStatus>, state: AreaStatus) {
@@ -11,6 +12,7 @@ function hasState(states: Record<Area, AreaStatus>, state: AreaStatus) {
 }
 
 export default function StatusSelectionPopover() {
+    const t = useTranslations();
     const globalState = useGlobalState();
     const [worstState, setWorstState] = useState(AreaStatus.OK);
 
@@ -44,7 +46,7 @@ export default function StatusSelectionPopover() {
                 collisionPadding={10}
                 sticky="always">
                 <div className={'h-[100%] w-[100%] overflow-x-auto'}>
-                    <h2 className={'font-bold text-lg mb-2'}>Status</h2>
+                    <h2 className={'font-bold text-lg mb-2'}>{t('managerApp.areaStatus.status')}</h2>
                     <StatusSelection status={globalState.status} />
                 </div>
             </PopoverContent>

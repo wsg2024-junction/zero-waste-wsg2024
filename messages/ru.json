@@ -4,10 +4,58 @@
     "NAV_LANG": "Язык",
     "CHAT_SHOW_ORIGINAL": "Показать оригинал",
     "CHAT_SHOW_TRANSLATION": "Показать перевод",
-    "CHAT_HINT_ENTER_TEXT": "Введите текст здесь...",
+    "CHAT_HINT_ENTER_TEXT": "Введите текст здесь…",
     "CHAT_SEND": "Отправить",
-    "GENERAL_PREPRODUCTION": "Предварительное производство",
-    "GENERAL_COOKING": "Готовка",
+    "GENERAL_PREPRODUCTION": "Предпроизводство",
+    "GENERAL_COOKING": "Приготовление",
     "GENERAL_STORAGE": "Хранение",
-    "GENERAL_PACKAGING": "Упаковка"
+    "GENERAL_PACKAGING": "Упаковка",
+    "stage": "Этап",
+    "preproduction": {
+        "batch": "Партия",
+        "selectBatch": "Выберите партию…",
+        "searchBatch": "Искать партию…",
+        "noBatchAvailable": "Партия недоступна.",
+        "weight": "Вес",
+        "enterWeight": "Пожалуйста, введите действительный вес",
+        "measurements": "Измерения",
+        "noMeasurements": "Измерения не введены",
+        "submit": "Отправить",
+        "weightOverview": "Обзор целевого веса",
+        "deviation": "Отклонение",
+        "targetWeight": "Целевой вес",
+        "actualWeight": "Фактический вес",
+        "decrease": "Уменьшить размер порции на",
+        "increase": "Увеличить размер порции на",
+        "recentSamples": "Недавние образцы",
+        "close": "Закрыть"
+    },
+    "managerApp": {
+        "areaStatus": {
+            "status": "Статус",
+            "ok": "ОК",
+            "slowed": "МЕДЛЕННО",
+            "stopped": "СТОП",
+            "emergency": "ЧРЕЗВЫЧАЙНАЯ СИТУАЦИЯ!"
+        },
+        "message": {
+            "title": "Отправить сообщение на панель управления",
+            "placeholder": "Введите сообщение дня…",
+            "automaticTranslationHint": "Этот текст автоматически переводится на язык, выбранный работником.",
+            "submit": "Отправить"
+        },
+        "predictionChart": {
+            "totalUsableProducts": "Используемые продукты",
+            "usableProductsPerBatch": "Используемые продукты на партию"
+        }
+    },
+    "dashboard": {
+        "plannedProductCount": "Запланированное количество продуктов",
+        "plannedTotalWeight": "Запланированная общая масса",
+        "productCount": "Количество продуктов",
+        "totalWeight": "Общий вес",
+        "maxStorageLeft": "Осталось места для хранения",
+        "overweightTotal": "Общий перевес",
+        "underweightProducts": "Продукты с недовесом"
+    }
 }
