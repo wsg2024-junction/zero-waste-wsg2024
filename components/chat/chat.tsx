@@ -33,6 +33,7 @@ export default function Chat() {
         });
     }, []);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onUpdateMessage = (event: any) => {
         setMessage(event.currentTarget.value);
     };

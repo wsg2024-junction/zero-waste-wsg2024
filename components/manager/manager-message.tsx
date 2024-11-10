@@ -31,12 +31,15 @@ export function ManagerMessage() {
 
     useEffect(() => {
         if (!globalMOTDs) return;
+        if (!setText) return;
+
         setText(globalMOTDs.dashboardMessages[currentArea]);
-    }, [currentArea, globalMOTDs]);
+    }, [currentArea, globalMOTDs, setText]);
 
     const onSubmitMOTD = () => {
         setDashboardMessage(currentArea as Area, currentMOTD);
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onUpdateMOTD = (event: any) => {
         setCurrentMOTD(event.currentTarget.value);
     };

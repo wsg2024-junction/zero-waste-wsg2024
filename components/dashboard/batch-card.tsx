@@ -1,11 +1,4 @@
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { DashboardInteractiveContext } from '@/contexts/dashboard-context';
 import { Batch } from '@/lib/models';
 import { cn } from '@/lib/utils';
@@ -15,7 +8,7 @@ import { ArchiveRestore, Boxes, Clock, Trash2, Weight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { PropsWithChildren, ReactElement, useContext } from 'react';
 import { Card } from '../ui/card';
-import { DialogFooter, DialogHeader } from '../ui/dialog';
+import { DialogHeader } from '../ui/dialog';
 import { StageIcon } from './stage-icon';
 
 interface BatchCardProps {

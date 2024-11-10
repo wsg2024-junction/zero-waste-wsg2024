@@ -34,7 +34,7 @@ export default function ChatMessage({
         translate(chatMessage.message, locale as TargetLanguageCode).then((translation) => {
             setTranslation(translation.text);
         });
-    }, [locale]);
+    }, [locale, chatMessage.message]);
 
     return (
         <div>

@@ -21,13 +21,20 @@ export default function Home() {
         if (Object.keys(users).length === 0) return;
         if (currentUser) return;
 
+        const onChangeUser = (value: string) => {
+            const user = Object.values(users).find((user) => user.id === value);
+            if (!user) return;
+            setCurrentUser(user);
+            localStorage.setItem('user', JSON.stringify(user));
+        };
+
         if (localStorage.getItem('user') != null) {
             const cUser = JSON.parse(localStorage.getItem('user') as string);
             onChangeUser(cUser.id);
         } else {
             onChangeUser(Object.keys(users)[0]);
         }
-    }, [users]);
+    }, [users, currentUser]);
 
     const onChangeUser = (value: string) => {
         const user = Object.values(users).find((user) => user.id === value);
