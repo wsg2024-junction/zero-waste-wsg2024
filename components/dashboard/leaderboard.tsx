@@ -1,4 +1,3 @@
-import { DashboardTitle } from '@/components/dashboard/dashboard-title';
 import { Card } from '@/components/ui/card';
 import { useGlobalState, useUsers } from '@/hooks/useModels';
 import { Score } from '@/lib/models';
@@ -17,7 +16,7 @@ export function Leaderboard() {
         <div className={'bg-teal-400 bg-opacity-50 rounded-xl p-2'}>
             <div className={'flex mb-2 gap-2 justify-center'}>
                 <Trophy />
-                <DashboardTitle>Leaderboard</DashboardTitle>
+                <h2 className={`text-xl`}>Leaderboard</h2>
             </div>
             <div className={'grid gap-2 grid-cols-[min-content_1fr_min-content]'}>
                 {scores.sort(byScore).map((score, idx) => (

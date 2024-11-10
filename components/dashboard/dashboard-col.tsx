@@ -2,7 +2,6 @@ import { ForwardRefExoticComponent, RefAttributes } from 'react';
 import { LucideProps } from 'lucide-react';
 import { BatchCard } from './batch-card';
 import { Area, Batch } from '@/lib/models';
-import { DashboardTitle } from '@/components/dashboard/dashboard-title';
 
 interface DashboardColProps {
     stage: Area | 'done';
@@ -10,6 +9,7 @@ interface DashboardColProps {
     color: string;
     batches: Batch[];
     isLast?: boolean;
+    selected?: boolean;
 }
 
 export function DashboardCol(props: DashboardColProps) {
@@ -18,7 +18,9 @@ export function DashboardCol(props: DashboardColProps) {
             <div className={'col-span-2 mb-0 mt-2 xl:mb-2 xl:mt-0'}>
                 <div className={'flex gap-2'}>
                     <props.icon color={props.color} />
-                    <DashboardTitle>{props.stage[0].toUpperCase() + props.stage.slice(1)}</DashboardTitle>
+                    <h2 className={`${props.selected && 'font-bold'} text-xl`}>
+                        {props.stage[0].toUpperCase() + props.stage.slice(1)}
+                    </h2>
                 </div>
             </div>
             <div

@@ -1,51 +1,12 @@
 'use client';
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
-import { Area, AreaEnum } from '@/lib/models';
-import { useEffect, useState } from 'react';
-import humanizeString from 'humanize-string';
-import { Button } from '@/components/ui/button';
-import { useGlobalState } from '@/hooks/useModels';
-import { Textarea } from '@/components/ui/textarea';
-import { setDashboardMessage } from '@/lib/firebase';
-import { useDeepLTranslate } from '@/hooks/useDeepLTranslate';
-import { useLocale, useTranslations } from 'next-intl';
-import { TargetLanguageCode } from 'deepl-node';
+
 import StatusSelectionPopover from '@/components/manager-status-selection/StatusSelectionPopover';
 import ChatPopover from '@/components/chat/chat-popover';
 import { Dashboard } from '@/components/dashboard/dashboard';
 import { PredictionChart } from '@/components/manager/prediction-chart';
+import { ManagerMessagePopover } from '@/components/manager/message-popover';
 
 export default function ManagerApp() {
-    const locale = useLocale();
-    const t = useTranslations();
-    const globalMOTDs = useGlobalState();
-    const areas = Object.keys(AreaEnum).map((key) => AreaEnum[key as keyof typeof AreaEnum] as Area);
-    const [currentArea, setCurrentArea] = useState<Area>(areas[0]);
-    const [currentMOTD, setCurrentMOTD] = useState<string>(globalMOTDs.dashboardMessages[currentArea]);
-    const [translation, setText] = useDeepLTranslate(locale as TargetLanguageCode);
-
-    useEffect(() => setCurrentMOTD(translation), [translation]);
-
-    useEffect(() => {
-        if (!globalMOTDs) return;
-        setText(globalMOTDs.dashboardMessages[currentArea]);
-    }, [currentArea, globalMOTDs]);
-
-    const onSubmitMOTD = () => {
-        setDashboardMessage(currentArea as Area, currentMOTD).then((r) => console.log(r));
-    };
-    const onUpdateMOTD = (event: any) => {
-        setCurrentMOTD(event.currentTarget.value);
-    };
-
     return (
         <div className={'flex flex-col'}>
             <Dashboard
@@ -53,42 +14,9 @@ export default function ManagerApp() {
                 className={'mb-8'}
             />
             <PredictionChart />
-            <Select
-                defaultValue={currentArea}
-                onValueChange={setCurrentArea}>
-                <SelectTrigger>
-                    <SelectValue placeholder={'Area'} />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectGroup>
-                        <SelectLabel>Stage</SelectLabel>
-                        <>
-                            {areas.map((area) => (
-                                <SelectItem
-                                    key={area}
-                                    value={area}>
-                                    {humanizeString(area)}
-                                </SelectItem>
-                            ))}
-                        </>
-                    </SelectGroup>
-                </SelectContent>
-            </Select>
-            <Textarea
-                className={'mt-2'}
-                value={currentMOTD}
-                onInput={onUpdateMOTD}
-                placeholder={'Enter message of the day...'}
-            />
-            <span className={'text-[0.825rem] opacity-50'}>{t('HINT_AUTOMATIC_TRANSLATION')}</span>
-            <Button
-                className={'mt-2'}
-                variant={'secondary'}
-                onClick={onSubmitMOTD}>
-                Submit
-            </Button>
-            <ChatPopover />
+            <ManagerMessagePopover />
             <StatusSelectionPopover />
+            <ChatPopover />
         </div>
     );
 }
